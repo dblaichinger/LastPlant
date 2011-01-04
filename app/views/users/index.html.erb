@@ -1,7 +1,23 @@
 <h1>All users</h1>
 
 <ul class="users">
-	<%= render @users %>
+
+<% @users.each do |user| %>
+
+    <li>
+      <%= gravatar_for user, :size => 40 %>
+      <%= link_to user.name, user %>
+	  
+		<% if current_user.admin? %>
+		  <% if (user.admin == true) %>
+			| <%= link_to "delete", user, :method => :delete, :confirm => "Attention:\nAre you sure to delete an ADMIN-USER!", :title => "Delete #{user.name}"%>
+			<% else %>
+			  | <%= link_to "delete", user, :method => :delete, :confirm => "Are you sure to delete #{user.name}?", :title => "Delete #{user.name}"%>
+			<% end %>
+		<% end %>
+	</li>
+<% end %>
+
 </ul>
 
 

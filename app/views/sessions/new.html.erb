@@ -1,19 +1,58 @@
-<h1>Sign in</h1>
 
-<%= form_for(:session, :url => sessions_path) do |f| %>
+<body id="login">
+<header class="login">
+<img class="logo" src="images/logo_turm_web-gross.png" alt="Last Plant">
+</header>
 
+<div id="machine"><img src="images/startimage_machine_kleiner.png"></div>
+<% if session[:token] %>
+    <h3>Logged In!</h3>
+<% else %>
+		<h1>Sign in</h1>
+		<h3 class="registrieren">Login with Facebook <fb:login-button></fb:login-button>
+		<a href="<%= @oauth.url_for_oauth_code(:permissions => "publish_stream, email") %>"><img src="images/facebook.png"></a></h3>
+		
+		<%= form_for(:session, :url => sessions_path) do |f| %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Sign in" %>
-  </div>
+		  <div class="field">
+			<%= f.label :email %><br />
+			<%= f.text_field :email %>
+		  </div>
+		  <div class="field">
+			<%= f.label :password %><br />
+			<%= f.password_field :password %>
+		  </div>
+		  <div class="actions">
+			<%= f.submit "Sign in" %>
+		  </div>
+		<% end %>
+	
+	<p>New user? <%= link_to "Sign up for free!", signup_path %></p>
+
+		
 <% end %>
 
-<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+
+<% if @users %>
+  <ul>
+    <% @users.each do |user| %>
+        <li>user names: <%= user.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>no users queried</p>
+<% end %>
+
+<% if session[:token] %>
+	<h3>Hello <%= @user.name %> </h3> 
+	<p>session[:token]: <%= session[:token] %></p>
+<% else %>
+    <a href="<%= @oauth.url_for_oauth_code(:permissions => "publish_stream, email") %>"><img src="/images/login-button.png" /></a><br />
+<% end %>
+
+</body>
+
+
+
+
+

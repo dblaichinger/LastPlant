@@ -1,13 +1,19 @@
 # == Schema Information
-# Schema version: 20101230150822
+# Schema version: 20110104150719
 #
 # Table name: users
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  encrypted_password :string(255)
+#  salt               :string(255)
+#  admin              :boolean
+#  fbid               :string(255)
+#  createScore        :integer
+#  destroyScore       :integer
 #
 
 class User < ActiveRecord::Base
@@ -41,8 +47,13 @@ class User < ActiveRecord::Base
 	 	encrypted_password == encrypt(submitted_password)
   	 end
 
-	  def self.authenticate(email, submitted_password)
+
+	
+	# Methods for authentication
+	
+	 def self.authenticate(email, submitted_password)
 		user = find_by_email(email)
+		
 		if user.nil?
 		  return nil
 		elsif user.has_password?(submitted_password)
@@ -50,21 +61,19 @@ class User < ActiveRecord::Base
 		else
 		  return nil
 		end
-	  end
-
-
-	
-	  def self.authenticate(email, submitted_password)
-		user = find_by_email(email)
-		return nil  if user.nil?
-		return user if user.has_password?(submitted_password)
-	  end
+	 end
 
 
 	def self.authenticate_with_salt(id, cookie_salt)
 	  user = find_by_id(id)
-	  return nil  if user.nil?
-	  return user if user.salt == cookie_salt
+	  
+	    if user.nil?
+		  return nil
+	 	elsif user.salt == cookie_salt
+		  return user
+		else
+		  return nil
+		end
 	end
 
 
@@ -80,11 +89,8 @@ class User < ActiveRecord::Base
 		end
 	
 		def make_salt
-		  secure_hash("#{Time.now.utc}--#{password}")
+		  Digest::SHA2.hexdigest("#{Time.now.utc}--#{password}")
 		end
-	
-		def secure_hash(string)
-		  Digest::SHA2.hexdigest(string)
-		end
+
 end
 

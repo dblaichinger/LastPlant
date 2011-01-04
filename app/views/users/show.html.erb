@@ -1,3 +1,5 @@
+<h1>Profile</h1>
+
 <table class="profile" summary="Profile information">
   <tr>
   
@@ -5,6 +7,7 @@
       <h1>
         <%= gravatar_for(@user) %>
         <%= @user.name %>
+		
       </h1>
     </td>
     <td class="sidebar round">
@@ -18,3 +21,14 @@
   </tr>
 </table>
 
+
+    <p>
+		Hello <%=@user.name%> Make your decision.
+    </p>
+
+#FACEBOOK ID - TOKEN
+
+<% if session[:fb_id] %>
+<p><%= session[:fb_id] %></p>
+<p><%= session[:token] %></p>
+<%end%>

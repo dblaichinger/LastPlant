@@ -7,13 +7,14 @@ SampleApp::Application.routes.draw do
 
 	
 
-  match '/contact', :to => 'pages#contact'
+  match '/overview', :to => 'users#overview'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
   
   match '/signup',    :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
+ 
 
 
   # You can have the root of your site routed with "root"
@@ -23,8 +24,6 @@ SampleApp::Application.routes.draw do
   	root :to => "pages#home"
 
 	get "pages/home"
- 	
- 	get "pages/contact"
 
 	get "pages/about"
 
