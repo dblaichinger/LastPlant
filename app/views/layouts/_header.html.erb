@@ -1,15 +1,15 @@
 <header>
 
 <% if signed_in? %>
-  <%= link_to logo, root_path %>
+  <%= link_to logo, home_path %>
 
   <nav>
     <ul id="navi">
-      <li class="left"><%= link_to "Home", root_path %></li>
+      <li class="left"><%= link_to "Home", home_path %></li>
       <li class="slash">/</li>
-	  <li><%= link_to "Protect", root_path %></li>
+	  <li><%= link_to "Protect", home_path %></li>
       <li class="slash">/</li>
-	  <li><%= link_to "Destroy", root_path %></li>
+	  <li><%= link_to "Destroy", home_path %></li>
       <li class="slash">/</li>
 
       <li><%= link_to "Profile", current_user %></li>
