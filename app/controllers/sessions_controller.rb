@@ -57,7 +57,7 @@ class SessionsController < ApplicationController
 		if(session[:fb_id])
 			redirect_to current_user
 		else
-			redirect_to root_path
+			#redirect_to root_path
 		end
 
 end
