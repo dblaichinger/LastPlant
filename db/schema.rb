@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104150719) do
+ActiveRecord::Schema.define(:version => 20110105180730) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20110104150719) do
     t.string   "fbid"
     t.integer  "createScore"
     t.integer  "destroyScore"
+    t.boolean  "isFacebook"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

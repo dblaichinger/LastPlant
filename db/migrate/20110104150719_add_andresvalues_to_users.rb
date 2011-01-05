@@ -3,7 +3,6 @@ class AddAndresvaluesToUsers < ActiveRecord::Migration
     add_column :users, :fbid, :string
     add_column :users, :createScore, :integer
     add_column :users, :destroyScore, :integer
-	add_column :users, :isFacebook, :boolean
   end
 
   def self.down
