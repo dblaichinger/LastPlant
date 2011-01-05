@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 		end
 		
 		#query all users
-		@users = User.all
+		#@users = User.all
 		
 		#create OAuth helper
 		@oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/")
@@ -33,10 +33,10 @@ class SessionsController < ApplicationController
 			#query user data from fb
 			@me = @graph.get_object("me")
 			
-			if User.find_by_mail(@me['email'])
+			if User.find_by_email(@me['email'])
 				session[:fb_id] = @me['id']
 				session[:token] = @token
-				@user = User.find_by_mail(@me['email'])
+				@user = User.find_by_email(@me['email'])
 				flash.now[:notice] = "user already member. IMPLEMENT login!"
 			else
 				# creates new user
