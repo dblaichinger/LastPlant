@@ -19,7 +19,7 @@
 class User < ActiveRecord::Base
 	
 	attr_accessor :password
-	attr_accessible :name, :email, :password, :password_confirmation
+	attr_accessible :name, :email, :password#, :password_confirmation
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -33,12 +33,12 @@ class User < ActiveRecord::Base
 
 
 	  # Automatically create the virtual attribute 'password_confirmation'.
-	 if(validates :isFacebook, :value => false)
-	  validates  :password, :presence     => true,
-	 					   :confirmation => true,
+	
+	  validates  :password,# :presence     => true,
+	 					   #:confirmation => true,
 						   :length       => { :within => 6..40 }
 	
-	  end
+	 
 						  
 
 	 
