@@ -12,8 +12,7 @@
 </head>
 <body>
   <%= render 'layouts/header' %>
-    <%= current_user %>
-  	<%if signed_in? %>
+  	<%if signed_in? || session['fb_id'] %>
     <div class="content">
 	<%end%>
 	
