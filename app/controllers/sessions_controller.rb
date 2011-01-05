@@ -8,12 +8,8 @@ class SessionsController < ApplicationController
 	#def facebook_login
 	
 		if(session[:fb_id])
-			@user = User.find_by_fbid(session[:fb_id])
 			redirect_to current_user
 		end
-		
-		#query all users
-		@users = User.all
 		
 		#create OAuth helper
 		@oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/")
@@ -29,7 +25,7 @@ class SessionsController < ApplicationController
 			@token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/").get_access_token(@code)
 			
 			#establish graph API connection
-			@graph = Koala::Facebook::GraphAPI.new(@token)
+			establish_graph
 			
 			#query user data from fb
 			@me = @graph.get_object("me")

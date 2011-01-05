@@ -66,4 +66,7 @@ def sign_in(user)
       cookies.signed[:remember_token] || [nil, nil]
     end
 
+	def establish_graph
+	 @graph = Koala::Facebook::GraphAPI.new(@token)
+	end
 end
