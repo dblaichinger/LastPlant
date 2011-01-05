@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 		end
 		
 		#query all users
-		#@users = User.all
+		@users = User.all
 		
 		#create OAuth helper
 		@oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/")
