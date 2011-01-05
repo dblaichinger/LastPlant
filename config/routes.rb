@@ -16,7 +16,7 @@ SampleApp::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
   
-  	root :to => "pages#home"
+  	root :to => "sessions#signin"
 
 	get "pages/home"
 
