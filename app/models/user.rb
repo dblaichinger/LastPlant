@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 	#if(validates :isFacebook, :presence => true)
 	
 	  validates :password, :presence     => true,
-						   :confirmation => true,
+						   :confirmation => true
 				
 	
 	#end 
