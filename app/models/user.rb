@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
 		end
 	
 		def encrypt(string)
-		  secure_hash("#{salt}--#{string}")
+		  Digest::SHA2.hexdigest("#{salt}--#{string}")
 		end
 	
 		def make_salt

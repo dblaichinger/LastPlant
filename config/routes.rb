@@ -1,13 +1,8 @@
 SampleApp::Application.routes.draw do
 
-	
-
   resources :users
   resources :sessions, :only =>[:new, :create, :destroy]
 
-	
-
-  match '/overview', :to => 'users#overview'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
   
@@ -77,9 +72,6 @@ SampleApp::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => "welcome#index"
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,22 +1,37 @@
 <header>
+
+<% if signed_in? %>
   <%= link_to logo, root_path %>
-  <nav class="round">
-    <ul>
-      <li><%= link_to "Home", root_path %></li>
-      
-	  <% if signed_in? %>
-      	<li><%= link_to "Profile", current_user %></li>
+
+  <nav>
+    <ul id="navi">
+      <li class="left"><%= link_to "Home", root_path %></li>
+      <li class="slash">/</li>
+	  <li><%= link_to "Protect", root_path %></li>
+      <li class="slash">/</li>
+	  <li><%= link_to "Destroy", root_path %></li>
+      <li class="slash">/</li>
+
+      <li><%= link_to "Profile", current_user %></li>
+	  <li class="slash">/</li>
+		
 		<li><%= link_to "Users", users_path %></li>
+		<li class="slash">/</li>
+		
 		<li><%= link_to "Settings", edit_user_path(current_user) %></li>
-	  <% end %>
+		 <li class="slash">/</li>
       
-	  <li><%= link_to "Help", help_path %></li>
-      
-	  <% if signed_in? %>
-     	 <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
-      <% else %>
-      	<li><%= link_to "Sign in", signin_path %></li>
-      <% end %>
-    </ul>
-  </nav>
+	 	<li><%= link_to "Help", help_path %></li>
+   	  	<li class="slash">/</li>
+     	<li class="rechts"><%= link_to "Logout", signout_path, :method => :delete %></li> 
+	  	</ul>
+  	</nav>
+<% else %>
+
+<% end %>
+
+ 
 </header>
+
+
+

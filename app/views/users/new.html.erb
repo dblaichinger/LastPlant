@@ -1,22 +1,29 @@
-<h1>Sign up</h1>
+<div class="login">
+<img class="logo" src="images/logo_turm_web-gross.png" alt="Last Plant">
+</div>
 
-<%= form_for(@user) do |f| %>
+<div id="machine"><img src="images/startimage_machine_kleiner.png"></div>
 
+
+
+
+<%= form_for(@user, :html => { :class => "loginform"}) do |f| %>
+	<h4>Sign up</h4>
 	<%= render 'shared/error_messages', :object => f.object %>
 	<div class="field">
-	  <%= f.label :name %><br />
+	  <%= f.label :name %>
 	  <%= f.text_field :name %>
 	</div>
 	<div class="field">
-	  <%= f.label :email %><br />
+	  <%= f.label :email %>
 	  <%= f.text_field :email %>
 	</div>
 	<div class="field">
-	  <%= f.label :password %><br />
+	  <%= f.label :password %>
 	  <%= f.password_field :password %>
 	</div>
 	<div class="field">
-	  <%= f.label :password_confirmation, "Confirmation" %><br />
+	  <%= f.label :password_confirmation, "Confirmation" %>
 	  <%= f.password_field :password_confirmation %>
 	</div>
 

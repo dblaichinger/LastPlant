@@ -13,7 +13,7 @@ def title
 end
 
 def logo
- 	logo = image_tag("logo.png", :alt => "Last Plant", :class => "round")
+ 	logo = image_tag("logo_turm_web.png", :alt => "Last Plant")
 end
 
 end

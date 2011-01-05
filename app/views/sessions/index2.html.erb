@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang=de>
+<head>
+<meta charset=utf-8>
+<title>Last Plant: Please Login to Play</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+  
+   <!--[if IE]>
+   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+   <![endif]-->
+</head>
+<body id="login">
+<header class="login">
+<img class="logo" src="images/logo_turm_web-gross.png" alt="Last Plant">
+</header>
+
+<div id="machine"><img src="images/startimage_machine_kleiner.png"></div>
+<% if session[:token] %>
+    <h3>Logged In!</h3>
+<% else %>
+<h3 class="registrieren">Login with Facebook <a href="<%= @oauth.url_for_oauth_code(:permissions => "publish_stream, email") %>"><img src="images/facebook.png"></a></h3>
+<form>
+    <h4>Login</h4>
+	<label>E-MAIL:<input type="text" placeholder="E-Mail" required /></label>
+	<!-- 
+	required sorgt dafür, dass das 
+	Formular nicht abgeschickt werden kann, wenn dieses Feld nicht ausgefüllt ist 
+	-->
+	<label>PASSWORD:<input type="password" placeholder="******" required /></label>
+    <p class="signup">No Member yet? <a href="signup">Sign up for free!</a></p>
+</form>
+<% end %>
+</body>
+
+</html>
+
+
+<p>Find me in app/views/home/index.html.erb</p>
+<% if @users %>
+  <ul>
+    <% @users.each do |user| %>
+        <li>user names: <%= user.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>no users queried</p>
+<% end %>
+
+<% if session[:token] %>
+<h3>Hello <%= @user.name %></h3>
+<% else %>
+    <a href="<%= @oauth.url_for_oauth_code(:permissions => "publish_stream, email") %>"><img src="/images/login-button.png" /></a><br />
+<% end %>
+
+<p>session[:token]: <%= session[:token] %></p>
