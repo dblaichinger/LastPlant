@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
 			else
 				# creates new user
 				# ERROR: cant find :fbid o.O
-				@user = User.new(:fbid => @me['id'], :name => @me['name'], :mail => @me['email'])
+				@user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true)
 				#@user.save
 				if @user.save
 					session[:fb_id] = @user.fbid
