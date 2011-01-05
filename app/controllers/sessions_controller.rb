@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
 			else
 				# creates new user
 
-				@user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true, :password =>@me['id'])
+				@user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true, :password =>@me['id'], :password_confirmation =>@me['id'])
 
 				if @user.save
 					session[:fb_id] = @user.fbid
