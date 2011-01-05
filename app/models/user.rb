@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110104150719
+# Schema version: 20110105180730
 #
 # Table name: users
 #
@@ -14,12 +14,13 @@
 #  fbid               :string(255)
 #  createScore        :integer
 #  destroyScore       :integer
+#  isFacebook         :boolean
 #
 
 class User < ActiveRecord::Base
 	
 	attr_accessor :password
-	attr_accessible :name, :email, :password, :password_confirmation, :isFacebook
+	attr_accessible :name, :email,:isFacebook#, :password, :password_confirmation
 	
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -33,13 +34,13 @@ class User < ActiveRecord::Base
 
 
 	  # Automatically create the virtual attribute 'password_confirmation'.
-	if(validates :isFacebook, :presence => true)
-	
-	  validates  :password, :presence     => true,
-	 					   :confirmation => true,
-						   :length       => { :within => 6..40 }
-	
-	end 
+	#if(validates :isFacebook, :presence => true)
+	#
+	#  validates  :password, :presence     => true,
+	# 					   :confirmation => true,
+	#					   :length       => { :within => 6..40 }
+	#
+	#end 
 						  
 
 	 
