@@ -51,8 +51,8 @@ class SessionsController < ApplicationController
 			redirect_to home_path
 			return
 		else
-			flash.now[:error] = "Error: Login failed"
-			redirect_to root_path
+			#flash.now[:error] = "Error: Login failed"
+			#render :action => 'pages#home'
 		end
 
 end
