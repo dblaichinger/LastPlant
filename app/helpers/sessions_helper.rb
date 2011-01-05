@@ -69,4 +69,8 @@ def sign_in(user)
 	def establish_graph
 	 @graph = Koala::Facebook::GraphAPI.new(@token)
 	end
+	
+	def establish_oauth
+		@oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/")
+	end
 end

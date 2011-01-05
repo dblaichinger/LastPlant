@@ -1,21 +1,22 @@
 class UsersController < ApplicationController
   
   before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
-  before_filter :correct_user, :only => [:edit, :update] 
-  before_filter :admin_user,   :only => :destroy
+ 
+ before_filter :correct_user, :only => [:edit, :update] 
+ 
+ before_filter :admin_user,   :only => :destroy
 
-
-  def show
-    @title = "Overview"
-	@user = User.find(params[:id])
-  end
 
 
   def index
     @title = "All users"
     @users = User.all
   end
-
+  
+  def show  
+	@user = User.find(params[:id])
+	@title = @user.name
+  end
   
   def new
    if signed_in?
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
 
   def create
   	if signed_in?
-		redirect_to root_path
+		redirect_to home_path
 	else	
 		@user = User.new(params[:user])
 		if @user.save
