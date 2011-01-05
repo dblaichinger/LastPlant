@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 		
 	
 		if(session[:fb_id])
-			#@user = User.find_by_fbid(session[:fb_id])
+            current_user = User.find_by_fbid(session[:fb_id])
 			redirect_to home_path
 			return
 		end
@@ -35,6 +35,7 @@ class SessionsController < ApplicationController
 				session[:fb_id] = @me['id']
 				session[:name] = @me['name']
 				@user = User.find_by_fbid(@me['id'])
+                current_user = @user
 				flash.now[:notice] = "user logged in."
 			else
 				# creates new user
@@ -44,6 +45,7 @@ class SessionsController < ApplicationController
 				if @user.save
 					session[:fb_id] = @user.fbid
 					session[:name] = @user.name
+                    current_user = @user
 					flash.now[:success] = "user saved!"
 				else
 					# unexpected error occured, save failed
@@ -52,8 +54,8 @@ class SessionsController < ApplicationController
 			end
 		end
 		if(session[:fb_id])
-			@user = User.find_by_fbid(session[:fb_id])
-			redirect_to user
+			current_user = User.find_by_fbid(session[:fb_id])
+			redirect_to home_path
 			return
 		else
 			#flash.now[:error] = "Error: Login failed"
