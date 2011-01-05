@@ -53,7 +53,7 @@ class SessionsController < ApplicationController
 		end
 		if(session[:fb_id])
 			@user = User.find_by_fbid(session[:fb_id])
-			redirect_to home_path
+			redirect_to user
 			return
 		else
 			#flash.now[:error] = "Error: Login failed"
