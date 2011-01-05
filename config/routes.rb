@@ -5,6 +5,8 @@ SampleApp::Application.routes.draw do
 
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
+  match '/home',	:to => 'pages#home'
+  
   
   match '/signup',    :to => 'users#new'
   match '/signin',  :to => 'sessions#new'

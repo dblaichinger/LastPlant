@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 	#def facebook_login
 	
 		if(session[:fb_id])
-			redirect_to current_user
+			redirect_to home_path
 		end
 		
 		#create OAuth helper
@@ -53,9 +53,9 @@ class SessionsController < ApplicationController
 		end
 		if(session[:fb_id])
 			@user = User.find_by_fbid(session[:fb_id])
-			redirect_to current_user
+			redirect_to home_path
 		else
-			#redirect_to root_path
+			#redirect_to home_path
 		end
 
 end
