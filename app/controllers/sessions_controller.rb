@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 	#def facebook_login
 	
 		if(session[:fb_id])
+			@user = User.find_by_fbid(session[:fb_id])
 			redirect_to current_user
 		end
 		
@@ -55,6 +56,7 @@ class SessionsController < ApplicationController
 			end
 		end
 		if(session[:fb_id])
+			@user = User.find_by_fbid(session[:fb_id])
 			redirect_to current_user
 		else
 			#redirect_to root_path
