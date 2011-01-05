@@ -8,18 +8,16 @@ class SessionsController < ApplicationController
 	#def facebook_login
 	
 		if(session[:fb_id])
+			#@user = User.find_by_fbid(session[:fb_id])
 			redirect_to home_path
+			return
 		end
 		
 		#create OAuth helper
 		@oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/")
-		
-		if session[:fb_id]
-			@user = User.find_by_fbid(session[:fb_id])
-		end
-		
+			
 		#if authorization code exists, get access token
-		if params[:code] && !session[:token]
+		if params[:code]
 			@code = params[:code]
 			#request and parse token from facebook
 			@token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/").get_access_token(@code)
@@ -30,21 +28,18 @@ class SessionsController < ApplicationController
 			#query user data from fb
 			@me = @graph.get_object("me")
 			
-			if User.find_by_email(@me['email'])
+			if User.find_by_fbid(@me['id'])
 				session[:fb_id] = @me['id']
-				session[:token] = @token
-				@user = User.find_by_email(@me['email'])
-				flash.now[:notice] = "user already member. IMPLEMENT login!"
+				session[:name] = @me['name']
+				@user = User.find_by_fbid(@me['id'])
+				flash.now[:notice] = "user logged in."
 			else
 				# creates new user
-				# ERROR: cant find :fbid o.O
 				@user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true)
-				#@user.save
 				if @user.save
 					session[:fb_id] = @user.fbid
-					session[:token] = @token
+					session[:name] = @user.name
 					flash.now[:success] = "user saved!"
-					#redirect_to :action => 'start'
 				else
 					# unexpected error occured, save failed
 					flash.now[:error] = "User save failed due to wrong data"
@@ -54,8 +49,10 @@ class SessionsController < ApplicationController
 		if(session[:fb_id])
 			@user = User.find_by_fbid(session[:fb_id])
 			redirect_to home_path
+			return
 		else
-			#redirect_to home_path
+			flash.now[:error] = "Error: Login failed"
+			redirect_to root_path
 		end
 
 end
