@@ -33,9 +33,13 @@ class User < ActiveRecord::Base
 
 
 	  # Automatically create the virtual attribute 'password_confirmation'.
-	  validates :password, 
-						   :confirmation => true,
+	 if(validates :isFacebook, :value => false)
+	  validates  :password, :presence     => true,
+	 					   :confirmation => true,
 						   :length       => { :within => 6..40 }
+	
+	  end
+						  
 
 	 
 	 #Calls method encrypt_password before saving to database
