@@ -38,7 +38,9 @@ class SessionsController < ApplicationController
 				flash.now[:notice] = "user logged in."
 			else
 				# creates new user
+
 				@user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true, :password =>@me['id'])
+
 				if @user.save
 					session[:fb_id] = @user.fbid
 					session[:name] = @user.name
