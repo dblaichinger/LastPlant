@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
 
 	
-	validates :name, :presence => true, :length => {:maximum =>50}
+	validates :name, :presence => true, :length => {:maximum =>100}
 
 	validates :email, :presence   => true,
                     :format     => { :with => email_regex },
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
 
 	  # Automatically create the virtual attribute 'password_confirmation'.
-	  validates :password, :presence     => true,
+	  validates :password, 
 						   :confirmation => true,
 						   :length       => { :within => 6..40 }
 
