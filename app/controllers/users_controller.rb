@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   	if signed_in?
 		redirect_to root_path
 	else	
-		@user = User.new(params[:user])
+		@user = User.new(params[:user], :isFacebook => false)
 		if @user.save
 			sign_in(@user)
 			flash[:success] = "Welcome to Last Plant!"
