@@ -14,7 +14,7 @@ def sign_in(user)
   end
 
   def signed_in?
-    !current_user.nil? || !session[:fb_id].nil?
+    !current_user.nil?
   end
 
   def sign_out
