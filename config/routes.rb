@@ -1,5 +1,15 @@
 SampleApp::Application.routes.draw do
 
+  get "maps/new"
+
+  get "maps/create"
+
+  get "maps/show"
+
+  get "maps/destroy"
+
+  get "maps/gamehandler"
+
   resources :users
   resources :sessions, :only =>[:new, :create, :destroy]
 
