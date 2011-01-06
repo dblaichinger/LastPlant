@@ -1,11 +1,11 @@
 <% content_for :scripts do %>
-   <!-- <script type="text/javascript" src="/renderengine/libs/base.js"></script> 
+      <script type="text/javascript" src="/renderengine/libs/base.js"></script> 
       <script type="text/javascript" src="/renderengine/libs/jquery.js"></script> 
       <script type="text/javascript" src="/renderengine/libs/jquery.ext.engine.js"></script> 
       <script type="text/javascript" src="/renderengine/libs/sylvester.js"></script> 
       <script type="text/javascript" src="/renderengine/engine/runtime/engine.js"></script> 
       <script type="text/javascript" src="/renderengine/lastplantgame/buildergame/createXHR.js"></script> 
-    -->
+    
 <% end %>
 
 <script type="application/javascript"> 
@@ -57,6 +57,6 @@
         <script type="text/javascript"> 
             $(document).ready(function() {
                 // Load the game script
-                Engine.loadGame('game.js','LastPlant','LastPlant Game');
+                Engine.loadGame('/../../javascripts/renderengine/lastplantgame/buildergame/game.js','LastPlant','LastPlant Game');
             });
         </script>
