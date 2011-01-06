@@ -7,8 +7,9 @@ class SessionsController < ApplicationController
 	
 	#FACEBOOK LOGIN ANDRE
 	#def facebook_login
-		establish_oauth
-		
+		if(!@oath)
+            establish_oauth
+		end
 	
 		if(session[:fb_id])
             current_user = User.find_by_fbid(session[:fb_id])
