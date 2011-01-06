@@ -53,7 +53,7 @@ def sign_in(user)
 		else
 		redirect_to(home_path)
 		end
-    end
+ 	 end
 
 
 #  private
