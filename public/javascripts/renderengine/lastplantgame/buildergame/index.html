@@ -1,0 +1,123 @@
+<!-- ChromeFrame Support -->
+<meta http-equiv="X-UA-Compatible" content="IE=9;chrome=1">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!--
+   /**
+    *
+    * The JS Game was created with Renderengine renderengine.com
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining a copy
+    * of this software and associated documentation files (the "Software"), to deal
+    * in the Software without restriction, including without limitation the rights
+    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    * copies of the Software, and to permit persons to whom the Software is
+    * furnished to do so, subject to the following conditions:
+    *
+    * The above copyright notice and this permission notice shall be included in
+    * all copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    * THE SOFTWARE.
+    *
+    */
+-->
+
+<html>
+   <head>
+      <title>The Last Plant</title>
+
+      <!-- Mobile WebKit View Definition
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0 maximum-scale=1.0; user-scalable=0;"/>
+         -->
+         
+        <!-- FlashCanvas for older IE -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="../../libs/flashcanvas.js"></script>
+        <![endif]-->
+         
+      <!-- Supporting Libraries -->
+      <script type="text/javascript" src="../../libs/base.js"></script>
+      <script type="text/javascript" src="../../libs/jquery.js"></script>
+      <script type="text/javascript" src="../../libs/jquery.ext.engine.js"></script>
+      <script type="text/javascript" src="../../libs/sylvester.js"></script>
+
+      <!-- Load the main engine script -->
+      <script type="text/javascript" src="../../engine/runtime/engine.js"></script>
+
+      <style type="text/css">
+        body {
+            font: 10pt Arial;
+            background-color:#efefce;
+        }
+        #buttons {
+            position:absolute;
+            left:0px; 
+            top:450px;
+        }
+      </style>
+   </head>
+   <body>
+
+        <script src="createXHR.js" type="text/javascript"></script>
+        <script type="application/javascript">
+            //var blueX=123;
+
+            function Write(url, content){
+                var xhr = createXHR();
+                xhr.onreadystatechange=function() {
+                    if(xhr.readyState == 4) {		
+                        // nothing for now
+                        // alert("sent " + url + " " + content);
+                    }
+                };
+
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(content);
+            }
+
+
+            function saveData(){ 
+                //console.log(Lastplant);
+                //var content = document.ajax.sentence.value; //das ist das was geschickt wird
+                var content = document.getElementById("storage").innerHTML;
+                if(content!="NULL"){
+                    //console.log(content);
+                    Write("ajax-post-text.php", "file=ajax-post-text.txt&content=" + content);
+                    var storing = document.getElementById("storage");
+                    
+                    document.ajax.dyn.value="Saved:" + content;	
+                    storing.innerHTML = "<p>XML File wurde gespeichert! <b><a href='ajax-post-text.txt' target='_parent'>Look at the file</a></b>. ";
+                }
+            }
+
+
+        </script>
+        <div id="buttons">
+            <FORM name="ajax" method="POST" action="">
+            <p>
+                <input type="text" name="dyn" size="200" value="">
+            </p>
+            <p>
+                <INPUT type="button" value="Save Construct"  ONCLICK="saveData()">
+            </p>        
+            </FORM>
+            <div id="storage">NULL</div>
+        </div>
+        <p>asdasd</p>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // Load the game script
+                Engine.loadGame('game.js','LastPlant','LastPlant Game');
+            });
+        </script>    
+            
+        
+   </body>
+</html>

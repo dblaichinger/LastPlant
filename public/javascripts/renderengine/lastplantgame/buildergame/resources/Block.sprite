@@ -1,0 +1,10 @@
+{
+   // block sprites
+   "bitmapImage": "Block.png",
+   "bitmapSize": [120,120],
+	"version": 2,
+   "sprites": {
+      "Block": [0, 0, 60, 120],
+      "BlockOver": [60, 0, 60, 120]
+   }
+}

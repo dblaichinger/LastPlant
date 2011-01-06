@@ -1,11 +1,13 @@
-<h1>Your Maps</h1>
+<h1>Protect</h1>
 <ul>
 <% if @maps %>
     <% @maps.each do |map| 
     %>
-    <li><%= map.name %></li>
+    <li><%= map.name %> | 
+    <%= link_to "delete", map, :method => :delete, :confirm => "Are you sure to delete #{map.name}?", :title => "Delete #{map.name}"%>
+    </li>
     <% end 
     %>
 <% end %>
-
+<p><%= link_to "New map", new_map_path %></p>
 </ul>

@@ -1,5 +1,6 @@
 class MapsController < ApplicationController
   def new
+  
   end
 
   def create
@@ -9,6 +10,9 @@ class MapsController < ApplicationController
   end
 
   def destroy
+    Map.find(params[:id]).destroy
+    flash[:success] = "Map destroyed."
+    redirect_to protect_path
   end
 
   def gamehandler
@@ -19,6 +23,7 @@ class MapsController < ApplicationController
   end
   
   def destroy_index
+    @rand_maps = Map.find(:all, :offset => (Map.count * rand).to_i, :limit => 5)
   end
   
 end

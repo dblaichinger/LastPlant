@@ -23,6 +23,7 @@ SampleApp::Application.routes.draw do
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
  
+  match '/new_map', :to => 'maps#new'
   match '/protect', :to => 'maps#protect_index'
   match '/destroy', :to => 'maps#destroy_index'
 

@@ -1,2 +1,10 @@
-<h1>Maps#show</h1>
-<p>Find me in app/views/maps/show.html.erb</p>
+<h1>Destroy</h1>
+<h2>Random Maps</h2>
+
+<% if @rand_maps %>
+    <% @rand_maps.each do |map| 
+    %>
+    <li><%= map.name %></li>
+    <% end 
+    %>
+<% end %>

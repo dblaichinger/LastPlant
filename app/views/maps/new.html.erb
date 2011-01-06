@@ -1,2 +1,62 @@
-<h1>Maps#new</h1>
-<p>Find me in app/views/maps/new.html.erb</p>
+<% content_for :scripts do %>
+   <!-- <script type="text/javascript" src="/renderengine/libs/base.js"></script> 
+      <script type="text/javascript" src="/renderengine/libs/jquery.js"></script> 
+      <script type="text/javascript" src="/renderengine/libs/jquery.ext.engine.js"></script> 
+      <script type="text/javascript" src="/renderengine/libs/sylvester.js"></script> 
+      <script type="text/javascript" src="/renderengine/engine/runtime/engine.js"></script> 
+      <script type="text/javascript" src="/renderengine/lastplantgame/buildergame/createXHR.js"></script> 
+    -->
+<% end %>
+
+<script type="application/javascript"> 
+            //var blueX=123;
+ 
+            function Write(url, content){
+                var xhr = createXHR();
+                xhr.onreadystatechange=function() {
+                    if(xhr.readyState == 4) {		
+                        // nothing for now
+                        // alert("sent " + url + " " + content);
+                    }
+                };
+ 
+                xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(content);
+            }
+ 
+ 
+            function saveData(){ 
+                //console.log(Lastplant);
+                //var content = document.ajax.sentence.value; //das ist das was geschickt wird
+                var content = document.getElementById("storage").innerHTML;
+                if(content!="NULL"){
+                    //console.log(content);
+                    Write("ajax-post-text.php", "file=ajax-post-text.txt&content=" + content);
+                    var storing = document.getElementById("storage");
+                    
+                    document.ajax.dyn.value="Saved:" + content;	
+                    storing.innerHTML = "<p>XML File wurde gespeichert! <b><a href='ajax-post-text.txt' target='_parent'>Look at the file</a></b>. ";
+                }
+            }
+ 
+ 
+        </script> 
+        <div id="buttons"> 
+            <FORM name="ajax" method="POST" action=""> 
+            <p> 
+                <input type="text" name="dyn" size="200" value=""> 
+            </p> 
+            <p> 
+                <INPUT type="button" value="Save Construct"  ONCLICK="saveData()"> 
+            </p>        
+            </FORM> 
+            <div id="storage">NULL</div> 
+        </div> 
+        <p>asdasd</p> 
+        <script type="text/javascript"> 
+            $(document).ready(function() {
+                // Load the game script
+                Engine.loadGame('game.js','LastPlant','LastPlant Game');
+            });
+        </script>
