@@ -30,7 +30,7 @@ def sign_in(user)
   def deny_access
   	session[:return_to] = request.fullpath
     flash[:notice] = "Please sign in to access this page."
-	redirect_to signin_path
+	redirect_to root_path
   end
  
  # def redirect_back_or(default)
@@ -49,9 +49,9 @@ def sign_in(user)
 	
 	def admin_user
 		if (current_user)
-		redirect_to(root_path) unless current_user.admin?
+		redirect_to(home_path) unless current_user.admin?
 		else
-		redirect_to(root_path)
+		redirect_to(home_path)
 		end
     end
 
