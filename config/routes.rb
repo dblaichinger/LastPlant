@@ -12,6 +12,7 @@ SampleApp::Application.routes.draw do
 
   resources :users
   resources :sessions, :only =>[:new, :create, :destroy]
+  resources :maps, :only => [:new, :create, :destroy, :gamehandler, :protect_index, :destroy_index]
 
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
@@ -22,6 +23,8 @@ SampleApp::Application.routes.draw do
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
  
+  match '/protect', :to => 'maps#protect_index'
+  match '/destroy', :to => 'maps#destroy_index'
 
 
   # You can have the root of your site routed with "root"

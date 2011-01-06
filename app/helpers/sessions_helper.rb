@@ -2,8 +2,13 @@ module SessionsHelper
 
 def sign_in(user)
     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
-    session[:logged_in] = true
     current_user = user
+    
+    if(session[:fb_id])
+      session[:id] = User.find_by_fbid(session[:fb_id])
+    else
+      session[:id] =  current_user.id
+    end
   end
 
   def current_user=(user)

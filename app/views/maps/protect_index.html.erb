@@ -1,0 +1,11 @@
+<h1>Your Maps</h1>
+<ul>
+<% if @maps %>
+    <% @maps.each do |map| 
+    %>
+    <li><%= map.name %></li>
+    <% end 
+    %>
+<% end %>
+
+</ul>

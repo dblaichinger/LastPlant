@@ -4,9 +4,11 @@ class CreateMaps < ActiveRecord::Migration
       t.string :name
       t.string :content
       t.integer :score
-
+      t.integer :user_id
+      
       t.timestamps
     end
+    add_index :maps, :user_id
   end
 
   def self.down
