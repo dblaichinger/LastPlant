@@ -11,7 +11,11 @@ def sign_in(user)
   end
 
   def current_user
-    @current_user ||= user_from_remember_token ||= User.find_by_fbid(session[:fb_id])
+    if(session[:fb_id])
+        @current_user = User.find_by_fbid(session[:fb_id])
+    else
+    @current_user ||= user_from_remember_token
+    end
   end
 
   def signed_in?
