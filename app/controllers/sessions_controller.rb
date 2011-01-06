@@ -34,8 +34,7 @@ class SessionsController < ApplicationController
 			if User.find_by_fbid(@me['id'])
 				session[:fb_id] = @me['id']
 				session[:name] = @me['name']
-				@user = User.find_by_fbid(@me['id'])
-                current_user = @user
+				current_user = User.find_by_fbid(@me['id'])
 				flash.now[:notice] = "user logged in."
 			else
 				# creates new user
@@ -54,7 +53,7 @@ class SessionsController < ApplicationController
 			end
 		end
 		if(session[:fb_id])
-			current_user = User.find_by_fbid(session[:fb_id])
+			current_user = User.find_by_fbid(@me['id'])
 			redirect_to current_user
 			return
 		else
