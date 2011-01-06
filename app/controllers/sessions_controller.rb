@@ -7,8 +7,9 @@ class SessionsController < ApplicationController
 	
 	#FACEBOOK LOGIN ANDRE
 	#def facebook_login
+        establish_oauth
 		if(!@oath)
-            establish_oauth
+            @oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/")
 		end
 	
 		if(session[:fb_id])
