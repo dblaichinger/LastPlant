@@ -7,8 +7,14 @@ class MapsController < ApplicationController
 
   def create
     mapname = User.find_by_id(session[:id]).name + "'s " + Map.find_all_by_user_id(session[:id]).count.to_s + ". Map"
-    Map.create(:name => mapname, :user_id => session[:id], :content => params[:map])
+    @map = Map.new(:name => mapname, :user_id => session[:id], :content => params[:map])
 
+    if @map.save
+        flash[:success] = "created successfully!"
+    else
+        flash[:error] = "failed to save map: " + mapname + " " + session[:id] + " " + params[:content]
+    end
+    
     redirect_to protect_path
   end
 
