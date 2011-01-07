@@ -235,9 +235,18 @@ form label input {
 canvas {
 	position: relative;
 	top: -402px;
-	left: 30px;
+	left: 50px;
 }
 
+.loadbox {
+	top: -200px;
+	left: 25px;
+}
+
+#savemap {
+	position: relative;
+	top: 400px;
+}
 
 /* Success, info, notice and error/alert boxes
 -------------------------------------------------------------- */

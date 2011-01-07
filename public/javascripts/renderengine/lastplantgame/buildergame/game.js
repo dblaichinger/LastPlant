@@ -196,6 +196,7 @@ Engine.initObject("LastPlant", "Game", function(){
             right: 0,
             bottom: 0});
 		*/
+		
         // Add the game context to the scene graph
         Engine.getDefaultContext().add(this.renderContext);
 
