@@ -41,17 +41,7 @@
  
  
         </script> 
-        <div id="buttons"> 
-            <FORM name="ajax" method="POST" action=""> 
-            <p> 
-                <input type="text" name="dyn" size="200" value=""> 
-            </p> 
-            <p> 
-                <INPUT type="button" id="savemap" value="Save Construct"  ONCLICK="saveData()"> 
-            </p>        
-            </FORM> 
-            <div id="storage">NULL</div> 
-        </div> 
+
         <p>asdasd</p> 
         <script type="text/javascript"> 
             $(document).ready(function() {
@@ -60,3 +50,16 @@
             });
         </script>
 	
+	        <div id="buttons"> 
+            <form name="ajax" method="POST" id="protectform" action=""> 
+          
+<!-- FIX ME: INPUT FIELD FOR MAP NAME
+               <input type="text" name="Mapname" value="Please enter map name">  -->
+        
+            
+                <INPUT type="button" id="savemap" value="Save Construct"  ONCLICK="saveData()"> 
+               
+            </form> 
+            <div id="storage">NULL</div> 
+        </div> 
+		<strong>Whole URL: </strong><%= request.fullpath %>
