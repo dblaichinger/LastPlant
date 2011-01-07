@@ -40,11 +40,11 @@ Engine.include("/textrender/text.renderer.js");
 Engine.include("/physics/collision/shapes/b2BoxDef.js");
 
 // Load game objects
-Game.load("/player.js");
-Game.load("/LPObject.js");
-Game.load("/Block.js");
-Game.load("/Plant.js");
-Game.load("/Background.js");
+Game.load("../../javascripts/renderengine/lastplantgame/buildergame/player.js");
+Game.load("../../javascripts/renderengine/lastplantgame/buildergame/LPObject.js");
+Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Block.js");
+Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Plant.js");
+Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Background.js");
 
 Engine.initObject("LastPlant", "Game", function(){
 
@@ -100,9 +100,9 @@ Engine.initObject("LastPlant", "Game", function(){
          this.spriteLoader = SpriteLoader.create();
          
          // Load the sprites
-         this.spriteLoader.load("Block-long", this.getFilePath("resources/Block-long.sprite"));
-         this.spriteLoader.load("Plant", this.getFilePath("resources/Plant.sprite"));
-         this.spriteLoader.load("Background", this.getFilePath("resources/Background.sprite"));
+         this.spriteLoader.load("Block-long", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Block-long.sprite"));
+         this.spriteLoader.load("Plant", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Plant.sprite"));
+         this.spriteLoader.load("Background", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Background.sprite"));
          
          //load background image
          //this.imageLoader = ImageLoader.create();
