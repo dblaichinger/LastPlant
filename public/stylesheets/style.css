@@ -243,9 +243,9 @@ canvas {
 	left: 25px;
 }
 
-#savemap {
+#protectform {
 	position: relative;
-	top: 400px;
+	top: 410px;
 }
 
 /* Success, info, notice and error/alert boxes
