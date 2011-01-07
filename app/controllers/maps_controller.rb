@@ -1,16 +1,22 @@
 class MapsController < ApplicationController
+  protect_from_forgery :except => [:create]
+
   def new
   
   end
 
   def create
+    mapname = User.find_by_id(session[:id]).name + "'s " + Map.find_all_by_user_id(session[:id]).count.to_s + ". Map"
+    Map.create(:name => mapname, :user_id => session[:id], :content => params[:map])
+
+    redirect_to protect_path
   end
 
   def show
   end
 
   def destroy
-    Map.find(params[:id]).destroy
+    @map = Map.find(params[:id])
     flash[:success] = "Map destroyed."
     redirect_to protect_path
   end
@@ -19,7 +25,7 @@ class MapsController < ApplicationController
   end
 
   def protect_index
-    @maps = Map.find_all_by_user_id("1")
+    @maps = Map.find_all_by_user_id(session[:id])
   end
   
   def destroy_index

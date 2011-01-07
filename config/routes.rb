@@ -26,6 +26,7 @@ SampleApp::Application.routes.draw do
   match '/new_map', :to => 'maps#new'
   match '/protect', :to => 'maps#protect_index'
   match '/destroy', :to => 'maps#destroy_index'
+  match '/maps/create',  :to => 'maps#create'
 
 
   # You can have the root of your site routed with "root"
