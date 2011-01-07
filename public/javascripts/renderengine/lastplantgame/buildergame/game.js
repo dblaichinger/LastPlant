@@ -188,13 +188,14 @@ Engine.initObject("LastPlant", "Game", function(){
         this.renderContext.add(this.simulation);
 
         // Draw an outline around the context
+		/*
         this.renderContext.jQ().css({
             border: "1px solid red",
             left: 0,
             top: 0,
             right: 0,
             bottom: 0});
-
+		*/
         // Add the game context to the scene graph
         Engine.getDefaultContext().add(this.renderContext);
 
