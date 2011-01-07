@@ -7,7 +7,7 @@ class MapsController < ApplicationController
 
   def create
     mapname = User.find_by_id(session[:id]).name + "'s " + (Map.find_all_by_user_id(session[:id]).count + 1).to_s + ". Map"
-    @map = Map.new(:name => mapname, :user_id => session[:id].to_i, :content => params[:map].to_s)
+    @map = Map.new(:name => mapname, :user_id => session[:id], :content => params[:map])
 
     if @map.save
         flash[:success] = "created successfully!"
