@@ -232,6 +232,12 @@ form label input {
 	padding-bottom: 10px;
 }
 
+canvas {
+	position: relative;
+	top: -402px;
+	left: 30px;
+}
+
 
 /* Success, info, notice and error/alert boxes
 -------------------------------------------------------------- */
@@ -283,3 +289,6 @@ form label input {
   color: #000;
   margin-left: 10px;
 }
+
+
+
