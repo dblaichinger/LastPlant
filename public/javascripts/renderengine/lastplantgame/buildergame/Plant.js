@@ -86,7 +86,7 @@ Engine.initObject("Plant", "LPObject", function() {
             
             if(this.isPlaced==true && this.getComponent("physics").isSleeping()==true && this.canBeSaved==true){
                 this.canBeSaved=false;
-                Timeout.create("SaveTimer", 2000, function() {
+                Timeout.create("SaveTimer", 1000, function() {
                     LastPlant.gameOver();
                     LastPlant.saveConstruct();
                 });

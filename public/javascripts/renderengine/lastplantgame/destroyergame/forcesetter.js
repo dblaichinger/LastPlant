@@ -83,19 +83,30 @@ Engine.initObject("ForceSetter", "LPObject", function() {
         },
 
         
-        clicked: function(p) {
-            //var force=Point2D(p.x,p.y);
+        clicked: function(currentCursorPos) {
+            //var force=Point2D(currentCursorPos.x,currentCursorPos.y);
             var AttackUnit=LastPlant.getAttackUnit();
-            var distanceToUnit=p.dist(AttackUnit.getPosition());
-            if(distanceToUnit<150){
-                this.setPosition(p);
-                this.ShootDirection=p.sub(AttackUnit.getPosition());
-                var ShootDirectionVec = Vector2D.create(this.ShootDirection.get().x, this.ShootDirection.get().y);
-                var AngleToSet = ShootDirectionVec.angleBetween(Vector2D.create(-1, 0));
-                //console.log(AngleToSet);
-                this.getComponent("physics").setRotation( (AngleToSet+180)*0.017453292519943 );
-                this.startsim();
-                this.stopsim();
+            var CursorPos=Point2D.create(currentCursorPos);
+            console.log("currentCursorPos vorher: " + currentCursorPos);
+            var distanceToUnit=CursorPos.dist(AttackUnit.getPosition());
+            
+            this.ShootDirection=CursorPos.sub(AttackUnit.getPosition());
+            var ShootDirectionVec = Vector2D.create(this.ShootDirection.get().x, this.ShootDirection.get().y);
+            var AngleToSet = ShootDirectionVec.angleBetween(Vector2D.create(-1, 0));
+            var AngleToYAxis = ShootDirectionVec.angleBetween(Vector2D.create(0, 1));
+            console.log("currentCursorPos nachher: " + currentCursorPos);
+            console.log(AngleToYAxis);
+                
+            if(distanceToUnit<150 && distanceToUnit>35){
+                if(AngleToSet>90 && AngleToYAxis>90 ){
+                    this.setPosition(currentCursorPos);
+                    
+
+                    
+                    this.getComponent("physics").setRotation( (AngleToSet+180)*0.017453292519943 );
+                    this.startsim();
+                    this.stopsim();
+                }
             }
                 
             //console.log("ForceSetter clicked");

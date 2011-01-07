@@ -62,7 +62,7 @@ Engine.initObject("Plant", "LPObject", function() {
 		 * @param scale {Number} A scalar scaling value for the LPObject
 		 */
 		createPhysicalBody: function(componentName, scale) {
-			this.boxSize = Point2D.create(19, 86);
+			this.boxSize = Point2D.create(24, 76);
 			this.boxSize.mul(scale);
 			this.add(BoxBodyComponent.create(componentName, this.boxSize));
 			

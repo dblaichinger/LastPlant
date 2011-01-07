@@ -40,11 +40,21 @@ Engine.include("/textrender/text.renderer.js");
 Engine.include("/physics/collision/shapes/b2BoxDef.js");
 
 // Load game objects
+//for use on heroku
+/*Game.load("../renderengine/lastplantgame/buildergame/player.js");
+Game.load("../renderengine/lastplantgame/buildergame/LPObject.js");
+Game.load("../renderengine/lastplantgame/buildergame/Block.js");
+Game.load("../renderengine/lastplantgame/buildergame/Plant.js");
+Game.load("../renderengine/lastplantgame/buildergame/Background.js");*/
+
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/player.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/LPObject.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Block.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Plant.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Background.js");
+
+
+
 
 Engine.initObject("LastPlant", "Game", function(){
 
@@ -77,6 +87,8 @@ Engine.initObject("LastPlant", "Game", function(){
       //Counter Text Object
       NumberBlocksLeftText: null,
       PlantWasSetText: null,
+	  
+	  TotalScore: null,
 
       // Sprite & image resource loader
       spriteLoader: null,
@@ -99,7 +111,13 @@ Engine.initObject("LastPlant", "Game", function(){
          
          this.spriteLoader = SpriteLoader.create();
          
+		 
          // Load the sprites
+         //heroku
+         /*this.spriteLoader.load("Block-long", this.getFilePath("../renderengine/lastplantgame/buildergame/resources/Block-long.sprite"));
+         this.spriteLoader.load("Plant", this.getFilePath("../renderengine/lastplantgame/buildergame/resources/Plant.sprite"));
+         this.spriteLoader.load("Background", this.getFilePath("../renderengine/lastplantgame/buildergame/resources/Background.sprite"));*/
+         
          this.spriteLoader.load("Block-long", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Block-long.sprite"));
          this.spriteLoader.load("Plant", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Plant.sprite"));
          this.spriteLoader.load("Background", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Background.sprite"));
@@ -224,47 +242,6 @@ Engine.initObject("LastPlant", "Game", function(){
         this.renderContext.setWorldPosition(pos);
         console.log(this.renderContext.getWorldPosition());*/
       },
-      
-      saveConstruct: function(){
-        var JSONToSave = {}; //'{"OverallNumberOfBlocks": "' +this.OverallNumberOfBlocks+'",';
-        JSONToSave.OverallNumberOfBlocks = this.OverallNumberOfBlocks;
-        JSONToSave.Blocks = [];
-        for (var i = 0; i < this.OverallNumberOfBlocks+1; i++){
-            //TODO
-            //UNITTYPE mitspeichern
-
-            JSONToSave.Blocks.push( {"Type":this.BlocksArray[i].getLPOType(), 
-                                     "PosX":parseInt(this.BlocksArray[i].getPos().x), 
-                                     "PosY":parseInt(this.BlocksArray[i].getPos().y), 
-                                     "Rot":parseInt(this.BlocksArray[i].getRot())
-                                    } );
-            
-            /*JSONToSave+=' "BLOCK": { '
-            
-            JSONToSave+='   "TYPE": "1",';
-            JSONToSave+='   "PosX": "'+parseInt(this.BlocksArray[i].getPos().x)+'",';
-            JSONToSave+='   "PosY": "'+parseInt(this.BlocksArray[i].getPos().y)+'",';
-            JSONToSave+='   "Rot": "' +parseInt(this.BlocksArray[i].getRot())+'"';
-            JSONToSave+="}";*/
-            
-            //JSONToSave+="Y:"+this.BlocksArray[i].getPos();
-            //console.log(this.BlocksArray[i].getRot());
-        }
-        //JSONToSave+="}";
-        
-        //console.log(JSONToSave);
-        var ElementToStoreIn = document.getElementById("storage");
-        var JSONtext= JSON.stringify(JSONToSave);
-        //console.log(JSONtext);
-        ElementToStoreIn.innerHTML = JSONtext;
-        
-        /*var JSONtryout = {};
-        JSONtryout.testfeld = 'halloo';
-        console.log("JSONtryout.testfeld: " + JSONtryout.testfeld);*/
-        
-      },
-
-        
         
       /**
        * Set up the physical world.  Creates the bounds of the world by establishing
@@ -297,17 +274,73 @@ Engine.initObject("LastPlant", "Game", function(){
   			pos.destroy();
   			ext.destroy();
         },
+      
+        saveConstruct: function(){
+            var JSONToSave = {}; //'{"OverallNumberOfBlocks": "' +this.OverallNumberOfBlocks+'",';
+            JSONToSave.OverallNumberOfBlocks = this.OverallNumberOfBlocks;
+            JSONToSave.Blocks = [];
+            for (var i = 0; i < this.OverallNumberOfBlocks+1; i++){
+                //TODO
+                //UNITTYPE mitspeichern
+
+                JSONToSave.Blocks.push( {"Type":this.BlocksArray[i].getLPOType(), 
+                                         "PosX":parseInt(this.BlocksArray[i].getPos().x), 
+                                         "PosY":parseInt(this.BlocksArray[i].getPos().y), 
+                                         "Rot":parseInt(this.BlocksArray[i].getRot())
+                                        } );
+                
+                /*JSONToSave+=' "BLOCK": { '
+                
+                JSONToSave+='   "TYPE": "1",';
+                JSONToSave+='   "PosX": "'+parseInt(this.BlocksArray[i].getPos().x)+'",';
+                JSONToSave+='   "PosY": "'+parseInt(this.BlocksArray[i].getPos().y)+'",';
+                JSONToSave+='   "Rot": "' +parseInt(this.BlocksArray[i].getRot())+'"';
+                JSONToSave+="}";*/
+                
+                //JSONToSave+="Y:"+this.BlocksArray[i].getPos();
+                //console.log(this.BlocksArray[i].getRot());
+            }
+            //JSONToSave+="}";
+            
+            //console.log(JSONToSave);
+            var ElementToStoreIn = document.getElementById("storage");
+            var JSONtext= JSON.stringify(JSONToSave);
+            //console.log(JSONtext);
+            ElementToStoreIn.innerHTML = JSONtext;
+            
+            var ElementToStoreScoreIn = document.getElementById("score");
+            var ScoreText= this.TotalScore;
+            //console.log(JSONtext);
+            ElementToStoreScoreIn.innerHTML = ScoreText;
+        },
+
+        getHeightOfConstruct: function(){
+            var maxPosY=this.fieldHeight;
+            for (var i = 0; i < this.OverallNumberOfBlocks+1; i++){
+                if(this.BlocksArray[i].getPos().y<maxPosY)
+                    maxPosY=this.BlocksArray[i].getPos().y
+            }
+            maxPosY=this.fieldHeight-maxPosY;
+            return parseInt(maxPosY);
+        },
         
         gameOver: function(){
             this.renderContext.remove(this.PlantWasSetText);
-
+			
+			this.TotalScore=0;
+			
             this.writeText(1.8, Point2D.create(180, 40), "You did your best to save the LastPlant!");
             this.writeText(1.4, Point2D.create(180, 80), 'Press "SAVE" now to receive following points on your Builder-Profile');
             
             var BlocksInLvl = "Blocks in level: " + this.OverallNumberOfBlocks + " x 30 points";
+			this.TotalScore=this.OverallNumberOfBlocks*30;
             this.writeText(1.4, Point2D.create(200, 100), BlocksInLvl);
-            var BlocksInLvl = "Height of the defense: " + "1337Fakenumber" + " points";
+            var height=this.getHeightOfConstruct();
+            var BlocksInLvl = "Height of the defense: " + height + " points";
+			this.TotalScore=this.TotalScore+height;
             this.writeText(1.4, Point2D.create(200, 120), BlocksInLvl);
+            var TotalScoreText = "All in all this makes: " + this.TotalScore + "Points";
+            this.writeText(1.4, Point2D.create(200, 140), TotalScoreText);
         },
         writeText: function(Size, Position, Text){
             this.renderContext.remove(TextToWrite);

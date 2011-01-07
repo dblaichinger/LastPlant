@@ -117,17 +117,25 @@ Engine.initObject("Player", "Object2D", function() {
        * Set, or initialize, the position of the mover component.
        * @param point {Point2D} The position where the cursor is
        */
-      setPosition: function(point) {
+      setPosition: function(point,mouseInfo) {
         //clamp position into screen coordinates
         //var clampedPosition=Point2D.create;
-        if(point.get().x < 0)
+        if(point.get().x < 0){
             point.setX(0);
-        if(point.get().x > LastPlant.fieldWidth)
+            this.onMouseUp(mouseInfo);
+        }
+        if(point.get().x > LastPlant.fieldWidth){
             point.setX(LastPlant.fieldWidth);
-        if(point.get().y < 0)
+            this.onMouseUp(mouseInfo);
+        }
+        if(point.get().y < 0){
             point.setY(0);
-        if(point.get().y > LastPlant.fieldHeight)
+            this.onMouseUp(mouseInfo);
+        }
+        if(point.get().y > LastPlant.fieldHeight){
             point.setY(LastPlant.fieldHeight);
+            this.onMouseUp(mouseInfo);
+        }
         //console.log(" clamped point: " + point);
 
         this.base(point);
@@ -161,7 +169,7 @@ Engine.initObject("Player", "Object2D", function() {
         //console.log("mouseInfo.position: " + mouseInfo.position);
         //console.log("mouseInfo.lastPosition: " + mouseInfo.lastPosition);
         //if(mouseInfo.position!=mouseInfo.lastPosition){
-        this.setPosition(this.convertToWorldCoord(mouseInfo.position));
+        this.setPosition(this.convertToWorldCoord(mouseInfo.position),mouseInfo);
             //console.log("getPosition: " + this.getPosition());
         //}
         //if (this.mousedown && this.clickLPObject) {

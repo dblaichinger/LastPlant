@@ -73,18 +73,22 @@ Engine.initObject("Block", "LPObject", function() {
             /*var force = Vector2D.create(p).sub(this.getPosition()).mul(20000);
              this.applyForce(force, p);
             force.destroy();*/
-            this.stopsim();
-            this.setPosition(p);
+            
+            //this.stopsim();
+            //this.setPosition(p);
         },
             
         /**
          * called when button released
          */
         released: function(p) {
-            this.rotation=this.getComponent("physics").getRotationRAD();
-            this.getComponent("physics").setRotation(this.getComponent("physics").getRotation()*0.017453292519943);
-            this.startsim();
+            //this.rotation=this.getComponent("physics").getRotationRAD();
+            //this.getComponent("physics").setRotation(this.getComponent("physics").getRotation()*0.017453292519943);
+            //this.startsim();
         },
+        onCollide: function(obj) {
+
+        },        
 		
 
     }, /** @scope Block.prototype */{ // Static

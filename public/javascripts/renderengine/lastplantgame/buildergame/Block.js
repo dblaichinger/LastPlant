@@ -95,8 +95,24 @@ Engine.initObject("Block", "LPObject", function() {
                 LastPlant.createLPObject(this);
                 this.startsim();
             }
+            //console.log(this);
         },
-		
+        /**
+         * Determine if the LPObject was touched by the player and, if so,
+         * change the sprite which represents it.
+        */
+        onCollide: function(obj) {
+            if(this.isPlaced==false){
+                if (Player.isInstance(obj) &&
+                  (this.getWorldBox().isIntersecting(obj.getWorldBox() ))) {
+                  this.setSprite(1);
+                  return ColliderComponent.STOP;
+                }
+
+                this.setSprite(0);
+                return ColliderComponent.CONTINUE;
+            }
+        },
 
     }, /** @scope Block.prototype */{ // Static
     
