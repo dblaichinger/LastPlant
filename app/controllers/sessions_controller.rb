@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 	#def facebook_login
         establish_oauth
 		if(!@oath)
-            @oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://localhost:3000/")
+            @oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/")
 		end
 	
 		#if(session[:fb_id])
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 		if params[:code]
 			@code = params[:code]
 			#request and parse token from facebook
-			@token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://localhost:3000/").get_access_token(@code)
+			@token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://blaichinger2.heroku.com/").get_access_token(@code)
 			
 			#establish graph API connection
 			establish_graph
