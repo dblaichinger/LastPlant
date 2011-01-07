@@ -15,7 +15,7 @@ class MapsController < ApplicationController
         flash[:error] = "failed to save map: " + mapname + " " + session[:id] + " " + params[:content]
     end
     
-    redirect_to protect_path
+    render 'protect_index'
   end
 
   def show
