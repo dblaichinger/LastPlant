@@ -6,8 +6,9 @@
     <%= csrf_meta_tag %>
 	
 	<%= render 'layouts/stylesheets' %>
-	<%= #javascript_include_tag :defaults 
-    %>
+	<%if(request.fullpath != '/maps/new') %>
+        <%= javascript_include_tag :defaults %>
+    <% end %>
     <%= yield :scripts %>
 
 </head>

@@ -22,7 +22,7 @@ class MapsController < ApplicationController
   end
 
   def destroy
-    @map = Map.find(params[:id])
+    @map = Map.find(params[:id]).destroy
     flash[:success] = "Map destroyed."
     redirect_to protect_path
   end
