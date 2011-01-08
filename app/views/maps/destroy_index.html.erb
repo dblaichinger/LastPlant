@@ -1,10 +1,14 @@
 <h1>Destroy</h1>
 <h2>Random Maps</h2>
-
+<ul>
 <% if @rand_maps %>
     <% @rand_maps.each do |map| 
     %>
-    <li><%= map.name %></li>
-    <% end 
-    %>
+    <li><%= map.name %> | <%= link_to 'Play this map', destroy_map_path%></li>
+	
 <% end %>
+<% end %>
+</ul>
+
+
+

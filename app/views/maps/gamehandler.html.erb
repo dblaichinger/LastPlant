@@ -1,2 +1,64 @@
-<h1>Maps#gamehandler</h1>
-<p>Find me in app/views/maps/gamehandler.html.erb</p>
+<% content_for :scripts do %>
+      <script type="text/javascript" src="../../javascripts/renderengine/libs/base.js"></script> 
+      <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.js"></script> 
+      <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.ext.engine.js"></script> 
+      <script type="text/javascript" src="../../javascripts/renderengine/libs/sylvester.js"></script> 
+      <script type="text/javascript" src="../../javascripts/renderengine/engine/runtime/engine.js"></script> 
+      <script type="text/javascript" src="../../javascripts/renderengine/lastplantgame/buildergame/createXHR.js"></script> 
+    
+<% end %>
+
+
+
+
+        <script type="application/javascript">
+            function getData(){
+                var req = null; 
+
+                document.ajax.dyn.value="Started...";
+                if(window.XMLHttpRequest)
+                    req = new XMLHttpRequest(); 
+                else if (window.ActiveXObject)
+                    req  = new ActiveXObject(Microsoft.XMLHTTP); 
+
+                req.onreadystatechange = function(){
+                    
+                    document.ajax.dyn.value="Wait server...";
+                    if(req.readyState == 4)
+                    {
+                        if(req.status == 200)
+                        {
+                            document.ajax.dyn.value="Received:" + req.responseText;	
+                            
+                            var storing = document.getElementById("storage");
+                            storing.innerHTML = req.responseText;	
+                        }	
+                        else	
+                        {
+                            document.ajax.dyn.value="Error: returned status code " + req.status + " " + req.statusText;
+                        }	
+                    } 
+                }; 
+                req.open("GET", "ajax-post-text.txt", true); 
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
+                req.send(null); 
+            } 
+        </script>   
+   
+      <script type="text/javascript">
+      	$(document).ready(function() {
+			// Load the game script
+			Engine.loadGame('/../../javascripts/renderengine/lastplantgame/destroyergame/game.js','LastPlant','LastPlant Game');
+		});
+      </script>
+      <div id="storage">{"OverallNumberOfBlocks":4,"Blocks":[{"Type":"Block","PosX":744,"PosY":300,"Rot":21},{"Type":"Block","PosX":585,"PosY":379,"Rot":-269},{"Type":"Block","PosX":547,"PosY":337,"Rot":-269},{"Type":"Block","PosX":609,"PosY":295,"Rot":-269},{"Type":"Plant","PosX":777,"PosY":362,"Rot":0}]}</div>
+      <div id="buttons">
+        <FORM name="ajax" method="POST" action="">
+            <p>
+                <input type="text" name="dyn" size="200" value="">
+            </p>
+            <p>
+                <INPUT type="button" value="Load from Server"  ONCLICK="getData()">
+            </p>        
+        </FORM>
+      </div>
