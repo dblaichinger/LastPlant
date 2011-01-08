@@ -17,13 +17,12 @@
                         // alert("sent " + url + " " + content);
                     }
                 };
- 
+                
                 xhr.open("POST", url, false);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.send(content);
             }
- 
- 
+
             function saveData(){ 
                 //console.log(Lastplant);
                 //var content = document.ajax.sentence.value; //das ist das was geschickt wird
@@ -35,8 +34,8 @@
                     
                     //document.ajax.dyn.value="Saved:" + content;	
                     //storing.innerHTML = "<p>XML File wurde gespeichert! <b><a href='ajax-post-text.txt' target='_parent'>Look at the file</a></b>. ";
-                    var target = "/protect"
-                    window.location.href = target
+                    var target = "/protect";
+                    window.location.href = target;
                 }
             }
  
