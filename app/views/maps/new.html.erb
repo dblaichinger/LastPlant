@@ -19,13 +19,12 @@ function Write(url, content){
                         // alert("sent " + url + " " + content);
                     }
                 };
- 
+                
                 xhr.open("POST", url, true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.send(content);
             }
- 
- 
+
             function saveData(){ 
                 
                 var content = document.getElementById("storage").innerHTML;
@@ -38,6 +37,8 @@ function Write(url, content){
                     //storing.innerHTML = "<p>XML File wurde gespeichert! <b><a href='ajax-post-text.txt' target='_parent'>Look at the file</a></b>. ";
                     var target = "/protect";
                     window.location.href = target;
+
+
                 }
             }
  

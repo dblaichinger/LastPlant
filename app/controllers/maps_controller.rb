@@ -11,9 +11,9 @@ class MapsController < ApplicationController
     @map = Map.new(:name => mapname, :user_id => session[:id], :content => params[:map])
 
     if @map.save
-        flash.now[:success] = "created successfully!"
+        #flash.now[:success] = "created successfully!"
     else
-        flash.now[:error] = "failed to save map "
+        #flash.now[:error] = "failed to save map "
     end
   end
 
