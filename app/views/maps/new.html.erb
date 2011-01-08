@@ -29,7 +29,7 @@
                 var content = document.getElementById("storage").innerHTML;
                 if(content!="NULL"){
                     //console.log(content);
-                    Write("/maps/create", "map=" + content);
+                    Write("/maps/create?", "map=" + content);
                     var storing = document.getElementById("storage");
                     
                     //document.ajax.dyn.value="Saved:" + content;	
