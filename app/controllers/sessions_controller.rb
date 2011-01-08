@@ -4,6 +4,10 @@ class SessionsController < ApplicationController
   def new
   	@title = "Sign in"
 
+    if(current_user)
+        redirect_to current_user
+    end
+    
     # create oauth helper
         establish_oauth
 		if(!@oath)
