@@ -2,7 +2,7 @@ class CreateMaps < ActiveRecord::Migration
   def self.up
     create_table :maps do |t|
       t.string :name
-      t.string :content
+      t.string :text
       t.integer :score
       t.integer :user_id
       
