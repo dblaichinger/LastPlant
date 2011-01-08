@@ -27,11 +27,12 @@ def sign_in(user)
     current_user = nil
   end
 
+
   def current_user?(user)
     user == current_user
   end
 
-
+  # Deny access to page if user is not logged in
   def deny_access
   	session[:return_to] = request.fullpath
     flash[:notice] = "Please sign in to access this page."

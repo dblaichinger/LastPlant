@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   
+  before_filter :authenticate, :only => [:destroy]
   
   def new
   	@title = "Sign in"

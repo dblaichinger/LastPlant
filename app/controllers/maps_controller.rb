@@ -1,6 +1,8 @@
 class MapsController < ApplicationController
   protect_from_forgery :except => [:create]
 
+  before_filter :authenticate, :only => [:new, :create, :show, :destroy, :gamehandler, :protect_index, :destroy_index]
+
   def new
   
   end
@@ -30,7 +32,6 @@ class MapsController < ApplicationController
   end
 
   def protect_index
-  	@cmd = request.raw_post
     @maps = Map.find_all_by_user_id(session[:id])
   end
   
