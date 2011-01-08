@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
                 
                 #if creating user worked, set session
 				if @user.save
-                    session[:fb_id] = @user.fb_id
+                    session[:fb_id] = @user.fbid
 					#flash[:success] = "Welcome to Last Plant!"
                     
                 #unexpected error occured, save faile 
