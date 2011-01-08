@@ -9,7 +9,9 @@
 <% end %>
 
 <script type="application/javascript"> 
-            function Write(url, content){
+
+
+function Write(url, content){
                 var xhr = createXHR();
                 xhr.onreadystatechange=function() {
                     if(xhr.readyState == 4) {		
@@ -25,8 +27,7 @@
  
  
             function saveData(){ 
-                //console.log(Lastplant);
-                //var content = document.ajax.sentence.value; //das ist das was geschickt wird
+                
                 var content = document.getElementById("storage").innerHTML;
                 if(content!="NULL"){
                     //console.log(content);
@@ -35,12 +36,12 @@
                     
                     //document.ajax.dyn.value="Saved:" + content;	
                     //storing.innerHTML = "<p>XML File wurde gespeichert! <b><a href='ajax-post-text.txt' target='_parent'>Look at the file</a></b>. ";
-                    var target = "/protect"
-                    window.location.href = target
+                    var target = "/protect";
+                    window.location.href = target;
                 }
             }
  
- 
+
         </script> 
 
         <p>asdasd</p> 
