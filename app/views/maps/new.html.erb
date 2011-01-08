@@ -20,8 +20,8 @@ function Write(url, content){
                     }
                 };
                 
-                xhr.open("POST", url, true);
-                xhr.setRequestHeader("Content-Type", "text/plain");
+                xhr.open("POST", url, false);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.send(content);
             }
 
@@ -32,8 +32,8 @@ function Write(url, content){
                 
                 if(content!="NULL"){
                     //console.log(content);
-                    
-                    Write("/maps/create", "map=" + content+ "&score=" + score);
+                    alert(content);
+                    Write("/maps/create", "map=" + content + "&score=" + score);
                     var storing = document.getElementById("storage");
                     
                     //document.ajax.dyn.value="Saved:" + content;	

@@ -1,7 +1,7 @@
 class MapsController < ApplicationController
   protect_from_forgery :except => [:create]
 
-  before_filter :authenticate, :only => [:new, :create, :show, :destroy, :gamehandler, :protect_index, :destroy_index]
+  #before_filter :authenticate, :only => [:new, :create, :show, :destroy, :gamehandler, :protect_index, :destroy_index]
 
   def new
   
@@ -17,6 +17,8 @@ class MapsController < ApplicationController
     else
         #flash.now[:error] = "failed to save map "
     end
+    
+    render 'create'
   end
 
   def show
