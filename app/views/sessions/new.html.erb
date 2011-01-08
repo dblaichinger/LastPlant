@@ -1,3 +1,4 @@
+<% if !signed_in? %>
 
 <div class="login">
 <img class="logo" src="images/logo_turm_web-gross.png" alt="Last Plant">
@@ -25,7 +26,7 @@
 		  
 		  <class="signup">New user? <%= link_to "Sign up for free!", signup_path %></p>
 		<% end %>
-        
+<% end %>        
 		
 	
 	
