@@ -6,16 +6,15 @@ class MapsController < ApplicationController
   end
 
   def create
+  #this method is only called per AJAX request
     mapname = User.find_by_id(session[:id]).name + "'s " + (Map.find_all_by_user_id(session[:id]).count + 1).to_s + ". Map"
     @map = Map.new(:name => mapname, :user_id => session[:id], :content => params[:map])
 
     if @map.save
-        flash[:success] = "created successfully!"
+        flash.now[:success] = "created successfully!"
     else
-        flash[:error] = "failed to save map "
+        flash.now[:error] = "failed to save map "
     end
-    
-    render 'protect_index'
   end
 
   def show
