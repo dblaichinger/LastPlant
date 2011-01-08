@@ -3,7 +3,7 @@
 </p>
 <p>session id: <%= session[:id] %></p>
 <p>session id komisch: <%= session['id'] %></p>
-
+<p>current user: <%= current_user.id %></p>
 <ul>
 <% if @maps %>
     <% @maps.each do |map| 
