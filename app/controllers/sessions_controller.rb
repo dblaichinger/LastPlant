@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
             # if user already member, set session
 			if User.find_by_fbid(@me['id'])
                 session[:fb_id] = @me['id']
-				flash.now[:notice] = "user logged in."
+				#flash.now[:notice] = "user logged in."
                 
             #else create new user
 			else
@@ -41,16 +41,17 @@ class SessionsController < ApplicationController
                 #if creating user worked, set session
 				if @user.save
                     session[:fb_id] = @user.fb_id
-					flash.now[:success] = "user saved!"
+					#flash[:success] = "Welcome to Last Plant!"
                     
                 #unexpected error occured, save faile 
 				else
-					flash.now[:error] = "User save failed due to wrong data"
+					flash[:error] = "Login failed."
 				end
 			end
 		end
         #if new fb user is signed in now, redirect to start page
 		if(session[:fb_id])
+            flash[:success] = "Welcome to Last Plant!"
 			session[:id] = User.find_by_fbid(@me['id']).id
             current_user = User.find(session[:id])
 			redirect_to current_user
