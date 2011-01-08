@@ -30,7 +30,8 @@ function Write(url, content){
                 var content = document.getElementById("storage").innerHTML;
                 if(content!="NULL"){
                     //console.log(content);
-                    Write("/maps/create", "map=" + content);
+                    
+                    Write("/maps/create", "map=" + content+ "&score=" + ScoreText);
                     var storing = document.getElementById("storage");
                     
                     //document.ajax.dyn.value="Saved:" + content;	
@@ -61,5 +62,6 @@ function Write(url, content){
                
             </form> 
             <div id="storage">NULL</div> 
+            <div id="score">SCORENULL</div>
         </div> 
 		<strong>Whole URL: </strong><%= request.fullpath %>
