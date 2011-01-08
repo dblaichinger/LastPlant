@@ -28,10 +28,12 @@ function Write(url, content){
             function saveData(){ 
                 
                 var content = document.getElementById("storage").innerHTML;
+                var score = document.getElementById("score").innerHTML;
+                
                 if(content!="NULL"){
                     //console.log(content);
                     
-                    Write("/maps/create", "map=" + content+ "&score=" + ScoreText);
+                    Write("/maps/create", "map=" + content+ "&score=" + score);
                     var storing = document.getElementById("storage");
                     
                     //document.ajax.dyn.value="Saved:" + content;	
