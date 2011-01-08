@@ -5,23 +5,20 @@
 
   <nav>
     <ul id="navi">
-      <li class="left"><%= link_to "Home", home_path %></li>
+      <li class="left"><%= link_to "Home", current_user %></li>
       <li class="slash">/</li>
 	  <li><%= link_to "Protect", protect_path %></li>
       <li class="slash">/</li>
 	  <li><%= link_to "Destroy", destroy_path %></li>
       <li class="slash">/</li>
 
-      <li><%= link_to "Profile", current_user %></li>
-	  <li class="slash">/</li>
-		
 		<li><%= link_to "Users", users_path %></li>
 		<li class="slash">/</li>
 		
 		<li><%= link_to "Settings", edit_user_path(current_user) %></li>
 		 <li class="slash">/</li>
       
-	 	<li><%= link_to "Help", help_path %></li>
+	 	<li class = "abstand"><%= link_to "Help", help_path %></li>
    	  	<li class="slash">/</li>
      	<li class="rechts"><%= link_to "Logout", signout_path, :method => :delete %></li> 
 	  	</ul>

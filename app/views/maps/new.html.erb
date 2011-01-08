@@ -9,7 +9,9 @@
 <% end %>
 
 <script type="application/javascript"> 
-            function Write(url, content){
+
+
+function Write(url, content){
                 var xhr = createXHR();
                 xhr.onreadystatechange=function() {
                     if(xhr.readyState == 4) {		
@@ -24,8 +26,7 @@
             }
 
             function saveData(){ 
-                //console.log(Lastplant);
-                //var content = document.ajax.sentence.value; //das ist das was geschickt wird
+                
                 var content = document.getElementById("storage").innerHTML;
                 var score = document.getElementById("score").innerHTML;
                 
@@ -42,7 +43,7 @@
                 }
             }
  
- 
+
         </script> 
 
         <p>asdasd</p> 

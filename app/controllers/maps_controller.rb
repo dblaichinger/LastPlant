@@ -30,6 +30,7 @@ class MapsController < ApplicationController
   end
 
   def protect_index
+  	@cmd = request.raw_post
     @maps = Map.find_all_by_user_id(session[:id])
   end
   
