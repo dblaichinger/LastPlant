@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
   def create
   	if signed_in?
-		redirect_to home_path
+		redirect_to current_user
 	else	
 		@user = User.new(params[:user])
 		if @user.save
