@@ -340,7 +340,7 @@ table {
 	margin-top: 15px;
 }
 
-#storage, #score, #map_score, #map_id {
+#storage, #score, #map_score, #map_id , #map_img , #mapname {
 	display: none;
 }
 
