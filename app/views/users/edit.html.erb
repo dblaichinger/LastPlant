@@ -28,6 +28,7 @@
 
 <div class="gravatar_div">
 <if current_user.isFacebook %>
+
     <img src="http://graph.facebook.com/<%= current_user.fbid.to_s %>/picture">
 <% else %>
   <%= gravatar_for @user %><br />
