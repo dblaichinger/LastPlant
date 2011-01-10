@@ -1,0 +1,14 @@
+<%= #gravatar_for(@user) 
+%>
+
+<h1 class="center_me">Hello <span class="highlight"><%=  @user.name %></span> ! Make your decision:</h1>
+<div class="overview_box">
+    <h2>Destroy</h2>
+    <p>Score: <span class="highlight"><%= @user.destroyScore %></span></p>
+    <%= link_to destroy_img, destroy_path %>
+</div>
+<div class="overview_box">
+    <h2>Protect</h2>
+    <p>Score: <span class="highlight"><%= @user.createScore %></span></p>
+    <%= link_to protect_img, protect_path %>
+</div>

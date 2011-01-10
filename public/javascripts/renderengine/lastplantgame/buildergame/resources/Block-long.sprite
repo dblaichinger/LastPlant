@@ -1,0 +1,10 @@
+{
+   // block-long sprites
+   "bitmapImage": "Block-long.png",
+   "bitmapSize": [68,160],
+	"version": 2,
+   "sprites": {
+      "Block-long": [0, 0, 33, 160],
+      "Block-longOver": [34, 0, 34, 160]
+   }
+}

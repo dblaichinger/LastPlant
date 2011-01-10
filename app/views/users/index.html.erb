@@ -1,0 +1,26 @@
+<h1>All users</h1>
+
+<ul class="users">
+
+<% @users.each do |user| %>
+
+    <li class="allusers"><% if user.isFacebook %>
+        <img src="http://graph.facebook.com/<%= user.fbid.to_s %>/picture">
+    <% else %>
+        <%= gravatar_for user, :size => 50 %>
+      <% end %>
+      <%= user.name %>
+	  
+		<% if current_user.admin? %>
+		  <% if (user.admin == true) %>
+			| <%= link_to "delete", user, :method => :delete, :confirm => "Attention:\nAre you sure to delete an ADMIN-USER!", :title => "Delete #{user.name}"%>
+			<% else %>
+			  | <%= link_to "delete", user, :method => :delete, :confirm => "Are you sure to delete #{user.name}?", :title => "Delete #{user.name}"%>
+			<% end %>
+		<% end %>
+	</li>
+<% end %>
+
+</ul>
+
+

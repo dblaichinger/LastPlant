@@ -1,0 +1,10 @@
+{
+   // ForceSetter sprites
+   "bitmapImage": "ForceSetter.png",
+   "bitmapSize": [32,17],
+	"version": 2,
+   "sprites": {
+      "ForceSetter": [0, 0, 15, 17],
+      "ForceSetterOver": [16, 0, 16, 17]
+   }
+}
