@@ -27,6 +27,9 @@
 <% end %>
 
 <div class="gravatar_div">
+<if current_user.isFacebook %>
+    <img src="<%= $graph.get_image(current_user.id.to_s) %>">
+<% else %>
   <%= gravatar_for @user %><br />
   <a href="http://gravatar.com/emails" target="_blank">Change picture</a>
 </div>
