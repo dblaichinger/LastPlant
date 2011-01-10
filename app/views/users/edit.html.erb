@@ -42,6 +42,10 @@ function checkpassword(){
 		alert('Your password needs to be longer!');
 		return false;
 	}
+	else if(document.getElementById('user_password').value != document.getElementById('user_password_confirmation').value){
+		alert("Password doesn't match confirmation!");
+		return false;
+	}	
 	else return true;
 }
 </script>
