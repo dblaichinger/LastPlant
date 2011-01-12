@@ -63,15 +63,27 @@ p.signup {
 }
 
 
+.pagination {
+    margin-top: 5px;
+    font-family: Arial;
+}
+
 
 .destroy_block {
 	
     padding: 10px;
-    width: 350px;
+    width: 280px;
     border: solid rgb(152, 191,75) 3px;
     text-align: center;
 }
 
+#randommaps, #mymaps, #latestmaps {
+    float: left;
+    margin: 10px 30px 20px 30px;
+    min-height: 110px;
+}
+
+/*
 #randommaps{
  	margin: 50px 40px 10px 30px;
 }
@@ -81,7 +93,7 @@ p.signup {
     position: relative;
     top: -82px;
 }
-
+*/
 
 h1, h2{
     font-size: 18px;
