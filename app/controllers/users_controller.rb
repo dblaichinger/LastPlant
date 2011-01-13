@@ -10,8 +10,8 @@ class UsersController < ApplicationController
 
   def index
     @title = "All users"
- 
-	@users = User.paginate(:page => params[:page])
+
+    @users = User.paginate(:all, :per_page => 7, :page => params[:page], :order => 'created_at DESC')
   end
   
   def show  

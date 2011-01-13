@@ -19,12 +19,15 @@ class MapsController < ApplicationController
     
     if @map.save
         @user = User.find(@map.user_id)
-        @user.createScore += @map.score.to_i
-        if @user.save
-            flash[:success] = "Your map was created successfully"
-        end
+        #@user.createScore += @map.score.to_i
+        score = @user.createScore + @map.score.to_i
+        @user.update_attribute(:createScore,score)
+        
+        #if @user.save
+        #    flash[:success] = "Your map was created successfully"
+        #end
     else
-        flash[:success] = "Failed to save map "
+        flash[:error] = "Failed to save map "
     end
     render 'protect_index'
   end
@@ -69,10 +72,15 @@ class MapsController < ApplicationController
   
   def destroy_index
   	@title = "Destroy"
-    @rand_maps = Map.find(:all, :offset => (Map.count * rand).to_i, :limit => 5)
-	
+    #@rand_maps = Map.paginate(:all, :offset => (Map.count * rand).to_i, :per_page => 2, :page => params[:rand_page] )
+	@rand_maps = Map.find(:all, :offset => (Map.count * rand).to_i, :limit => 5);
+    
+    
+    @latest_maps = Map.paginate(:all, :per_page => 5, :order => 'created_at DESC', :page => params[:latest_page])
+    
 	@user_id = current_user.id
-	@my_maps = Map.find_all_by_user_id(@user_id);
+	@my_maps = Map.find_all_by_user_id(@user_id)
+    #@my_maps.paginate(:limit => 3, :order => 'created_at DESC', :page => params[:my_page]);
   end
 end
 

@@ -7,17 +7,13 @@
 		<% @rand_maps.each do |map| %>
 	
 		<p><%= map.name %> | <%= link_to 'Play this map', map_path(map.id)%></p>
-		
 		<% end %>
 	<% else %>
 		<p>Could not find any maps</p>
 	<% end %>
-
 </div>
 
-
 <div class="destroy_block" id="mymaps">
-
 <p>My maps</p>
 	<% if @my_maps != [] %>
     	<% @my_maps.each do |map| %>
@@ -27,7 +23,19 @@
    <%else%>
 		<p>You have not build any maps yet</p>
 	<% end %>
+
 </div>
 
 
-
+<div class="destroy_block" id="latestmaps">
+<p>Latest maps</p>
+	<% if @latest_maps != [] %>
+		<% @latest_maps.each do |map| %>
+	
+		<p><%= map.name %> | <%= link_to 'Play this map', map_path(map.id)%></p>
+		<% end %>
+	<% else %>
+		<p>Could not find any maps</p>
+	<% end %>
+    <%= will_paginate @latest_maps, :param_name => :latest_page  %>
+</div>

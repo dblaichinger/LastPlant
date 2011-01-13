@@ -18,7 +18,9 @@
 #
 
 class User < ActiveRecord::Base
-	
+    cattr_reader :per_page
+    @@per_page = 10
+    
 	attr_accessor :password
 	attr_accessible :name, :email, :password, :password_confirmation, :fbid, :isFacebook, :admin, :createScore, :destroyScore
 	
