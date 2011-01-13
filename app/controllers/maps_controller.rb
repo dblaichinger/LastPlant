@@ -10,22 +10,19 @@ class MapsController < ApplicationController
 
   def create
   #this method is only called per AJAX request
-    if(!params[:mapname] || params[:mapname] == "" || params[:mapname] == "Please enter map name")
-      mapname = User.find_by_id(session[:id]).name + "'s " + (Map.find_all_by_user_id(session[:id]).count + 1).to_s + ". Map"     
-    else
-      mapname = params[:mapname]
-    end
+    mapname = Map.set_name(params[:mapname])
+    
     @map = Map.new(:name => mapname, :user_id => session[:id], :content => params[:map], :score => params[:score])
     
     if @map.save
         @user = User.find(@map.user_id)
-        #@user.createScore += @map.score.to_i
-        score = @user.createScore + @map.score.to_i
-        @user.update_attribute(:createScore,score)
+        @user.createScore += @map.score.to_i
+        #score = @user.createScore + @map.score.to_i
+        #@user.update_attribute(:createScore,score)
         
-        #if @user.save
-        #    flash[:success] = "Your map was created successfully"
-        #end
+        if @user.save
+            flash[:success] = "Your map was created successfully"
+        end
     else
         flash[:error] = "Failed to save map "
     end
