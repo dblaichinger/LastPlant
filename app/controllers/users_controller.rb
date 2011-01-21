@@ -28,10 +28,8 @@ class UsersController < ApplicationController
   	if signed_in?
       redirect_to current_user
     else
-      @user = User.new(params[:user])
-      @user.createScore = 0;
-      @user.destroyScore = 0;
-      @user.isFacebook = false;
+	  @user = register_new(params[:user], false)	
+	
       if @user.save
         sign_in(@user)
         flash[:success] = "Welcome to Last Plant!"
