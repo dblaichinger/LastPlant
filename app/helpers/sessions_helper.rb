@@ -67,13 +67,12 @@ module SessionsHelper
 
   # Methods for Facebook - Login
 	def establish_graph
-    if(!$oauth)
-      establish_oauth
-    end
-    #request and parse token from facebook
-    $token = Koala::Facebook::OAuth.new("158315630884949", '24649532594ab931351f13465261391e', "http://blaichinger5.heroku.com/").get_access_token(@code)
-
-	  $graph = Koala::Facebook::GraphAPI.new($token)
+		if(!$oauth)
+		  establish_oauth
+		end
+		#request and parse token from facebook
+		$token = Koala::Facebook::OAuth.new("158315630884949", '24649532594ab931351f13465261391e', "http://blaichinger5.heroku.com/").get_access_token(@code)
+		$graph = Koala::Facebook::GraphtAPI.new($token)
 	end
 	
 	def establish_oauth
@@ -114,7 +113,8 @@ module SessionsHelper
 				if @user.save
           			session[:fb_id] = @user.fbid
           			flash[:success] = "Welcome to Last Plant!"
-          #unexpected error occured, save faile
+					
+          #unexpected error occured, save failed
 				else
 					flash[:error] = "Login failed."
 				end

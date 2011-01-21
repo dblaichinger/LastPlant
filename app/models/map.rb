@@ -20,11 +20,19 @@ end
 
 private
 def self.set_name(name)
+<<<<<<< HEAD
   if(!name || name == "")
     return self.generate_name
   else
     mapname = params[:mapname]
   end
+=======
+    if(!name || name == "")
+      return self.generate_name     
+    else
+      return name
+    end
+>>>>>>> 2ec9da5ae3a2eae60be5c6f3234f551b635604a3
 
 end
 
