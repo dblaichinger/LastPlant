@@ -101,14 +101,8 @@ module SessionsHelper
                 
         #else create new user
 			else
-                params[:user][:fbid] = @me['id']
-                params[:user][:name] = @me['name']
-                params[:user][:email] = @me['email']
-                params[:user][:password] = @me['id']
-                params[:user][:password_confirmation] = @me['id']
-                
-				@user = User.register_new(params[:user], true)
-                
+               @user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true, :password =>@me['id'], :password_confirmation =>@me['id'], :createScore => 0, :destroyScore => 0)
+                 
         #if creating user worked, set session
 				if @user.save
           session[:fb_id] = @user.fbid
