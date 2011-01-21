@@ -4,12 +4,15 @@
 	<meta charset="utf-8">
    <title><%= title %></title>
     <%= csrf_meta_tag %>
-	
+
 	<%= render 'layouts/stylesheets' %>
 
-	<%if(request.fullpath != '/maps/new') %>
+	<%if((request.fullpath != '/maps/new') || (request.fullpath != '/maps/destroy_map')) %>
         <%= javascript_include_tag :defaults %>
     <% end %>
+
+
+	
 
     <%= yield :scripts %>
 
