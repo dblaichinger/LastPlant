@@ -1,29 +1,26 @@
 /**
- * LastPlant JS Game
- * Michael Webersdorfer 
- * 
- *
- * Created with Renderengine renderengine.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
+    * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
+    * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining a copy
+    * of this software and associated documentation files (the "Software"), to deal
+    * in the Software without restriction, including without limitation the rights
+    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    * copies of the Software, and to permit persons to whom the Software is
+    * furnished to do so, subject to the following conditions:
+    *
+    * The above copyright notice and this permission notice shall be included in
+    * all copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    * THE SOFTWARE.
+    *
+*/
 
 // Load all required engine components
 Engine.include("/rendercontexts/context.canvascontext.js");
@@ -39,15 +36,8 @@ Engine.include("/textrender/text.renderer.js");
 
 Engine.include("/physics/collision/shapes/b2BoxDef.js");
 
-// Load game objects
-//for use on heroku
-/*Game.load("../renderengine/lastplantgame/buildergame/player.js");
-Game.load("../renderengine/lastplantgame/buildergame/LPObject.js");
-Game.load("../renderengine/lastplantgame/buildergame/Block.js");
-Game.load("../renderengine/lastplantgame/buildergame/Plant.js");
-Game.load("../renderengine/lastplantgame/buildergame/Background.js");*/
-
-Game.load("../../javascripts/renderengine/lastplantgame/buildergame/player.js");
+//load game objects
+Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Player.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/LPObject.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Block.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Plant.js");
@@ -79,7 +69,7 @@ Engine.initObject("LastPlant", "Game", function(){
       fieldHeight: 400,
       
       //Blocks
-      OverallNumberOfBlocks: 4,
+      OverallNumberOfBlocks: 7,
       currentNumberOfBlocks: 0,
       BlocksArray: null,
       BlocksArrayIndex: 0,
@@ -111,26 +101,15 @@ Engine.initObject("LastPlant", "Game", function(){
          
          this.spriteLoader = SpriteLoader.create();
          
-		 
-         // Load the sprites
-         //heroku
-         /*this.spriteLoader.load("Block-long", this.getFilePath("../renderengine/lastplantgame/buildergame/resources/Block-long.sprite"));
-         this.spriteLoader.load("Plant", this.getFilePath("../renderengine/lastplantgame/buildergame/resources/Plant.sprite"));
-         this.spriteLoader.load("Background", this.getFilePath("../renderengine/lastplantgame/buildergame/resources/Background.sprite"));*/
-         
+         // Load sprites
          this.spriteLoader.load("Block-long", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Block-long.sprite"));
+         this.spriteLoader.load("Block-square", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Block-square.sprite"));
          this.spriteLoader.load("Plant", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Plant.sprite"));
          this.spriteLoader.load("Background", this.getFilePath("../../javascripts/renderengine/lastplantgame/buildergame/resources/Background.sprite"));
          
-         //load background image
-         //this.imageLoader = ImageLoader.create();
-         //this.imageLoader.load("background", this.getFilePath("resources/Background.png"), 800, 400);
-        
-
-         
          // Don't start until all of the resources are loaded
          Timeout.create("wait", 250, function() {
-				if (LastPlant.spriteLoader.isReady() /*&& LastPlant.imageLoader.isReady()*/) {
+				if (LastPlant.spriteLoader.isReady()) {
 						this.destroy();
 						LastPlant.run();
 				}
@@ -162,21 +141,7 @@ Engine.initObject("LastPlant", "Game", function(){
          
         // Create the game context
         this.renderContext = CanvasContext.create("Playfield", this.fieldWidth, this.fieldHeight);
-        this.renderContext.setBackgroundColor("#FFFFFF");
-        
-        //draw background image
-        //this.add(ImageComponent.create("draw", Tutorial4.imageLoader, "keys"));
-        //var backgroundIMG = ImageComponent.create("background", 1, this.imageLoader.getImage("background"));
-        //this.renderContext.drawImage(this.fieldBox, this.imageLoader.getImage("background"))
-        //console.log(this.spriteLoader.getSprite("BGSprite", "Background"));
-        /*var canvas=HTMLElementContext.create("thiscanvas", this.renderContext.getElement());
-        canvas.pushTransform();
-        canvas.setPosition(Point2D.create(200, 200))
-        canvas.popTransform();
-        console.log( canvas.getPosition() );*/
-        //console.log( this.renderContext.jQ().offset() );
-        //this.renderContext.drawSprite(this.spriteLoader.getSprite("BGSprite", "Background"),0)
-        
+        this.renderContext.setBackgroundColor("#241E1E");
 
         // Set up the physics simulation
         this.simulation = Simulation.create("simulation", this.fieldBox);
@@ -187,68 +152,33 @@ Engine.initObject("LastPlant", "Game", function(){
         // world is stepped (updated) in sync with each frame generated
         this.renderContext.add(this.simulation);
 
-        // Draw an outline around the context
-		/*
-        this.renderContext.jQ().css({
-            border: "1px solid red",
-            left: 0,
-            top: 0,
-            right: 0,
-            bottom: 0});
-		*/
-		
         // Add the game context to the scene graph
         Engine.getDefaultContext().add(this.renderContext);
 
         // Create the collision model with 8x8 divisions
         this.cModel = SpatialGrid.create(this.fieldWidth, this.fieldHeight, 8);
-         
-        //this.renderContext.drawSprite(this.spriteLoader.getSprite("BGSprite", "Background"))
-        /*var BGSpritee = SpriteComponent.create("BGSpriteComp", 1, this.spriteLoader.getSprite("BGSprite", "Background"));
-        console.log(BGSpritee);
-        this.renderContext.add(BGSpritee);*/
-        //console.log(this.spriteLoader.getSprite("BGSprite", "Background"));
-        //this.renderContext.drawSprite(this.spriteLoader.getSprite("BGSprite", "Background"))
-        
-        //var backgroundIMG = ImageComponent.create("background", 1, this.imageLoader.getImage("background"));
-        //this.renderContext.add(backgroundIMG);
-        //this.renderContext.drawImage(this.fieldBox, this.imageLoader.getImage("background"));
 
-        //console.log(Background.create());
+        // Add the Background to the context
         this.getRenderContext().add(Background.create());
-        //Background.create();
-        
+
         this.BlocksArray = [];
         LastPlant.createLPObject();
-        //LastPlant.createLPObject(Block.create(),2);
-        //LastPlant.createLPObject(Block.create(),3);
          
         // Add the player object
         var player = Player.create();
         this.getRenderContext().add(player);
           
-        // Texts
+        // Write the "Blocks Left" Text
         var BlocksLeftText = TextRenderer.create(ContextText.create(), "Blocks left", 1.8);
         BlocksLeftText.setPosition(Point2D.create(20, 50));
         BlocksLeftText.setTextFont("Verdana")
         BlocksLeftText.setColor("#ccff33");
         this.renderContext.add(BlocksLeftText);
-        
-        
-        //console.log(this.renderContext.getRenderPosition());
-        /*var pos=Point2D.create(200, 200);
-        this.renderContext.setPosition(pos);
-        console.log(this.renderContext.getPosition());
-        console.log(this.renderContext.getWorldPosition());
-        var pos=Point2D.create(100, 100);
-        this.renderContext.setWorldPosition(pos);
-        console.log(this.renderContext.getWorldPosition());*/
       },
         
       /**
-       * Set up the physical world.  Creates the bounds of the world by establishing
-       * walls and a floor.  The actual objects have no visual respresentation but they
-       * will exist in the simulation and prevent the LPObjects from leaving the playfield.
+       * Set up the physical world.  Creates "invisible walls" to prevent
+       * Objects of leaving the canvas
        * @private
        */
       setupWorld: function() {
@@ -278,42 +208,27 @@ Engine.initObject("LastPlant", "Game", function(){
         },
       
         saveConstruct: function(){
-            var JSONToSave = {}; //'{"OverallNumberOfBlocks": "' +this.OverallNumberOfBlocks+'",';
+            var JSONToSave = {}; 
             JSONToSave.OverallNumberOfBlocks = this.OverallNumberOfBlocks;
             JSONToSave.Blocks = [];
             for (var i = 0; i < this.OverallNumberOfBlocks+1; i++){
-                //TODO
-                //UNITTYPE mitspeichern
-
                 JSONToSave.Blocks.push( {"Type":this.BlocksArray[i].getLPOType(), 
                                          "PosX":parseInt(this.BlocksArray[i].getPos().x), 
                                          "PosY":parseInt(this.BlocksArray[i].getPos().y), 
                                          "Rot":parseInt(this.BlocksArray[i].getRot())
                                         } );
-                
-                /*JSONToSave+=' "BLOCK": { '
-                
-                JSONToSave+='   "TYPE": "1",';
-                JSONToSave+='   "PosX": "'+parseInt(this.BlocksArray[i].getPos().x)+'",';
-                JSONToSave+='   "PosY": "'+parseInt(this.BlocksArray[i].getPos().y)+'",';
-                JSONToSave+='   "Rot": "' +parseInt(this.BlocksArray[i].getRot())+'"';
-                JSONToSave+="}";*/
-                
-                //JSONToSave+="Y:"+this.BlocksArray[i].getPos();
-                //console.log(this.BlocksArray[i].getRot());
             }
-            //JSONToSave+="}";
-            
-            //console.log(JSONToSave);
             var ElementToStoreIn = document.getElementById("storage");
             var JSONtext= JSON.stringify(JSONToSave);
-            //console.log(JSONtext);
             ElementToStoreIn.innerHTML = JSONtext;
             
             var ElementToStoreScoreIn = document.getElementById("score");
             var ScoreText= this.TotalScore;
-            //console.log(JSONtext);
             ElementToStoreScoreIn.innerHTML = ScoreText;
+            
+            var ElementToStoreMap_Img = document.getElementById("map_img");
+            var imgData= this.renderContext.getDataURL();
+            ElementToStoreMap_Img.innerHTML = imgData;
         },
 
         getHeightOfConstruct: function(){
@@ -331,141 +246,99 @@ Engine.initObject("LastPlant", "Game", function(){
 			
 			this.TotalScore=0;
 			
-            this.writeText(1.8, Point2D.create(180, 40), "You did your best to save the LastPlant!");
-            this.writeText(1.4, Point2D.create(180, 80), 'Press "SAVE" now to receive following points on your Builder-Profile');
+            this.writeText(1.8, Point2D.create(190, 50), "You did your best to save the LastPlant!");
+            this.writeText(1.4, Point2D.create(190, 83), 'Press "Save Construct" now to receive following points on your Builder-Profile');
             
             var BlocksInLvl = "Blocks in level: " + this.OverallNumberOfBlocks + " x 30 points";
 			this.TotalScore=this.OverallNumberOfBlocks*30;
-            this.writeText(1.4, Point2D.create(200, 100), BlocksInLvl);
+            this.writeText(1.4, Point2D.create(210, 105), BlocksInLvl);
             var height=this.getHeightOfConstruct();
             var BlocksInLvl = "Height of the defense: " + height + " points";
 			this.TotalScore=this.TotalScore+height;
-            this.writeText(1.4, Point2D.create(200, 120), BlocksInLvl);
-            var TotalScoreText = "All in all this makes: " + this.TotalScore + "Points";
-            this.writeText(1.4, Point2D.create(200, 140), TotalScoreText);
+            this.writeText(1.4, Point2D.create(210, 125), BlocksInLvl);
+            var TotalScoreText = "All in all this makes: " + this.TotalScore + " points";
+            this.writeText(1.4, Point2D.create(210, 145), TotalScoreText);
         },
         writeText: function(Size, Position, Text){
             this.renderContext.remove(TextToWrite);
             var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
             TextToWrite.setPosition(Position);
             TextToWrite.setTextFont("Verdana")
-            TextToWrite.setColor("#ccff33");
+            TextToWrite.setColor("#655655");
             this.renderContext.add(TextToWrite);
         },
         showPlantWasSetText: function(){
             var PlantWasSetTextString="Please wait for the Plant to settle down";
             
             this.PlantWasSetText = TextRenderer.create(ContextText.create(), PlantWasSetTextString, 1.8);
-            this.PlantWasSetText.setPosition(Point2D.create(180, 40));
+            this.PlantWasSetText.setPosition(Point2D.create(190, 50));
             this.PlantWasSetText.setTextFont("Verdana")
-            this.PlantWasSetText.setColor("#ccff33");
+            this.PlantWasSetText.setColor("#655655");
             this.renderContext.add(this.PlantWasSetText);
         },
         
         /**
-         * Create a LPObject
-         * @param LPObjectObject {LPObject} A LPObject object to add to the playfield and simulation
+         * Create a LPObject to add to the playfield and simulation
          * @private
          */
         createLPObject: function() {
-  			// Before we create a LPObject, check the engine load.  If it's > 80%
-  			// just return.
-  			//if (Engine.getEngineLoad() > 0.8) {
-  				//return;
-  			//}
-  			// if(id==0){
-                // this.AttackUnit=LPObjectObject;
-                // //console.log("AttackUnit: " + this.AttackUnit)
-                // var p = Point2D.create(50, 370);
-            // }
-  			// if(id==1){
-    			// // Set a location
-    			// var p = Point2D.create(500, 200);
-  			// }
-  			// if(id==2){
-                // // Set a location
-                // var p = Point2D.create(600, 200);
-            // }
-            // if(id==3){
-                // // Set a location
-                // var p = Point2D.create(700, 100);
-                // //LPObjectObject.setRotation(90);
-                // //console.log("rotation beim createn: " + LPObjectObject.getRotation());
-            // }
-            
-            //return if blocks number is reache
             var blocksleft=this.OverallNumberOfBlocks-this.currentNumberOfBlocks;
             
             if(blocksleft<0)
                 return;
-            else if(blocksleft==0){
+            else if(blocksleft==0){  //Spawn Plant
                 this.writeBlocksCounter("0");
-                LPObjectObject=Plant.create();
+                
+
+                NewLPObject=Plant.create();
                 
                 var p = Point2D.create(50, 200);
-                LPObjectObject.setPosition(p);
+                NewLPObject.setPosition(p);
                 p.destroy();
                 
-                LPObjectObject.setSimulation(this.simulation);
-                this.getRenderContext().add(LPObjectObject);
+                NewLPObject.setSimulation(this.simulation);
+                this.getRenderContext().add(NewLPObject);
 
-                LPObjectObject.simulate();
-                LPObjectObject.startsim();
-                LPObjectObject.stopsim();
+                NewLPObject.simulate();
+                NewLPObject.startsim();
+                NewLPObject.stopsim();
 
-                this.BlocksArray[this.BlocksArrayIndex]=LPObjectObject;
-            } else {
+                this.BlocksArray[this.BlocksArrayIndex]=NewLPObject;
+            } else { //spawn a new Block
                 
-                LPObjectObject=Block.create();
+                var TypeofBlock=Math2.randomRange(0,2,true);
+                if(TypeofBlock==0)
+                    NewLPObject=Block.create("Block-square");
+                else
+                    NewLPObject=Block.create("Block-long");
+                    
+
                 this.writeBlocksCounter(blocksleft)
-                
                 this.currentNumberOfBlocks=this.currentNumberOfBlocks+1;
+
+                var startPos = Point2D.create(60, 200);
                 
-                //console.log("LPObjectObject: " + LPObjectObject);
-                //console.log(LPObjectObject);
-                var p = Point2D.create(60, 200);
-                
-                LPObjectObject.setPosition(p);
-                //console.log(Math2.randomRange(0,180,true));
+                NewLPObject.setPosition(startPos);
                 var rot=Math2.randomRange(0,180,true);
-                LPObjectObject.setRot(rot*0.017453292519943); //conversion RAD->GRAD
-                LPObjectObject.getComponent("physics").setRotation(rot*0.017453292519943);
+                NewLPObject.saveRot(rot*0.017453292519943); //conversion RAD->GRAD
+                NewLPObject.getComponent("physics").setRotation(rot*0.017453292519943);
                 
                 
                 // The simulation is used to update the position and rotation
-                // of the physical body.  Whereas the render context is used to 
-                // represent (draw) the shape.
-                LPObjectObject.setSimulation(this.simulation);
-                this.getRenderContext().add(LPObjectObject);
+                // of the physical body.  Whereas the render context is used to draw the shape
+                NewLPObject.setSimulation(this.simulation);
+                this.getRenderContext().add(NewLPObject);
                  
-                // Start the simulation of the object so we can apply a force
-                LPObjectObject.simulate();
-                //LPObjectObject.setRotation(90);
-                //console.log("rotation at creation: " + LPObjectObject.getRotation());
+                // Start the simulation of the object
+                // And stop again so the player can set it without physical limitations
+                NewLPObject.simulate();
+                NewLPObject.startsim();
+                NewLPObject.stopsim();
 
-                LPObjectObject.startsim();
-                LPObjectObject.stopsim();
-
-                this.BlocksArray[this.BlocksArrayIndex]=LPObjectObject;
+                this.BlocksArray[this.BlocksArrayIndex]=NewLPObject;
                 this.BlocksArrayIndex++;
-                
-                //if(id==3 || id==0){
-                    //LPObjectObject.setRotation(90);
-                    //console.log("rotation beim createn: " + LPObjectObject.getRotation());
-                    
-                    //LPObjectObject.startsim();
-                    //LPObjectObject.setRotation(90);
-                    //LPObjectObject.stopsim();
-                    //LPObjectObject.setRot(90);
-                    //LPObjectObject.update();
-                //}
-                
-                //var v = Vector2D.create (0,0);//((1000 + (Math2.random() * 5000)) * 2000, 10);
-                //LPObjectObject.applyForce(v, p);
-                 
-                // Clean up temporary objects
-                //v.destroy();
-                p.destroy();
+
+                startPos.destroy();
             }
       },
       /** 

@@ -1,33 +1,51 @@
 <header>
 
-<% if signed_in? %>
-  <%= link_to logo, home_path %>
+  <% if signed_in? %>
+    <%= link_to logo, user_path(@current_user) %>
 
-  <nav>
-    <ul id="navi">
-      <li class="left"><%= link_to "Home", current_user %></li>
-      <li class="slash">/</li>
-	  <li><%= link_to "Protect", protect_path %></li>
-      <li class="slash">/</li>
-	  <li><%= link_to "Destroy", destroy_path %></li>
-      <li class="slash">/</li>
+    <nav>
+      <ul id="navi">
 
-		<li><%= link_to "Users", users_path %></li>
-		<li class="slash">/</li>
-		
-		<li><%= link_to "Settings", edit_user_path(current_user) %></li>
-		 <li class="slash">/</li>
-      
-	 	<li class = "abstand"><%= link_to "Help", help_path %></li>
-   	  	<li class="slash">/</li>
-     	<li class="rechts"><%= link_to "Logout", signout_path, :method => :delete %></li> 
-	  	</ul>
-  	</nav>
-<% else %>
+        <% if(request.fullpath == '/users/' + current_user[:id].to_s ) %>
+          <li class="left"><%= link_to "Home", current_user, :class => 'highlight_link' %></li>
+        <% else %>
+          <li class="left"><%= link_to "Home", current_user %></li>
+        <% end %>
 
-<% end %>
+        <li class="slash">/</li>
+        <% if(request.fullpath == '/protect') %>
+          <li><%= link_to "Protect", protect_path, :class => 'highlight_link' %></li>
+        <% else %>
+          <li><%= link_to "Protect", protect_path %></li>
+        <% end %>
 
- 
+        <li class="slash">/</li>
+        <% if(request.fullpath == '/destroy') %>
+          <li><%= link_to "Destroy", destroy_path,:class => 'highlight_link' %></li>
+        <% else %>
+          <li><%= link_to "Destroy", destroy_path %></li>
+        <% end %>
+        <li class="slash">/</li>
+
+
+        <% if(request.fullpath == '/users') %>
+          <li><%= link_to "Users", users_path, :class => 'highlight_link' %></li>
+        <% else %>
+          <li><%= link_to "Users", users_path %></li>
+        <% end %>
+        <li class="slash">/</li>
+
+        <% if(request.fullpath == '/users/'+ current_user[:id].to_s + '/edit') %>
+          <li><%= link_to "Settings", edit_user_path(current_user), :class => 'highlight_link' %></li>
+        <% else %>
+          <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+        <% end %>
+
+        <li class="abstand"><%= link_to "Logout", signout_path, :method => :delete %></li>
+      </ul>
+    </nav>
+  <% end %>
+
 </header>
 
 

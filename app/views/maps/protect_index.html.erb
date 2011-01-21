@@ -1,18 +1,21 @@
 <h1>Protect</h1>
-<p>session: <%= session %>
+<h3><%= link_to "Create new map", new_map_path %></h3>
+
+
+<div id="protect_block">
+  <h3 class="left">Your Maps:</h3>
+
+  <p>
+    <% if @maps != [] %>
+      <% @maps.each do |map| %>
+      <div class="map">
+        <%= map.name %><br />
+                            Score: <%= map.score %> <br />
+        <%= link_to "delete", map, :method => :delete, :confirm => "Are you sure to delete #{map.name}?", :title => "Delete #{map.name}"%>
+      </div>
+    <% end %>
+  <% else %>
+                  You haven't build a map yet.
+  <% end %>
 </p>
-<p>session id: <%= session[:id] %></p>
-<p>session id komisch: <%= session['id'] %></p>
-<p>current user: <%= current_user.id %></p>
-<ul>
-<% if @maps %>
-    <% @maps.each do |map| 
-    %>
-    <li><%= map.name %> | 
-    <%= link_to "delete", map, :method => :delete, :confirm => "Are you sure to delete #{map.name}?", :title => "Delete #{map.name}"%>
-    </li><li>content: <%= map.content %></li>
-    <% end 
-    %>
-<% end %>
-<p><%= link_to "New map", new_map_path %></p>
-</ul>
+</div>

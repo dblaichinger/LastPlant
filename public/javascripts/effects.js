@@ -489,7 +489,7 @@ Effect.Highlight = Class.create(Effect.Base, {
       this.element.setStyle({backgroundImage: 'none'});
     }
     if (!this.options.endcolor)
-      this.options.endcolor = this.element.getStyle('background-color').parseColor('#ffffff');
+      this.options.endcolor = this.element.getStyle('background-color').parseColor('#FFFFFF');
     if (!this.options.restorecolor)
       this.options.restorecolor = this.element.getStyle('background-color');
     // init color calculations

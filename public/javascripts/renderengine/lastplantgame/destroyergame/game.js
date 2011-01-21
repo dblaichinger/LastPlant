@@ -1,29 +1,26 @@
 /**
- * LastPlant JS Game
- * Michael Webersdorfer 
- * 
- *
- * Created with Renderengine renderengine.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
+    * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
+    * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining a copy
+    * of this software and associated documentation files (the "Software"), to deal
+    * in the Software without restriction, including without limitation the rights
+    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    * copies of the Software, and to permit persons to whom the Software is
+    * furnished to do so, subject to the following conditions:
+    *
+    * The above copyright notice and this permission notice shall be included in
+    * all copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    * THE SOFTWARE.
+    *
+*/
 
 // Load all required engine components
 Engine.include("/rendercontexts/context.canvascontext.js");
@@ -38,14 +35,14 @@ Engine.include("/textrender/text.renderer.js");
 Engine.include("/physics/collision/shapes/b2BoxDef.js");
 
 // Load game objects
-Game.load("/player.js");
-Game.load("/LPObject.js");
-Game.load("/AttkUnit.js");
-Game.load("/AttkUnitLegs.js");
-Game.load("/Block.js");
-Game.load("/Plant.js");
-Game.load("/forcesetter.js");
-Game.load("/Background.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Player.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/LPObject.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/AttkUnit.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/AttkUnitLegs.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Block.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Plant.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Forcesetter.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Background.js");
 
 
 Engine.initObject("LastPlant", "Game", function(){
@@ -71,10 +68,11 @@ Engine.initObject("LastPlant", "Game", function(){
       fieldHeight: 400,
       
       //the object setting the shot strengh
-      forcesetter: null,
+      Forcesetter: null,
       
       //Blocks 
       OverallNumberOfBlocks: null,
+      destroyedBlocks: null,
       currentNumberOfBlocks: 0,
       BlocksArray: null,
       BlocksArrayIndex: 0,
@@ -109,12 +107,13 @@ Engine.initObject("LastPlant", "Game", function(){
          this.spriteLoader = SpriteLoader.create();
          
          // Load the sprites
-         this.spriteLoader.load("AttkUnit", this.getFilePath("resources/AttkUnit.sprite"));
-         this.spriteLoader.load("AttkUnitLegs", this.getFilePath("resources/AttkUnitLegs.sprite"));
-         this.spriteLoader.load("Block-long", this.getFilePath("resources/Block-long.sprite"));
-         this.spriteLoader.load("Plant", this.getFilePath("resources/Plant.sprite"));
-         this.spriteLoader.load("ForceSetter", this.getFilePath("resources/ForceSetter.sprite"));
-         this.spriteLoader.load("Background", this.getFilePath("resources/Background.sprite"));
+         this.spriteLoader.load("AttkUnit", this.getFilePath("../../javascripts/renderengine/lastplantgame/destroyergame/resources/AttkUnit.sprite"));
+         this.spriteLoader.load("AttkUnitLegs", this.getFilePath("../../javascripts/renderengine/lastplantgame/destroyergame/resources/AttkUnitLegs.sprite"));
+         this.spriteLoader.load("Block-long", this.getFilePath("../../javascripts/renderengine/lastplantgame/destroyergame/resources/Block-long.sprite"));
+         this.spriteLoader.load("Block-square", this.getFilePath("../../javascripts/renderengine/lastplantgame/destroyergame/resources/Block-square.sprite"));
+         this.spriteLoader.load("Plant", this.getFilePath("../../javascripts/renderengine/lastplantgame/destroyergame/resources/Plant.sprite"));
+         this.spriteLoader.load("ForceSetter", this.getFilePath("../../javascripts/renderengine/lastplantgame/destroyergame/resources/ForceSetter.sprite"));
+         this.spriteLoader.load("Background", this.getFilePath("../../javascripts/renderengine/lastplantgame/destroyergame/resources/Background.sprite"));
          
          // Don't start until all of the resources are loaded
          Timeout.create("wait", 250, function() {
@@ -150,7 +149,7 @@ Engine.initObject("LastPlant", "Game", function(){
 
         // Create the game context
         this.renderContext = CanvasContext.create("Playfield", this.fieldWidth, this.fieldHeight);
-        this.renderContext.setBackgroundColor("#FFFFFF");
+        this.renderContext.setBackgroundColor("#241E1E");
 
         // Set up the physics simulation
         this.simulation = Simulation.create("simulation", this.fieldBox);
@@ -161,14 +160,6 @@ Engine.initObject("LastPlant", "Game", function(){
         // world is stepped (updated) in sync with each frame generated
         this.renderContext.add(this.simulation);
 
-        // Draw an outline around the context
-        this.renderContext.jQ().css({
-            border: "1px solid black",
-            left: 0,
-            top: 0,
-            right: 0,
-            bottom: 0,
-        });
 
         // Add the game context to the scene graph
         Engine.getDefaultContext().add(this.renderContext);
@@ -176,59 +167,41 @@ Engine.initObject("LastPlant", "Game", function(){
         // Create the collision model with 8x8 divisions
         this.cModel = SpatialGrid.create(this.fieldWidth, this.fieldHeight, 8);
 
-        // Add some LPObjects to play around with
-        /*MultiTimeout.create("AttkUnitmaker", 2, 150, function() {
-          LastPlant.createLPObject(AttkUnit.create());
-        });*/
-
-        /*MultiTimeout.create("boxmaker", 1, 150, function() {
-          LastPlant.createLPObject(Block.create(),0);
-        });*/
         
-        //add background img
+        // Add the Background
         this.getRenderContext().add(Background.create());
-
-        //this.renderContext.setFillStyle("yellow");
-        //this.renderContext.drawFilledRectangle(Rectangle2D.create(195, 75, 200, 100));
         
-        //var Position = Point2D.create(50, 370);
-
-        
+        // Load the Blocks and the Plant
         this.loadBlocks();
         
-        this.forcesetter = ForceSetter.create();
-        this.forcesetter.setPosition(Point2D.create(120, 280));
-        this.forcesetter.setStartPosandRot(Point2D.create(120, 280), -45);
-        this.forcesetter.getComponent("physics").setRotation(-45*0.017453292519943);
-        this.forcesetter.setSimulation(this.simulation);
-        //console.log("rotation beim createn 1: " + forcesetter.getRotation());
-        this.renderContext.add(this.forcesetter);
-        this.forcesetter.simulate();
-        this.forcesetter.stopsim();
+        // Setup the ForceSetter
+        this.Forcesetter = ForceSetter.create();
+        this.Forcesetter.setPosition(Point2D.create(120, 280));
+        this.Forcesetter.setStartPosandRot(Point2D.create(120, 280), -45);
+        this.Forcesetter.getComponent("physics").setRotation(-45*0.017453292519943);
+        this.Forcesetter.setSimulation(this.simulation);
+        this.renderContext.add(this.Forcesetter);
+        this.Forcesetter.simulate();
+        this.Forcesetter.stopsim();
 
         // Add the player object
         var player = Player.create();
         this.getRenderContext().add(player);
-        
+
+        // Spawn the first Attack Unit
         this.spawnAttackUnits();
 
-
-        
+        // Spawn the Attack unit Legs
         this.AttackUnitLegs = AttkUnitLegs.create();
         this.AttackUnitLegs.setPosition(Point2D.create(0, 364));
-        //Position.destroy();        
-        //console.log("attkunitlegs position: ");
-        //console.log(AttackUnitLegs.getPos());
         this.getRenderContext().add(this.AttackUnitLegs);
-
-        //this.gameOver();
-        
-        //Position.set(700, 360);
-        //this.Plant=Plant.create();
-        //LastPlant.createLPObject(this.Plant, Position, 0);
       },
+      
+      /**
+       * Set the next Attackunit to the shooting Position
+       * @private
+       */        
       setNewAttackUnit: function(){
-        //console.log("shots left: "+ this.AttackUnitLifes);
         if(this.AttackUnitLifes>0){
             this.AttackUnitLifes--;
             this.AttackUnitsArray.shift();
@@ -239,35 +212,100 @@ Engine.initObject("LastPlant", "Game", function(){
             this.gameOver(false);
         }
       },
+      
+      /**
+       * Write Gameover Texts and save score
+       * @private
+       */
       gameOver: function(GameWon){
-        //this.renderContext.remove(GameOverText);
-        this.forcesetter.destroy();
+        this.Forcesetter.destroy();
         this.getRenderContext().remove(this.AttackUnitLegs);
         
         this.getRenderContext().remove(this.AttackUnitLegs);
         var GameOverString;
+        var OverallPoints;
+		var MapBaseScore = document.getElementById("map_score");
+        MapBaseScore=MapBaseScore.innerHTML;
+        MapBaseScore=parseInt(MapBaseScore);
+        var croppedBaseScore=MapBaseScore/4;
+        var croppedBaseScore=parseInt(croppedBaseScore);
+
         if(GameWon){
-            //console.log("you win");
             this.CurrentAttackUnit.destroy();
             this.writeText(1.8, Point2D.create(200, 40), "You destroyed the LastPlant. All Hail the Maschine!");
             this.writeText(1.4, Point2D.create(200, 80), "You receive following points on your Destroyer-Profile");
-
-            var BlocksInLvl = "Blocks in level: " + this.OverallNumberOfBlocks + " x 10 points";
-            this.writeText(1.4, Point2D.create(200, 100), BlocksInLvl);
+            
+            var Quar
+            var BaseScoreText = "1/4 Basescore of the map: " + croppedBaseScore;
+            this.writeText(1.4, Point2D.create(200, 100), BaseScoreText);
+			
+            var BlocksInLvl = "Blocks destroyed: " + this.destroyedBlocks + " x 10 points";
+            this.writeText(1.4, Point2D.create(200, 120), BlocksInLvl);
             
             var MonestersLeft = "Monsters left: " + this.AttackUnitLifes + " x 30 points";
-            this.writeText(1.4, Point2D.create(200, 120), MonestersLeft);
+            this.writeText(1.4, Point2D.create(200, 140), MonestersLeft);
             
-            var OverallPoints=this.OverallNumberOfBlocks*10 + this.AttackUnitLifes*30;
+            OverallPoints=croppedBaseScore + this.destroyedBlocks*10 + this.AttackUnitLifes*30;
             var OverallPointsText = "All in all you get: " + OverallPoints + " points";
-            this.writeText(1.6, Point2D.create(200, 160), OverallPointsText);
+            this.writeText(1.6, Point2D.create(200, 180), OverallPointsText);
         }else{
-            //console.log("game over");
             this.writeText(1.8, Point2D.create(200, 40), "You couldn't destroy the LastPlant.");
-            this.writeText(1.6, Point2D.create(200, 80), "You receive 10 points, for your effort.");
+			MapBaseScore=MapBaseScore/10;
+			MapBaseScore=parseInt(MapBaseScore);
+            this.writeText(1.6, Point2D.create(200, 80), "You receive " + MapBaseScore + "points (MapScore/10) for your effort.");
+            OverallPoints=MapBaseScore;
         }
+        this.writeText(1.6, Point2D.create(200, 200), "Please wait 3 seconds for your score to be saved");
+        
+        var map_id = document.getElementById("map_id");
+        map_id = map_id.innerHTML;
+        map_id = parseInt(map_id);
+        Timeout.create("SaveDataTimer", 3000, function() {
+			LastPlant.saveDataAJAX(OverallPoints, map_id, GameWon);
+        });
+
+        //this.saveDataAJAX(OverallPoints, map_id, GameWon);
       },
       
+      writeAJAX: function(url, score){
+        var xhr = createXHR();
+        xhr.onreadystatechange=function() {
+            if(xhr.readyState == 4) {		
+                // nothing for now
+                // alert("sent " + url + " " + content);
+            }
+        };
+        
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(score);
+      },
+
+      saveDataAJAX: function(score, mapid, destroyerWon){
+        
+        var builderScore;
+        var destroyerScore = score;
+        if(destroyerWon){
+            builderScore = score/50;
+            builderScore=parseInt(builderScore);
+        }else{
+            builderScore = score/2;
+        }
+        //console.log("mapid: " + mapid);
+ 
+        this.writeAJAX("/gamehandler", "builderscore=" + builderScore + "&destroyerscore=" + destroyerScore + "&mapid=" + mapid);
+        var target = "/protect";
+        window.location.href = target;
+
+      },
+       
+      /**
+       * Write a Text to a  given Position
+       * @param Position (Point2D): Position the object should be set to
+       * @param Size (float): Size to write the text in
+       * @param Text (string): the string to write
+       * @private
+       */
       writeText: function(Size, Position, Text){
         this.renderContext.remove(TextToWrite);
         var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
@@ -277,10 +315,13 @@ Engine.initObject("LastPlant", "Game", function(){
         this.renderContext.add(TextToWrite);
       },
       
+      /**
+       * Create the Attackunits
+       * @private
+       */      
       spawnAttackUnits: function(){
         this.AttackUnitsArray = [];
         
-        //for (var i = 0; i < this.AttackUnitLifes; i++){
         this.writeText(1.2, Point2D.create(30, 20), "Remaining Monsters");
         
         this.AttackUnit=AttkUnit.create();
@@ -299,49 +340,14 @@ Engine.initObject("LastPlant", "Game", function(){
         this.AttackUnitsArray.push(this.AttackUnit);
         
         this.CurrentAttackUnit=this.AttackUnitsArray[0];
-        //console.log("shots left: "+ this.AttackUnitLifes);
         this.AttackUnitLifes--;
-
-        /*if(this.AttackUnitLifes>0){
-            this.AttackUnitLifes--;
-            
-            this.AttackUnit2.setPosition(Point2D.create(45, 360));
-            console.log("this.AttackUnit vor destroy: " + this.AttackUnit);
-            this.getRenderContext().remove(this.AttackUnit);
-            this.AttackUnit.destroy();
-            
-            console.log("this.AttackUnit got destroyed: " + this.AttackUnit);
-            this.AttackUnit2=AttkUnit.create();
-            LastPlant.createLPObject(this.AttackUnit2, Point2D.create(45, 360), 0);
-            this.AttackUnit2.stopsim();
-            console.log("this.AttackUnit2: " + this.AttackUnit2);
-            
-            
-            console.log("oldAttackUnit: " + oldAttackUnit);
-            this.AttackUnit=AttkUnit.create();
-            LastPlant.createLPObject(this.AttackUnit, Point2D.create(45, 360), 0);
-            this.AttackUnit.stopsim();
-            console.log("this.AttackUnit: " +this.AttackUnit);
-            console.log(this.AttackUnit);
-            //console.log("attackunit isDestroyed: " + this.AttackUnit.isDestroyed());
-            
-            if(this.FirstAttackUnitwasCreated==true){
-                console.log("oldAttackUnit getting destroyed: " + oldAttackUnit);
-                //this.getRenderContext().remove(this.AttackUnit);
-                //this.AttackUnit.stopsim();
-                oldAttackUnit.destroy();
-                console.log("oldAttackUnit after getting destroyed: " + oldAttackUnit);
-                //console.log(oldAttackUnit);
-                //console.log("attackunit isDestroyed: " + this.AttackUnit.isDestroyed());
-                //this.AttackUnit=null;
-                //console.log(this.AttackUnit);
-            }
-            this.FirstAttackUnitwasCreated=true;*/
-        //}
       },
       
+      /**
+       * Load the construct (Blocks and Plant)
+       * @private
+       */
       loadBlocks: function(){
-        //console.log("loadBlocks called");
         var JSONString = document.getElementById("storage");
         JSONString=JSONString.innerHTML;
         BlocksInfo=jQuery.parseJSON(JSONString);
@@ -350,22 +356,19 @@ Engine.initObject("LastPlant", "Game", function(){
         
         var LPObjPos = Point2D.create(0, 0);
         for (var i = 0; i < this.OverallNumberOfBlocks+1; i++){
-            //console.log(this.BlocksArray[i].PosY);
             LPObjPos.set(this.BlocksArray[i].PosX, this.BlocksArray[i].PosY);
-            if(this.BlocksArray[i].Type=="Block")
-                LastPlant.createLPObject(Block.create(), LPObjPos, this.BlocksArray[i].Rot);
-            else if(this.BlocksArray[i].Type=="Plant")
+            if(this.BlocksArray[i].Type=="Plant")
                 LastPlant.createLPObject(Plant.create(), LPObjPos, this.BlocksArray[i].Rot);
+            else
+                LastPlant.createLPObject(Block.create(this.BlocksArray[i].Type), LPObjPos, this.BlocksArray[i].Rot);
         }
         LPObjPos.destroy();
-
       },
       
       
       /**
-       * Set up the physical world.  Creates the bounds of the world by establishing
-       * walls and a floor.  The actual objects have no visual respresentation but they
-       * will exist in the simulation and prevent the LPObjects from leaving the playfield.
+       * Set up the physical world.  Creates "invisible walls" to prevent
+       * Objects of leaving the canvas
        * @private
        */
       setupWorld: function() {
@@ -395,70 +398,23 @@ Engine.initObject("LastPlant", "Game", function(){
         },
         
         /**
-         * Create a LPObject
-         * @param LPObjectObject {LPObject} A LPObject object to add to the playfield and simulation
-         * @param position: positions the object should be set to
+         * Initialise a LPObject
+         * @param NewLPObject {LPObject} A LPObject object to add to the playfield and simulation
+         * @param Position (Point2D): Position the object should be set to
+         * @param Rotation (int): Rotation of the Object in grad
          * @private
          */
-        createLPObject: function(LPObjectObject, Position, Rotation) {
-  			// Before we create a LPObject, check the engine load.  If it's > 80%
-  			// just return.
-  			//if (Engine.getEngineLoad() > 0.8) {
-  				//return;
-  			//}
-  			/*if(id==0){
-                this.AttackUnit=LPObjectObject;
-                //console.log("AttackUnit: " + this.AttackUnit)
-                var p = Point2D.create(50, 370);
-            }
-  			if(id==1){
-    			// Set a location
-    			var p = Point2D.create(500, 200);
-  			}
-  			if(id==2){
-                // Set a location
-                var p = Point2D.create(600, 200);
-            }
-            if(id==3){
-                // Set a location
-                var p = Point2D.create(700, 100);
-                //LPObjectObject.setRotation(90);
-                //console.log("rotation beim createn: " + LPObjectObject.getRotation());
-            }*/
-    		
-            LPObjectObject.setPosition(Position);
-            //LPObjectObject.setRot(Rotation*0.017453292519943); //conversion RAD->GRAD
-            LPObjectObject.getComponent("physics").setRotation(Rotation*0.017453292519943);
-  			
+        createLPObject: function(NewLPObject, Position, Rotation) {
+            NewLPObject.setPosition(Position);
+            NewLPObject.getComponent("physics").setRotation(Rotation*0.017453292519943); //Box2D works with RAD
   			
     		// The simulation is used to update the position and rotation
-    		// of the physical body.  Whereas the render context is used to 
-    		// represent (draw) the shape.
-            LPObjectObject.setSimulation(this.simulation);
-            this.getRenderContext().add(LPObjectObject);
+    		// of the physical body.  Whereas the render context is used to draw the shape.
+            NewLPObject.setSimulation(this.simulation);
+            this.getRenderContext().add(NewLPObject);
              
-            // Start the simulation of the object so we can apply a force
-            LPObjectObject.simulate();
-            //LPObjectObject.setRotation(90);
-            //console.log("rotation at creation: " + LPObjectObject.getRotation());
-            
-            //if(id==3 || id==0){
-                //LPObjectObject.setRotation(90);
-                //console.log("rotation beim createn: " + LPObjectObject.getRotation());
-                
-                //LPObjectObject.startsim();
-                //LPObjectObject.setRotation(90);
-                //LPObjectObject.stopsim();
-                //LPObjectObject.setRot(90);
-                //LPObjectObject.update();
-            //}
-            
-            //var v = Vector2D.create (0,0);//((1000 + (Math2.random() * 5000)) * 2000, 10);
-            //LPObjectObject.applyForce(v, p);
-             
-            // Clean up temporary objects
-            //v.destroy();
-            //p.destroy();
+            // Start the simulation of the object
+            NewLPObject.simulate();
       },
       
       /**
@@ -484,12 +440,24 @@ Engine.initObject("LastPlant", "Game", function(){
       getCModel: function() {
          return this.cModel;
       },
+      /**
+       * Returns a reference to the current attack unit
+       * @return {AttkUnit}
+       */
       getAttackUnit: function() {
          return this.CurrentAttackUnit;
       },
+      /**
+       * Returns a reference to the ForceSetter
+       * @return {ForceSetter}
+       */      
       getForceSetter: function() {
-         return this.forcesetter;
+         return this.Forcesetter;
       },
+      /**
+       * Returns a reference to the attack unit legs
+       * @return {AttkUnitLegs}
+       */        
       getAttackUnitLegs: function() {
          return this.AttackUnitLegs;
       }

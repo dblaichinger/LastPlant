@@ -1,36 +1,14 @@
-<h1>Profile</h1>
+<%= #gravatar_for(@user) 
+%>
 
-<table class="profile" summary="Profile information">
-  <tr>
-  
-    <td class="main">
-      <h1>
-        <%= gravatar_for(@user) %>
-        <%= @user.name %>
-		
-      </h1>
-    </td>
-    <td class="sidebar round">
-      <strong>Name: </strong> <%= @user.name %><br />
-      <strong>URL: </strong>  <%= link_to user_path(@user), user_path(@user) %><br />
-      <strong>Whole URL: </strong><%= user_url(@user) %>
-	   <strong>Whole URL: </strong><%= request.fullpath %>
-	</td>
-
-	
-
-  </tr>
-</table>
-
-
-    <p>
-		Hello <%=@user.name%> Make your decision.
-    </p>
-
-#FACEBOOK ID - TOKEN
-
-<% if session[:fb_id] %>
-<p><%= session[:fb_id] %></p>
-<p>current user: <%= current_user %></p>
-
-<%end%>
+<h1 class="center_me">Hello <span class="highlight"><%=  @user.name %></span> ! Make your decision:</h1>
+<div class="overview_box">
+  <h2>Destroy</h2>
+  <p>Score: <span class="highlight"><%= @user.destroyScore %></span></p>
+  <%= link_to destroy_img, destroy_path %>
+</div>
+<div class="overview_box">
+  <h2>Protect</h2>
+  <p>Score: <span class="highlight"><%= @user.createScore %></span></p>
+  <%= link_to protect_img, protect_path %>
+</div>

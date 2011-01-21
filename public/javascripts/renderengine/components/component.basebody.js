@@ -284,10 +284,16 @@ var BaseBodyComponent = Transform2DComponent.extend(/** @scope BaseBodyComponent
     getRotationRAD: function() {
 		return this.getBodyDef().rotation;
 	},
-    //Velo hack
+    //AngVelo hack
     getAngVelocity: function() {
 		return this.getBody().m_angularVelocity;
 	},
+    //LinVelo hack 
+    getLinVelocity: function() {
+		return this.getBody().m_linearVelocity;
+	},
+      
+    
 	/**
 	 * Get the position of the body during simulation.  This value is updated
 	 * as the simulation is stepped.

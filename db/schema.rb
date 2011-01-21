@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110106163234) do
+ActiveRecord::Schema.define(:version => 20110108170303) do
 
   create_table "maps", :force => true do |t|
     t.string   "name"
-    t.string   "content"
     t.integer  "score"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "content"
   end
 
   add_index "maps", ["user_id"], :name => "index_maps_on_user_id"

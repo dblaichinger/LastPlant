@@ -1,29 +1,26 @@
 /**
- * LastPlant JS Game
- * Michael Webersdorfer 
- * 
- *
- * Created with Renderengine renderengine.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
+    * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
+    * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining a copy
+    * of this software and associated documentation files (the "Software"), to deal
+    * in the Software without restriction, including without limitation the rights
+    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    * copies of the Software, and to permit persons to whom the Software is
+    * furnished to do so, subject to the following conditions:
+    *
+    * The above copyright notice and this permission notice shall be included in
+    * all copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    * THE SOFTWARE.
+    *
+*/
 
 // Load engine objects
 Engine.include("/components/component.boxbody.js");
@@ -42,11 +39,6 @@ Engine.initObject("Plant", "LPObject", function() {
    var Plant = LPObject.extend(/** @scope Plant.prototype */{
 
 		boxSize: null,
-        destroyable: false,
-        timeOfCreation: null,
-        timeOfCreationSet: false,
-        health: 20,
-        isPlaced: false,
         canBeSaved: true,
         
 		/**
@@ -66,16 +58,15 @@ Engine.initObject("Plant", "LPObject", function() {
 		 * @param scale {Number} A scalar scaling value for the LPObject
 		 */
 		createPhysicalBody: function(componentName, scale) {
-			this.boxSize = Point2D.create(24, 76);
+			this.boxSize = Point2D.create(21, 66);
 			this.boxSize.mul(scale);
 			this.add(BoxBodyComponent.create(componentName, this.boxSize));
 			
-			// Set the friction and bounciness of the Plant
+			// Set the friction, bounciness and density of the Plant
+            // Mass depends on objects size
 			this.getComponent(componentName).setFriction(0.3);
 			this.getComponent(componentName).setRestitution(0);
 			this.getComponent(componentName).setDensity(8);
-            
-			//this.getComponent(componentName).setRotation(90);
 		},
 		
         //called every frame
@@ -94,19 +85,10 @@ Engine.initObject("Plant", "LPObject", function() {
 		},
         
 		clicked: function(p) {
-            /*var force = Vector2D.create(p).sub(this.getPosition()).mul(20000);
-             this.applyForce(force, p);
-            force.destroy();*/
-            
-            //this.stopsim();
-            //this.setPosition(p);
-            //console.log("plant clicked");
-            
             if(this.isPlaced==false){
                 this.stopsim();
                 this.setPosition(p);
             }
-            
         },
             
         /**
@@ -115,11 +97,37 @@ Engine.initObject("Plant", "LPObject", function() {
         released: function(p) {
             if(this.isPlaced==false){
                 this.isPlaced=true;
+                this.remove(this.Collider);
+                this.setSprite(0);
                 this.startsim();
                 LastPlant.showPlantWasSetText();
+                // Backup timer if the safe function isnt called via update
+                Timeout.create("SaveTimer", 10000, function() {
+                    if(this.canBeSaved==true){
+                        LastPlant.gameOver();
+                        LastPlant.saveConstruct();
+                    }
+                });
+                
             }
         },
-		
+
+        /**
+         * Determine if the LPObject was touched by the player and, if so,
+         * change the sprite which represents it.
+        */
+        onCollide: function(obj) {
+            if(this.isPlaced==false){
+                if (Player.isInstance(obj) &&
+                  (this.getWorldBox().isIntersecting(obj.getWorldBox() ))) {
+                  this.setSprite(1);
+                  return ColliderComponent.STOP;
+                }
+
+                this.setSprite(0);
+                return ColliderComponent.CONTINUE;
+            }
+        },
 
     }, /** @scope Plant.prototype */{ // Static
     

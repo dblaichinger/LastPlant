@@ -22,12 +22,15 @@
 	font-style: normal;
 }
 
+
+
 body {
     color: #f1f1f1;
     text-transform: none;
+	
 }
     
-a {
+a, .highlight {
     color: rgb(152, 191,75);
     text-decoration: none;
 }    
@@ -38,9 +41,67 @@ a:hover {
     
 p.signup {
     width: 220px;
-    margin: 5px auto;
+    margin: 10px 0 10px 60px;
 }
 
+.left {
+    text-align: left;
+}
+
+#protect_block {
+    margin-left: 30px;
+}
+
+#protect_block .map {
+    margin: 10px 50px 10px 50px;
+    float: left;
+    padding: 10px;
+    width: 150px;
+    margin-left: 50px;
+    border: solid rgb(152, 191,75) 3px;
+    text-align: center;
+}
+
+
+.pagination {
+    margin-top: 5px;
+    font-family: Arial;
+}
+
+
+.destroy_block {
+	
+    padding: 10px;
+    width: 280px;
+    border: solid rgb(152, 191,75) 3px;
+    text-align: center;
+}
+
+#randommaps, #mymaps, #latestmaps {
+    float: left;
+    margin: 20px 30px 20px 35px;
+    min-height: 110px;
+    min-width: 355px;
+}
+
+/*
+#randommaps{
+ 	margin: 50px 40px 10px 30px;
+}
+
+#mymaps {
+    left: 490px;
+    position: relative;
+    top: -82px;
+}
+*/
+
+h1, h2{
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 nav {
 	width: 900px;
@@ -66,7 +127,7 @@ ul#navi{ list-style:none;
     text-align: left;
 	width: 900px;
 	overflow:hidden;
-	margin-bottom:10px;
+	margin-bottom:5px;
 	margin-top:10px;
 }	
 ul#navi a {
@@ -95,7 +156,7 @@ ul#navi li.rechts{
 	width:5em;}	
 	
 ul#navi li.abstand{
-	padding-left:80px;}	
+	padding-left: 250px;}	
 	
 ul#navi li.slash{
 		color:rgb(144, 141, 137);
@@ -112,9 +173,21 @@ ul#navi li.slash{
 .content	{
 	width: 900px;
 	font-family:'BebasNeueRegular', Geneva, sans-serif;
-	height:400px;
+	height:500px;
 	margin: 0 auto;
-	border: solid rgb(152, 191,75) 3px;}
+	border: solid rgb(152, 191,75) 3px;
+}
+
+.overview_box {
+    width: 450px;
+    float: left;
+    text-align: center;
+}
+
+.center_me {
+    text-align: center;
+}
+    
 h3{color:rgb(152, 191,75);
 padding-top: 20px;
 text-align: center}	
@@ -127,18 +200,16 @@ text-align: center}
 	 list-style:none;}
 	 
 #footer{
-	width:800px;
-	margin:0 auto}	 
-#footer p{
+	width:900px;
+}
+	 
+#footer p {
+    width: 120px;
 	text-align:center;
 	font-family:'DroidSansRegular', Geneva, sans-serif;
 	font-size: 9px;
 	color: rgb(152, 191,75);
-    left: 933px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    position: absolute;
-    top: 587px;	
+    margin: 10px auto;
 }	
 	
 #footer p a{
@@ -171,7 +242,7 @@ div#machine{
 }
 	
 form.loginform{
-	top: -500px;
+	top: -558px;
 }
 	
 form {
@@ -179,6 +250,11 @@ form {
 	left: 250px;
 	width: 300px;
 	border: solid rgb(152, 191,75) 1px;
+}
+
+#protectform {
+    border: none;
+    width: 200px;
 }
 	
 h4{font-family:'BebasNeueRegular', Geneva, sans-serif;
@@ -193,7 +269,7 @@ h3.registrieren{
 	font-family:'BebasNeueRegular', Geneva, sans-serif;
 	font-size:27px;
 	position:relative;
-	top: -520px;
+	top: -560px;
 	left: 250px;
 	width:300px;
 	border: rgb(152, 191,75) solid 1px;
@@ -207,7 +283,7 @@ form .field {
 }
 
 form .field input {
-    width: 140px;
+    width: 150px;
     float: right;
 }
 
@@ -217,7 +293,7 @@ form .field label {
 	display:inline;
     text-align: right;
     width: 120px;
-    margin-left: 80px;
+    margin-left: 50px;
     margin-bottom: 5px;
     color: #000;
     text-align: right;
@@ -234,19 +310,76 @@ form label input {
 
 canvas {
 	position: relative;
-	top: -402px;
+	top: -500px;
 	left: 50px;
+	background-color: #241E1E;
 }
 
 .loadbox {
-	top: -200px;
-	left: 25px;
+
 }
 
 #protectform {
-	position: relative;
-	top: 410px;
+    position: relative;
+    top: 450px;
+    padding-left: 130px;
 }
+
+table {
+	padding: 10px;
+}
+
+.edit_user {
+	left: 300px;
+	margin-top: 25px;
+}
+
+.allusers{
+	padding-left: 50px;
+	padding-bottom: 5px;
+}
+
+#user_submit, #session_submit {
+	margin-left: 115px;
+}
+
+#session_submit {
+	margin-top: 5px;
+}
+
+
+.gravatar_div {
+	margin-left: 375px;
+	margin-top: 15px;
+}
+
+#storage, #score, #map_score, #map_id , #map_img , #mapname {
+	display: none;
+}
+
+ul#navi a.highlight_link {
+	font-weight: bold;
+	color: #98BF4B;
+}
+
+#about {
+    border: 3px solid #98BF4B;
+    margin: 20px 50px;
+    padding: 10px;
+    text-align: center;
+    width: 780px;
+}
+
+#descr {
+    border: 2px solid #98BF4B;
+    left: 242px;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    top: -571px;
+    width: 296px;
+}
+
 
 /* Success, info, notice and error/alert boxes
 -------------------------------------------------------------- */
