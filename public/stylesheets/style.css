@@ -22,14 +22,6 @@
 	font-style: normal;
 }
 
-<<<<<<< HEAD
-body {
-    color: #f1f1f1;
-    text-transform: none;
-}
-    
-a {
-=======
 
 
 body {
@@ -39,7 +31,6 @@ body {
 }
     
 a, .highlight {
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     color: rgb(152, 191,75);
     text-decoration: none;
 }    
@@ -50,11 +41,6 @@ a:hover {
     
 p.signup {
     width: 220px;
-<<<<<<< HEAD
-    margin: 5px auto;
-}
-
-=======
     margin: 10px 0 10px 60px;
 }
 
@@ -116,7 +102,6 @@ h1, h2{
     margin-top: 20px;
     margin-bottom: 20px;
 }
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 nav {
 	width: 900px;
@@ -142,11 +127,7 @@ ul#navi{ list-style:none;
     text-align: left;
 	width: 900px;
 	overflow:hidden;
-<<<<<<< HEAD
-	margin-bottom:10px;
-=======
 	margin-bottom:5px;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 	margin-top:10px;
 }	
 ul#navi a {
@@ -175,11 +156,7 @@ ul#navi li.rechts{
 	width:5em;}	
 	
 ul#navi li.abstand{
-<<<<<<< HEAD
-	padding-left:80px;}	
-=======
 	padding-left: 250px;}	
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 	
 ul#navi li.slash{
 		color:rgb(144, 141, 137);
@@ -196,11 +173,6 @@ ul#navi li.slash{
 .content	{
 	width: 900px;
 	font-family:'BebasNeueRegular', Geneva, sans-serif;
-<<<<<<< HEAD
-	height:400px;
-	margin: 0 auto;
-	border: solid rgb(152, 191,75) 3px;}
-=======
 	height:500px;
 	margin: 0 auto;
 	border: solid rgb(152, 191,75) 3px;
@@ -216,7 +188,6 @@ ul#navi li.slash{
     text-align: center;
 }
     
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 h3{color:rgb(152, 191,75);
 padding-top: 20px;
 text-align: center}	
@@ -229,30 +200,16 @@ text-align: center}
 	 list-style:none;}
 	 
 #footer{
-<<<<<<< HEAD
-	width:800px;
-	margin:0 auto}	 
-#footer p{
-=======
 	width:900px;
 }
 	 
 #footer p {
     width: 120px;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 	text-align:center;
 	font-family:'DroidSansRegular', Geneva, sans-serif;
 	font-size: 9px;
 	color: rgb(152, 191,75);
-<<<<<<< HEAD
-    left: 933px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    position: absolute;
-    top: 587px;	
-=======
     margin: 10px auto;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 }	
 	
 #footer p a{
@@ -285,11 +242,7 @@ div#machine{
 }
 	
 form.loginform{
-<<<<<<< HEAD
-	top: -500px;
-=======
 	top: -558px;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 }
 	
 form {
@@ -298,14 +251,11 @@ form {
 	width: 300px;
 	border: solid rgb(152, 191,75) 1px;
 }
-<<<<<<< HEAD
-=======
 
 #protectform {
     border: none;
     width: 200px;
 }
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 	
 h4{font-family:'BebasNeueRegular', Geneva, sans-serif;
 
@@ -319,11 +269,7 @@ h3.registrieren{
 	font-family:'BebasNeueRegular', Geneva, sans-serif;
 	font-size:27px;
 	position:relative;
-<<<<<<< HEAD
-	top: -520px;
-=======
 	top: -560px;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 	left: 250px;
 	width:300px;
 	border: rgb(152, 191,75) solid 1px;
@@ -337,11 +283,7 @@ form .field {
 }
 
 form .field input {
-<<<<<<< HEAD
-    width: 140px;
-=======
     width: 150px;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     float: right;
 }
 
@@ -351,11 +293,7 @@ form .field label {
 	display:inline;
     text-align: right;
     width: 120px;
-<<<<<<< HEAD
-    margin-left: 80px;
-=======
     margin-left: 50px;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     margin-bottom: 5px;
     color: #000;
     text-align: right;
@@ -372,22 +310,6 @@ form label input {
 
 canvas {
 	position: relative;
-<<<<<<< HEAD
-	top: -402px;
-	left: 50px;
-}
-
-.loadbox {
-	top: -200px;
-	left: 25px;
-}
-
-#protectform {
-	position: relative;
-	top: 410px;
-}
-
-=======
 	top: -500px;
 	left: 50px;
 	background-color: #241E1E;
@@ -459,7 +381,6 @@ ul#navi a.highlight_link {
 }
 
 
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 /* Success, info, notice and error/alert boxes
 -------------------------------------------------------------- */
 

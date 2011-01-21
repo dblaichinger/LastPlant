@@ -1,31 +1,4 @@
 /**
-<<<<<<< HEAD
- * LastPlant JS Game
- * Michael Webersdorfer 
- * 
- *
- * Created with Renderengine renderengine.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
-=======
     * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
     * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
     *
@@ -48,16 +21,11 @@
     * THE SOFTWARE.
     *
 */
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 // Load engine objects
 Engine.include("/components/component.sprite.js");
 Engine.include("/components/component.collider.js");
 Engine.include("/objects/object.physicsactor.js");
-<<<<<<< HEAD
-//Engine.include("/components/component.mover2d.js");
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 Engine.initObject("LPObject", "PhysicsActor", function() {
 
@@ -70,11 +38,7 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
   * @param spriteName {String} The name of the sprite, in the resource, that represents the default LPObject image
   * @param spriteOverName {String} The name of the sprite, in the resource, for when the mouse is over the LPObject
   * @extends PhysicsActor
-<<<<<<< HEAD
-  * @description Base class for a physical LPObject object
-=======
   * @description Base class for a physical LPObject
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
   * @constructor
   */
  var LPObject = PhysicsActor.extend(/** @scope LPObject.prototype */{
@@ -82,10 +46,7 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
     sprites: null,
 	renderScale: 1,
 	rotation: null,
-<<<<<<< HEAD
-=======
     LPOType: null,
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 	/**
 	 * @private
@@ -97,25 +58,12 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
       
       // Add components to draw and collide with the player
       this.add(ColliderComponent.create("collide", LastPlant.cModel));
-<<<<<<< HEAD
-
-
-       
-      // Create the physical body object which will move the LPObject object
-=======
        
       // Create the physical body object which will move the LPObject
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
       this.createPhysicalBody("physics", this.renderScale);
       this.getComponent("physics").setScale(this.renderScale);
       this.getComponent("physics").setRenderComponent(SpriteComponent.create("draw"));
 
-<<<<<<< HEAD
-      // Add move component
-      //this.add(Mover2DComponent.create("move"));       //versuch für rotation
-      
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
       // The sprites
       this.sprites = [];
       this.sprites.push(LastPlant.spriteLoader.getSprite(spriteResource, spriteName));
@@ -157,13 +105,6 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
     },
     
     setRot: function(angle) {
-<<<<<<< HEAD
-       //console.log("rotation SOLL werden: " + degrees);
-       //this.getComponent("physics").setRotation(degrees)
-       //this.setRotation(degrees);
-       //console.log("rotation IST danach: " + this.getComponent("physics").getRotation());
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
        this.getComponent("physics").setRotation(angle);
     },
     stopsim: function() {
@@ -186,33 +127,14 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
      * @param p {Point2D} The position where the mouse currently resides
      */
     clicked: function(p) {
-<<<<<<< HEAD
-  		/*var force = Vector2D.create(p).sub(this.getPosition()).mul(20000);
-         this.applyForce(force, p);
-  		force.destroy();*/
-  		
-  		// this.stopsim();
-  		// this.setPosition(p);
-  		
-  		// this.setRot(90);
-  		
-=======
         //[ABSTRACT]
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     },
 		
 	/**
 	 * called when button released
 	 */
 	released: function(p) {
-<<<<<<< HEAD
-	    //console.log("rotation wurde: " + this.getComponent("physics").getRotation());
-        // this.startsim();
-        //console.log("rotation wurde nach start: " + this.getRotation());
-	    /*this.getComponent("physics").setRotation(this.rot);*/
-=======
 	    //[ABSTRACT]
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 	},
 
     /**
@@ -231,15 +153,8 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
     },
     
     getWorldBox: function() {
-<<<<<<< HEAD
-        //var bBox = this.base();
         var pos=this.getComponent("physics").getPosition();
         var bBox = Rectangle2D.create(pos.x,pos.y,10,10);
-        //console.log(-bBox.getHalfHeight());
-=======
-        var pos=this.getComponent("physics").getPosition();
-        var bBox = Rectangle2D.create(pos.x,pos.y,10,10);
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
         return bBox.offset(-bBox.getHalfWidth(), -bBox.getHalfHeight());
     },
 

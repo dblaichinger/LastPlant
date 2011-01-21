@@ -1,0 +1,48 @@
+<%= form_for(@user) do |f| %>
+	<h3>Edit user</h3>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<div class="field">
+	  <%= f.label :name %>
+	  <%= f.text_field :name %>
+	</div>
+	<div class="field">
+	  <%= f.label :email %>
+	  <%= f.text_field :email %>
+	</div>
+	
+	<div class="field">
+	  <%= f.label :password %>
+	  <%= f.password_field :password, :required => "true"  %>
+	</div>
+	<div class="field">
+	  <%= f.label :password_confirmation, "Confirmation" %>
+	  <%= f.password_field :password_confirmation %>
+	</div>
+
+  <div class="actions">
+    <%= f.submit "Update", :onclick => "return checkpassword();"%>
+  </div>
+<% end %>
+
+<div class="gravatar_div">
+<% if current_user.isFacebook %>
+    <img src="http://graph.facebook.com/<%= current_user.fbid.to_s %>/picture">
+<% else %>
+  <%= gravatar_for @user %><br />
+  <a href="http://gravatar.com/emails" target="_blank">Change picture</a>
+<% end %>
+</div>
+
+<script type="text/javascript">
+function checkpassword(){
+	if (document.getElementById('user_password').value.length < 4) { 
+		alert('Your password needs to be longer!');
+		return false;
+	}
+	else if(document.getElementById('user_password').value != document.getElementById('user_password_confirmation').value){
+		alert("Password doesn't match confirmation!");
+		return false;
+	}	
+	else return true;
+}
+</script>

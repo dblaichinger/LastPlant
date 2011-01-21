@@ -1,31 +1,4 @@
 /**
-<<<<<<< HEAD
- * LastPlant JS Game
- * Michael Webersdorfer 
- * 
- *
- * Created with Renderengine renderengine.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
-=======
     * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
     * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
     *
@@ -48,7 +21,6 @@
     * THE SOFTWARE.
     *
 */
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 // Load engine objects
 Engine.include("/components/component.boxbody.js");
@@ -67,14 +39,6 @@ Engine.initObject("Block", "LPObject", function() {
    var Block = LPObject.extend(/** @scope Block.prototype */{
 
 		boxSize: null,
-<<<<<<< HEAD
-
-		/**
-		 * @private
-		 */
-		constructor: function() {
-			this.base("Block-long", "Block-long", "Block-longOver");
-=======
         destroyable: false,
         timeOfCreation: null,
         timeOfCreationSet: false,
@@ -89,7 +53,6 @@ Engine.initObject("Block", "LPObject", function() {
                 this.base("Block-long", "Block-long", "Block-longOver");
             else if(BlockType=="Block-square")
                 this.base("Block-square", "Block-square", "Block-squareOver");
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 		},
 
 		/**
@@ -100,34 +63,15 @@ Engine.initObject("Block", "LPObject", function() {
 		 * @param scale {Number} A scalar scaling value for the LPObject
 		 */
 		createPhysicalBody: function(componentName, scale) {
-<<<<<<< HEAD
-			this.boxSize = Point2D.create(42, 197);
-=======
             if(this.LPOType=="Block-long")
                 this.boxSize = Point2D.create(34, 160);
 			else if(this.LPOType=="Block-square")
                 this.boxSize = Point2D.create(63, 63);
                 
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 			this.boxSize.mul(scale);
 			this.add(BoxBodyComponent.create(componentName, this.boxSize));
 			
 			// Set the friction and bounciness of the Block
-<<<<<<< HEAD
-			this.getComponent(componentName).setFriction(0.3);
-			this.getComponent(componentName).setRestitution(0);
-			this.getComponent(componentName).setDensity(8);
-			//this.setRot(90);
-		},
-		
-		clicked: function(p) {
-            /*var force = Vector2D.create(p).sub(this.getPosition()).mul(20000);
-             this.applyForce(force, p);
-            force.destroy();*/
-            
-            //this.stopsim();
-            //this.setPosition(p);
-=======
 			this.getComponent(componentName).setFriction(1);
 			this.getComponent(componentName).setRestitution(-1);
 			this.getComponent(componentName).setDensity(10);
@@ -179,26 +123,16 @@ Engine.initObject("Block", "LPObject", function() {
         },
 		clicked: function(p) {
             //[ABSTRACT]        
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
         },
             
         /**
          * called when button released
          */
         released: function(p) {
-<<<<<<< HEAD
-            //this.rotation=this.getComponent("physics").getRotationRAD();
-            //this.getComponent("physics").setRotation(this.getComponent("physics").getRotation()*0.017453292519943);
-            //this.startsim();
-        },
-        onCollide: function(obj) {
-
-=======
             //[ABSTRACT]
         },
         onCollide: function(obj) {
             //[ABSTRACT]
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
         },        
 		
 

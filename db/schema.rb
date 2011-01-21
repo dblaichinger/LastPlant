@@ -10,26 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20110106163234) do
-
-  create_table "maps", :force => true do |t|
-    t.string   "name"
-    t.string   "content"
-=======
 ActiveRecord::Schema.define(:version => 20110108170303) do
 
   create_table "maps", :force => true do |t|
     t.string   "name"
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     t.integer  "score"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-=======
     t.text     "content"
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
   end
 
   add_index "maps", ["user_id"], :name => "index_maps_on_user_id"

@@ -1,31 +1,4 @@
 /**
-<<<<<<< HEAD
- * LastPlant JS Game
- * Michael Webersdorfer 
- * 
- *
- * Created with Renderengine renderengine.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
-=======
     * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
     * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
     *
@@ -48,7 +21,6 @@
     * THE SOFTWARE.
     *
 */
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 // Load engine objects
 Engine.include("/components/component.boxbody.js");
@@ -67,20 +39,10 @@ Engine.initObject("Block", "LPObject", function() {
    var Block = LPObject.extend(/** @scope Block.prototype */{
 
 		boxSize: null,
-<<<<<<< HEAD
-        isPlaced: false,
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 		/**
 		 * @private
 		 */
-<<<<<<< HEAD
-		constructor: function() {
-			this.base("Block-long", "Block-long", "Block-longOver");
-            this.isPlaced=false;
-            this.LPOType="Block";
-=======
 		constructor: function(BlockType) {
             this.LPOType=BlockType;
             if(BlockType=="Block-long")
@@ -89,7 +51,6 @@ Engine.initObject("Block", "LPObject", function() {
                 this.base("Block-square", "Block-square", "Block-squareOver");
             
             this.isPlaced=false;
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 		},
 
 		/**
@@ -100,24 +61,6 @@ Engine.initObject("Block", "LPObject", function() {
 		 * @param scale {Number} A scalar scaling value for the LPObject
 		 */
 		createPhysicalBody: function(componentName, scale) {
-<<<<<<< HEAD
-			this.boxSize = Point2D.create(42, 197);
-			this.boxSize.mul(scale);
-			this.add(BoxBodyComponent.create(componentName, this.boxSize));
-			
-			// Set the friction and bounciness of the Block
-			this.getComponent(componentName).setFriction(0.3);
-			this.getComponent(componentName).setRestitution(0);
-			this.getComponent(componentName).setDensity(8);
-			//this.setRot(90);
-		},
-		
-		clicked: function(p) {
-            /*var force = Vector2D.create(p).sub(this.getPosition()).mul(20000);
-             this.applyForce(force, p);
-            force.destroy();*/
-
-=======
 			if(this.LPOType=="Block-long")
                 this.boxSize = Point2D.create(34, 160);
 			else if(this.LPOType=="Block-square")
@@ -134,7 +77,6 @@ Engine.initObject("Block", "LPObject", function() {
 		},
 		
 		clicked: function(p) {
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
             if(this.isPlaced==false){
                 this.stopsim();
                 this.setPosition(p);
@@ -153,10 +95,6 @@ Engine.initObject("Block", "LPObject", function() {
                 LastPlant.createLPObject(this);
                 this.startsim();
             }
-<<<<<<< HEAD
-            //console.log(this);
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
         },
         /**
          * Determine if the LPObject was touched by the player and, if so,

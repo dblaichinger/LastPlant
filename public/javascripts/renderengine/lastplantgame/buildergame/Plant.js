@@ -1,31 +1,4 @@
 /**
-<<<<<<< HEAD
- * LastPlant JS Game
- * Michael Webersdorfer 
- * 
- *
- * Created with Renderengine renderengine.com
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
-=======
     * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
     * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
     *
@@ -48,7 +21,6 @@
     * THE SOFTWARE.
     *
 */
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 // Load engine objects
 Engine.include("/components/component.boxbody.js");
@@ -67,14 +39,6 @@ Engine.initObject("Plant", "LPObject", function() {
    var Plant = LPObject.extend(/** @scope Plant.prototype */{
 
 		boxSize: null,
-<<<<<<< HEAD
-        destroyable: false,
-        timeOfCreation: null,
-        timeOfCreationSet: false,
-        health: 20,
-        isPlaced: false,
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
         canBeSaved: true,
         
 		/**
@@ -94,18 +58,6 @@ Engine.initObject("Plant", "LPObject", function() {
 		 * @param scale {Number} A scalar scaling value for the LPObject
 		 */
 		createPhysicalBody: function(componentName, scale) {
-<<<<<<< HEAD
-			this.boxSize = Point2D.create(24, 76);
-			this.boxSize.mul(scale);
-			this.add(BoxBodyComponent.create(componentName, this.boxSize));
-			
-			// Set the friction and bounciness of the Plant
-			this.getComponent(componentName).setFriction(0.3);
-			this.getComponent(componentName).setRestitution(0);
-			this.getComponent(componentName).setDensity(8);
-            
-			//this.getComponent(componentName).setRotation(90);
-=======
 			this.boxSize = Point2D.create(21, 66);
 			this.boxSize.mul(scale);
 			this.add(BoxBodyComponent.create(componentName, this.boxSize));
@@ -115,7 +67,6 @@ Engine.initObject("Plant", "LPObject", function() {
 			this.getComponent(componentName).setFriction(0.3);
 			this.getComponent(componentName).setRestitution(0);
 			this.getComponent(componentName).setDensity(8);
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 		},
 		
         //called every frame
@@ -134,25 +85,10 @@ Engine.initObject("Plant", "LPObject", function() {
 		},
         
 		clicked: function(p) {
-<<<<<<< HEAD
-            /*var force = Vector2D.create(p).sub(this.getPosition()).mul(20000);
-             this.applyForce(force, p);
-            force.destroy();*/
-            
-            //this.stopsim();
-            //this.setPosition(p);
-            //console.log("plant clicked");
-            
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
             if(this.isPlaced==false){
                 this.stopsim();
                 this.setPosition(p);
             }
-<<<<<<< HEAD
-            
-=======
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
         },
             
         /**
@@ -161,13 +97,6 @@ Engine.initObject("Plant", "LPObject", function() {
         released: function(p) {
             if(this.isPlaced==false){
                 this.isPlaced=true;
-<<<<<<< HEAD
-                this.startsim();
-                LastPlant.showPlantWasSetText();
-            }
-        },
-		
-=======
                 this.remove(this.Collider);
                 this.setSprite(0);
                 this.startsim();
@@ -199,7 +128,6 @@ Engine.initObject("Plant", "LPObject", function() {
                 return ColliderComponent.CONTINUE;
             }
         },
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
     }, /** @scope Plant.prototype */{ // Static
     

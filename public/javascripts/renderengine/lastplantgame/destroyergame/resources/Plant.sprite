@@ -1,18 +1,10 @@
 {
    //plant sprites
    "bitmapImage": "Plant.png",
-<<<<<<< HEAD
-   "bitmapSize": [48,76],
-	"version": 2,
-   "sprites": {
-      "Plant": [0, 0, 23, 76],
-      "PlantOver": [24, 0, 24, 76]
-=======
    "bitmapSize": [42,66],
 	"version": 2,
    "sprites": {
       "Plant": [0, 0, 20, 66],
       "PlantOver": [21, 0, 21, 66]
->>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
    }
 }
