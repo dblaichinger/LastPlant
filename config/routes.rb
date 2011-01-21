@@ -30,6 +30,15 @@ SampleApp::Application.routes.draw do
   
   	root :to => "sessions#new"
 
+<<<<<<< HEAD
+=======
+	get "pages/home"
+
+	get "pages/about"
+
+	get "pages/help"
+	
+>>>>>>> 0814d7cf1c175d776c10434ef213fb524f138e1f
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
