@@ -25,14 +25,22 @@ def self.set_name(name)
   else
     mapname = params[:mapname]
   end
-
 end
 
 def self.generate_name
+<<<<<<< HEAD
   username = User.find_by_id(session[:id]).name
   map_count = (Map.find_all_by_user_id(session[:id]).count + 1)
   #map_count = Map.where("user_id =
     
   mapname = username + "'s " + map_count.to_s + " Map"
   return mapname
+=======
+    username = User.find_by_id(session[:id]).name
+    map_count = (Map.find_all_by_user_id(session[:id]).count + 1)
+    #map_count = Map.where("user_id = 
+    
+    mapname = username + "'s " + map_count.to_s + " Map"
+    return mapname
+>>>>>>> 2ec9da5ae3a2eae60be5c6f3234f551b635604a3
 end

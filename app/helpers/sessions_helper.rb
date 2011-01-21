@@ -71,12 +71,13 @@ module SessionsHelper
       establish_oauth
     end
     #request and parse token from facebook
-    $token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/").get_access_token(@code)
-	  $graph = Koala::Facebook::GraphAPI.new($token)
+    $token = Koala::Facebook::OAuth.new("158315630884949", '24649532594ab931351f13465261391e', "http://blaichinger5.heroku.com/").get_access_token(@code)
+	$graph = Koala::Facebook::GraphtAPI.new($token)
+
 	end
 	
 	def establish_oauth
-	  $oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/")
+	  $oauth = Koala::Facebook::OAuth.new("158315630884949", '24649532594ab931351f13465261391e', "http://blaichinger5.heroku.com/")
 	end
 	
 	
@@ -100,7 +101,13 @@ module SessionsHelper
                 
         #else create new user
 			else
-				@user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true, :password =>@me['id'], :password_confirmation =>@me['id'], :createScore => 0, :destroyScore => 0)
+                params[:user][:fbid] = @me['id']
+                params[:user][:name] = @me['name']
+                params[:user][:email] = @me['email']
+                params[:user][:password] = @me['id']
+                params[:user][:password_confirmation] = @me['id']
+                
+				@user = User.register_new(params[:user], true)
                 
         #if creating user worked, set session
 				if @user.save

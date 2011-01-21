@@ -9,6 +9,7 @@ class MapsController < ApplicationController
   end
 
   def create
+
     #this method is only called per AJAX request
     mapname = Map.set_name(params[:mapname])
     
@@ -23,6 +24,7 @@ class MapsController < ApplicationController
       if @user.save
         flash[:success] = "Your map was created successfully"
       end
+	  
     else
       flash[:error] = "Failed to save map "
     end
