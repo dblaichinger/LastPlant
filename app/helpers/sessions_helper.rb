@@ -95,7 +95,7 @@ module SessionsHelper
 			
       # if user already member, set session
 			if User.find_by_fbid(@me['id'])
-        session[:fb_id] = @me['id']
+            session[:fb_id] = @me['id']
 				#flash.now[:notice] = "user logged in."
                 
         #else create new user
