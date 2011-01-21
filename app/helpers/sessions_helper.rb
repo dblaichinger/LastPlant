@@ -72,8 +72,8 @@ module SessionsHelper
     end
     #request and parse token from facebook
     $token = Koala::Facebook::OAuth.new("158315630884949", '24649532594ab931351f13465261391e', "http://blaichinger5.heroku.com/").get_access_token(@code)
-	$graph = Koala::Facebook::GraphtAPI.new($token)
-
+	
+	$graph = Koala::Facebook::GraphAPI.new($token)
 	end
 	
 	def establish_oauth
