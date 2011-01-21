@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * LastPlant JS Game
  * Michael Webersdorfer 
  * 
@@ -24,12 +25,39 @@
  * THE SOFTWARE.
  *
  */
+=======
+    * Copyright (c) 2010 Michael Webersdorfer (mwebersdorfer@hotmail.com)
+    * The LastPlant Javascript Game was created with "The Renderengine" (www.renderengine.com) by Brett Fattori (brettf@renderengine.com)
+    *
+    * Permission is hereby granted, free of charge, to any person obtaining a copy
+    * of this software and associated documentation files (the "Software"), to deal
+    * in the Software without restriction, including without limitation the rights
+    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    * copies of the Software, and to permit persons to whom the Software is
+    * furnished to do so, subject to the following conditions:
+    *
+    * The above copyright notice and this permission notice shall be included in
+    * all copies or substantial portions of the Software.
+    *
+    * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    * THE SOFTWARE.
+    *
+*/
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 // Load engine objects
 Engine.include("/components/component.sprite.js");
 Engine.include("/components/component.collider.js");
 Engine.include("/objects/object.physicsactor.js");
+<<<<<<< HEAD
 //Engine.include("/components/component.mover2d.js");
+=======
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 Engine.initObject("LPObject", "PhysicsActor", function() {
 
@@ -42,7 +70,11 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
   * @param spriteName {String} The name of the sprite, in the resource, that represents the default LPObject image
   * @param spriteOverName {String} The name of the sprite, in the resource, for when the mouse is over the LPObject
   * @extends PhysicsActor
+<<<<<<< HEAD
   * @description Base class for a physical LPObject object
+=======
+  * @description Base class for a physical LPObject
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
   * @constructor
   */
  var LPObject = PhysicsActor.extend(/** @scope LPObject.prototype */{
@@ -52,6 +84,10 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
     rotation: null,
     LPOType: null,
     Collider: null,
+<<<<<<< HEAD
+=======
+    isPlaced: false,
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
 	/**
 	 * @private
@@ -59,12 +95,17 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
     constructor: function(spriteResource, spriteName, spriteOverName) {
       this.base("PhysicsLPObject");
       this.sprite = null;
+<<<<<<< HEAD
       this.renderScale = 1;//(Math2.random() * 1) + 0.8;
+=======
+      this.renderScale = 1;
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
       
       // Add components to draw and collide with the player
       this.Collider = ColliderComponent.create("collide", LastPlant.cModel);
       this.add(this.Collider);
 
+<<<<<<< HEAD
 
        
       // Create the physical body object which will move the LPObject object
@@ -74,6 +115,13 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
 
       // Add move component
       //this.add(Mover2DComponent.create("move"));       //versuch für rotation
+=======
+       
+      // Create the physical body object which will move the LPObject
+      this.createPhysicalBody("physics", this.renderScale);
+      this.getComponent("physics").setScale(this.renderScale);
+      this.getComponent("physics").setRenderComponent(SpriteComponent.create("draw"));
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
       
       // The sprites
       this.sprites = [];
@@ -105,7 +153,13 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
        this.setBoundingBox(sprite.getBoundingBox());
        this.getComponent("physics").getRenderComponent().setSprite(sprite);
     },
+<<<<<<< HEAD
     
+=======
+    /**
+     * Return the LPOType (string)
+     */
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     getLPOType: function() {
        return this.LPOType;
     },
@@ -124,6 +178,7 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
     getRot: function() {
        return this.getComponent("physics").getRotation();
     },
+<<<<<<< HEAD
     
     setRot: function(angle) {
        //console.log("rotation SOLL werden: " + degrees);
@@ -132,6 +187,11 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
        //console.log("rotation IST danach: " + this.getComponent("physics").getRotation());
        this.rotation=angle;
        //this.getComponent("physics").setRotation(angle);
+=======
+
+    saveRot: function(angle) {
+       this.rotation=angle;
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     },
     stopsim: function() {
        this.getComponent("physics").stopSimulation();
@@ -153,6 +213,7 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
      * @param p {Point2D} The position where the mouse currently resides
      */
     clicked: function(p) {
+<<<<<<< HEAD
   		/*var force = Vector2D.create(p).sub(this.getPosition()).mul(20000);
          this.applyForce(force, p);
   		force.destroy();*/
@@ -162,16 +223,21 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
   		
   		// this.setRot(90);
   		
+=======
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     },
 		
 	/**
 	 * called when button released
 	 */
 	released: function(p) {
+<<<<<<< HEAD
 	    //console.log("rotation wurde: " + this.getComponent("physics").getRotation());
         // this.startsim();
         //console.log("rotation wurde nach start: " + this.getRotation());
 	    /*this.getComponent("physics").setRotation(this.rot);*/
+=======
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 	},
 
     /**
@@ -190,6 +256,7 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
     },
     
     getWorldBox: function() {
+<<<<<<< HEAD
         //var bBox = this.base();
         //console.log(bBox);
         //bBox.setRotation(this.getRot());
@@ -202,6 +269,11 @@ Engine.initObject("LPObject", "PhysicsActor", function() {
         //var bBox = this.getComponent("physics").getBoundingBox();
         //console.log(bBox);
         //return bBox.offset(-bBox.getHalfWidth(), -bBox.getHalfHeight());
+=======
+        var pos=this.getComponent("physics").getPosition();
+        var bBox = Rectangle2D.create(pos.x,pos.y,10,10);
+        return bBox.offset(-bBox.getHalfWidth(), -bBox.getHalfHeight());
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
     },
 
 

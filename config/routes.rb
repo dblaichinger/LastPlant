@@ -1,5 +1,6 @@
 SampleApp::Application.routes.draw do
 
+<<<<<<< HEAD
   get "maps/new"
 
   get "maps/create"
@@ -13,11 +14,21 @@ SampleApp::Application.routes.draw do
   resources :users
   resources :sessions, :only =>[:new, :create, :destroy]
   resources :maps, :only => [:new, :create, :destroy, :gamehandler, :protect_index, :destroy_index]
+=======
+
+  resources :users
+  resources :sessions, :only =>[:new, :create, :destroy]
+  resources :maps, :only => [:new, :show, :create, :destroy, :protect_index, :destroy_index]
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
   match '/home',	:to => 'pages#home'
+<<<<<<< HEAD
   
+=======
+  match '/imprint', :to => 'pages#imprint'
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
   
   match '/signup',    :to => 'users#new'
   match '/signin',  :to => 'sessions#new'
@@ -28,8 +39,15 @@ SampleApp::Application.routes.draw do
   match '/destroy', :to => 'maps#destroy_index'
   match '/maps/create',  :to => 'maps#create'
   
+<<<<<<< HEAD
   match '/destroy_map', :to => 'maps#gamehandler'
 
+=======
+
+  match 'images/new', :to => 'maps#new_image'
+
+  match '/gamehandler', :to => 'maps#gamehandler'
+>>>>>>> 12a6c858ca3a1f66ff36776792d0e57daca43736
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
