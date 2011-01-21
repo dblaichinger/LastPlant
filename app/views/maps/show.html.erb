@@ -1,53 +1,50 @@
 <% content_for :scripts do %>
-      <script type="text/javascript" src="../../javascripts/renderengine/libs/base.js"></script> 
-      <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.js"></script> 
-      <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.ext.engine.js"></script> 
-      <script type="text/javascript" src="../../javascripts/renderengine/libs/sylvester.js"></script> 
-      <script type="text/javascript" src="../../javascripts/renderengine/engine/runtime/engine.js"></script> 
-      <script type="text/javascript" src="../../javascripts/renderengine/lastplantgame/buildergame/createXHR.js"></script> 
-    
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/base.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.ext.engine.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/sylvester.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/engine/runtime/engine.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/lastplantgame/buildergame/createXHR.js"></script>
+
 <% end %>
 
-
-
-
-        <script type="application/javascript">
-            function getData(){
-                var req = null; 
+<script type="application/javascript">
+  function getData(){
+    var req = null;
 				
-                if(window.XMLHttpRequest)
-                    req = new XMLHttpRequest(); 
-                else if (window.ActiveXObject)
-                    req  = new ActiveXObject(Microsoft.XMLHTTP); 
+    if(window.XMLHttpRequest)
+      req = new XMLHttpRequest();
+    else if (window.ActiveXObject)
+      req  = new ActiveXObject(Microsoft.XMLHTTP);
 
-                req.onreadystatechange = function(){
+    req.onreadystatechange = function(){
      
-                    if(req.readyState == 4)
-                    {
-                        if(req.status == 200)
-                        {
-                          	var storing = document.getElementById("storage");
-                            storing.innerHTML = req.responseText;	
-                        }	
-                    } 
-                }; 
-                //req.open("POST", "/gamehandler", true); 
-                //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); 
-               //req.send(params[:id]);
-				//window.location.href = '/destroy_map';
-            } 
-        </script>   
-   
-      <script type="text/javascript">
-      	$(document).ready(function() {
-			// Load the game script
-			Engine.loadGame('/../../javascripts/renderengine/lastplantgame/destroyergame/game.js','LastPlant','LastPlant Game');
-		});
-      </script>
-      <div id="score"></div>
-      <div id="storage"><%= @map.content %></div>
-      <div id="map_score"><%= @map.score %></div>
-      <div id="map_id"><%= @map.id %></div>
+      if(req.readyState == 4)
+      {
+        if(req.status == 200)
+        {
+          var storing = document.getElementById("storage");
+          storing.innerHTML = req.responseText;
+        }
+      }
+    };
+    //req.open("POST", "/gamehandler", true);
+    //req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    //req.send(params[:id]);
+    //window.location.href = '/destroy_map';
+  }
+</script>   
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Load the game script
+    Engine.loadGame('/../../javascripts/renderengine/lastplantgame/destroyergame/game.js','LastPlant','LastPlant Game');
+  });
+</script>
+<div id="score"></div>
+<div id="storage"><%= @map.content %></div>
+<div id="map_score"><%= @map.score %></div>
+<div id="map_id"><%= @map.id %></div>
 
 
 

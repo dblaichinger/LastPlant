@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-before_filter :authenticate, :only => [:about, :help]
+  before_filter :authenticate, :only => [:about, :help]
 
   def home
     @title = "Home"
@@ -17,6 +17,4 @@ before_filter :authenticate, :only => [:about, :help]
   def imprint
     @title = "Imprint"
   end
-  
-
 end
