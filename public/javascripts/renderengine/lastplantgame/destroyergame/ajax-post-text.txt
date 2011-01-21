@@ -1,1 +1,0 @@
-{"OverallNumberOfBlocks":4,"Blocks":[{"Type":"Block","PosX":452,"PosY":370,"Rot":-270},{"Type":"Block","PosX":340,"PosY":335,"Rot":41},{"Type":"Block","PosX":559,"PosY":339,"Rot":-231},{"Type":"Block","PosX":445,"PosY":287,"Rot":-244},{"Type":"Plant","PosX":681,"PosY":360,"Rot":0}]}
