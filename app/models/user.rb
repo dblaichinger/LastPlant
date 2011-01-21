@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
 		  return nil
 		end
 	end
+<<<<<<< HEAD
 	
 	
 	def self.register_new(params, isFacebook = false)
@@ -89,6 +90,9 @@ class User < ActiveRecord::Base
 	  return @user
 	end
 	
+=======
+
+>>>>>>> 0814d7cf1c175d776c10434ef213fb524f138e1f
   private
 	
   def encrypt_password

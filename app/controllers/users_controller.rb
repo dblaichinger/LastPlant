@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       redirect_to current_user
     else
 	  @user = User.register_new(params[:user], false)
-	  
+
       if @user.save
         sign_in(@user)
         flash[:success] = "Welcome to Last Plant!"
