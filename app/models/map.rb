@@ -23,7 +23,7 @@ def self.set_name(name)
     if(!name || name == "")
       return self.generate_name     
     else
-      mapname = params[:mapname]
+      return name
     end
 
 end
