@@ -1,0 +1,10 @@
+{
+   // gui sprites
+   "bitmapImage": "gui.png",
+   "bitmapSize": [20,10],
+	"version": 2,
+   "sprites": {
+      "guiblock": [0, 0, 10, 10],
+      "over": [10, 0, 10, 10]
+   }
+}

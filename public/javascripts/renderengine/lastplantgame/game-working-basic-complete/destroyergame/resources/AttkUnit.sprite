@@ -1,0 +1,10 @@
+{
+	//Attack Unit sprites
+   "bitmapImage": "AttkUnit.png",
+   "bitmapSize": [40,40],
+	"version": 2,
+   "sprites": {
+      "AttkUnit": [0, 0, 40, 40],
+      "AttkUnitOver": [0, 0, 40, 40]
+   }
+}
