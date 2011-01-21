@@ -65,7 +65,8 @@ module SessionsHelper
     cookies.signed[:remember_token] || [nil, nil]
   end
 
-  # Methods for Facebook - Login
+
+  ## Methods for Facebook - Login
 	def establish_graph
 		if(!$oauth)
 		  establish_oauth
