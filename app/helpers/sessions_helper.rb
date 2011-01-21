@@ -1,9 +1,9 @@
 module SessionsHelper
 
-def sign_in(user)
+  def sign_in(user)
     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
     current_user = user
-	session[:id] = user.id
+    session[:id] = user.id
   end
 
   def current_user=(user)
@@ -13,10 +13,10 @@ def sign_in(user)
 
   def current_user
     if(session[:fb_id])
-        @current_user = User.find_by_fbid(session[:fb_id])
+      @current_user = User.find_by_fbid(session[:fb_id])
     else
-        @current_user ||= user_from_remember_token	
-	end
+      @current_user ||= user_from_remember_token
+    end
   end
 
   def signed_in?
@@ -30,7 +30,6 @@ def sign_in(user)
     current_user = nil
   end
 
-
   def current_user?(user)
     user == current_user
   end
@@ -38,44 +37,41 @@ def sign_in(user)
   # Deny access to page if user is not logged in
   def deny_access
     flash[:notice] = "Please sign in to access this page."
-	redirect_to root_path
+    redirect_to root_path
   end
 
+  def authenticate
+    deny_access unless signed_in?
+  end
 
-    def authenticate
-      deny_access unless signed_in?
-    end
-
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
-    end
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+  end
 	
 	def admin_user
 		if (current_user)
-		redirect_to(home_path) unless current_user.admin?
+      redirect_to(home_path) unless current_user.admin?
 		else
-		redirect_to(home_path)
+      redirect_to(home_path)
 		end
- 	 end
+  end
 
+  def user_from_remember_token
+    user_with_cookie = User.authenticate_with_salt(*remember_token)
+  end
 
-    def user_from_remember_token
-        user_with_cookie = User.authenticate_with_salt(*remember_token)	
-    end
+  def remember_token
+    cookies.signed[:remember_token] || [nil, nil]
+  end
 
-    def remember_token
-      cookies.signed[:remember_token] || [nil, nil]
-    end
-
-# Methods for Facebook - Login
-
+  # Methods for Facebook - Login
 	def establish_graph
-      if(!$oauth)
-        establish_oauth
-      end
-      #request and parse token from facebook
-      $token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/").get_access_token(@code)
+    if(!$oauth)
+      establish_oauth
+    end
+    #request and parse token from facebook
+    $token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/").get_access_token(@code)
 	  $graph = Koala::Facebook::GraphAPI.new($token)
 	end
 	
@@ -85,8 +81,8 @@ def sign_in(user)
 	
 	
 	def facebook_login
-	    # create oauth helper
-        establish_oauth
+    # create oauth helper
+    establish_oauth
 
 		#if facebook authorization code exists, get access token
 		if params[:code]
@@ -97,30 +93,30 @@ def sign_in(user)
 			#query user data from fb
 			@me = $graph.get_object("me")
 			
-            # if user already member, set session
+      # if user already member, set session
 			if User.find_by_fbid(@me['id'])
-                session[:fb_id] = @me['id']
+        session[:fb_id] = @me['id']
 				#flash.now[:notice] = "user logged in."
                 
-            #else create new user
+        #else create new user
 			else
 				@user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true, :password =>@me['id'], :password_confirmation =>@me['id'], :createScore => 0, :destroyScore => 0)
                 
-                #if creating user worked, set session
+        #if creating user worked, set session
 				if @user.save
-                    session[:fb_id] = @user.fbid
-                    flash[:success] = "Welcome to Last Plant!"
-                #unexpected error occured, save faile 
+          session[:fb_id] = @user.fbid
+          flash[:success] = "Welcome to Last Plant!"
+          #unexpected error occured, save faile
 				else
 					flash[:error] = "Login failed."
 				end
 			end
 		end
-        #if new fb user is signed in now, redirect to start page
+    #if new fb user is signed in now, redirect to start page
 		if(session[:fb_id])
 			#session[:id] = User.find_by_fbid(session[:fb_id]).id
-            current_user = User.find_by_fbid(session[:fb_id])
-            session[:id] = current_user.id
+      current_user = User.find_by_fbid(session[:fb_id])
+      session[:id] = current_user.id
 			redirect_to current_user
 			return
 		end

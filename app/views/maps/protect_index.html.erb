@@ -3,19 +3,19 @@
 
 
 <div id="protect_block">
-	<h3 class="left">Your Maps:</h3>
-	
-	<p>
-	<% if @maps != [] %>
-		<% @maps.each do |map| %>
-		<div class="map">
-			<%= map.name %><br />
-			Score: <%= map.score %> <br />
-			<%= link_to "delete", map, :method => :delete, :confirm => "Are you sure to delete #{map.name}?", :title => "Delete #{map.name}"%>
-		</div>
-		<% end %>
-	<% else %>
-		You haven't build a map yet.
-	<% end %>
-	</p>
+  <h3 class="left">Your Maps:</h3>
+
+  <p>
+    <% if @maps != [] %>
+      <% @maps.each do |map| %>
+      <div class="map">
+        <%= map.name %><br />
+                            Score: <%= map.score %> <br />
+        <%= link_to "delete", map, :method => :delete, :confirm => "Are you sure to delete #{map.name}?", :title => "Delete #{map.name}"%>
+      </div>
+    <% end %>
+  <% else %>
+                  You haven't build a map yet.
+  <% end %>
+</p>
 </div>
