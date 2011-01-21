@@ -1,0 +1,10 @@
+{
+   //plant sprites
+   "bitmapImage": "Plant.png",
+   "bitmapSize": [42,66],
+	"version": 2,
+   "sprites": {
+      "Plant": [0, 0, 20, 66],
+      "PlantOver": [21, 0, 21, 66]
+   }
+}

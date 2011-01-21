@@ -1,0 +1,10 @@
+{
+   // block-square sprites
+   "bitmapImage": "Block-square.png",
+   "bitmapSize": [128,64],
+	"version": 2,
+   "sprites": {
+      "Block-square": [0, 0, 63, 64],
+      "Block-squareOver": [64, 0, 64, 64]
+   }
+}
