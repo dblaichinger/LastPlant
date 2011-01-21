@@ -75,7 +75,20 @@ class User < ActiveRecord::Base
 		  return nil
 		end
 	end
-
+	
+	
+	def self.register_new(params, isFacebook = false)
+	  @user = User.new(params)
+      @user.createScore = 0;
+      @user.destroyScore = 0;
+	  if(!isFacebook)
+    	  @user.isFacebook = false;
+	  else
+	  	  @user.isFacebook = true;
+	  end
+	  return @user
+	end
+	
   private
 	
   def encrypt_password
