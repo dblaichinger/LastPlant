@@ -210,11 +210,11 @@ Engine.initObject("MouseInputComponent", "InputComponent", function() {
 					});
 	         });
 	
-	         ctx.addEvent(null, "mousedown", function(evt) {
+	         ctx.addEvent(LastPlant.renderContext, "mousedown", function(evt) {
 	            var mouseInfo = Engine.getDefaultContext().MouseInputComponent_mouseInfo;
 	            mouseInfo.button = evt.which;
 					mouseInfo.downPosition.set(evt.pageX, evt.pageY);
-					evt.preventDefault();
+					//evt.preventDefault();
 	         });
 	
 	         ctx.addEvent(null, "mouseup", function(evt) {

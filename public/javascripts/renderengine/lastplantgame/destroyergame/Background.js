@@ -49,6 +49,9 @@ Engine.initObject("Background", "Object2D", function() {
           // Set the starting position of the Background
           this.setPosition(Point2D.create(0, 0));
         },
+		setBGtoGameOver: function() {
+            this.getComponent("draw").setSprite(LastPlant.spriteLoader.getSprite("Background", "BackgroundGameover"));
+        }
 
     }, /** @scope Background.prototype */{ // Static
     
@@ -58,7 +61,7 @@ Engine.initObject("Background", "Object2D", function() {
      */
     getClassName: function() {
        return "Background";
-      }
+    }
       
     });
 

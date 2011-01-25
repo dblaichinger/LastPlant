@@ -1,10 +1,13 @@
 {
    // block-long sprites
    "bitmapImage": "Block-long.png",
-   "bitmapSize": [68,160],
+   "bitmapSize": [68,640],
 	"version": 2,
    "sprites": {
       "Block-long": [0, 0, 33, 160],
-      "Block-longOver": [34, 0, 34, 160]
+      "Block-longOver": [34, 0, 34, 160],
+      "Block-long-cracked": [0, 160, 33, 160],
+      "Block-long-lightbroken": [0, 320, 33, 160],
+      "Block-long-heavybroken": [0, 480, 33, 160]
    }
 }

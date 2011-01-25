@@ -4,6 +4,7 @@
    "bitmapSize": [800,400],
 	"version": 2,
    "sprites": {
-      "BackgroundIMG": [0, 0, 800, 400]
+      "BackgroundIMG": [0, 0, 800, 400],
+      "BackgroundGameOver": [0, 400, 800, 400]
    }
 }

@@ -208,9 +208,10 @@ ul#navi li.rechts{
 	text-align:right;
 	width:5em;}	
 	
-ul#navi li.abstand{
-	padding-left: 460px;}	
-	
+ul#navi .right{
+    float: right;
+}
+    
 ul#navi li.slash{
 		color:rgb(144, 141, 137);
 	text-align:left;
@@ -411,7 +412,7 @@ form label input {
 
 canvas {
 	display: block;
-    margin: -200px auto;
+    margin: -170px auto;
 	background-color: #241E1E;
 }
 
@@ -424,8 +425,9 @@ table {
 }
 
 .edit_user {
-	left: 300px;
 	margin-top: 25px;
+    margin: 0 auto;
+    width: 280px;
 }
 
 #user_submit {
@@ -445,8 +447,8 @@ table {
 
 
 .gravatar_div {
-	margin-left: 375px;
-	margin-top: 15px;
+	margin: 0 auto;
+    width: 150px;
 }
 
 #storage, #score, #map_score, #map_id , #map_img {
