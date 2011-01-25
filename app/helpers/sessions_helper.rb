@@ -67,8 +67,9 @@ module SessionsHelper
 
   # Methods for Facebook - Login
 	def establish_graph
-    if(!$oauth)
-      establish_oauth
+      if(!$oauth)
+        establish_oauth
+      end
     end
     #request and parse token from facebook
     $token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/").get_access_token(@code)

@@ -10,7 +10,7 @@ class MapsController < ApplicationController
 
   def create
     #this method is only called per AJAX request
-    mapname = Map.set_name(params[:mapname])
+    mapname = Map.set_name(params[:mapname], session[:id])
     
     @map = Map.new(:name => mapname, :user_id => session[:id], :content => params[:map], :score => params[:score])
     
