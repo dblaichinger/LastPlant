@@ -28,7 +28,6 @@ def self.set_name(name)
 
 end
 
-
 def self.generate_name
   username = User.find_by_id(session[:id]).name
   map_count = (Map.find_all_by_user_id(session[:id]).count + 1)

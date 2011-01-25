@@ -89,6 +89,7 @@ Engine.initObject("LastPlant", "Game", function(){
       AttackUnitLegs: null,
       AttackUnitLifes: 3,
       FirstAttackUnitwasCreated: false,
+      shootOffPosition: null,
       
       // the Plant unit
       Plant: null,      
@@ -187,8 +188,10 @@ Engine.initObject("LastPlant", "Game", function(){
         // Add the player object
         var player = Player.create();
         this.getRenderContext().add(player);
-
+        
+        
         // Spawn the first Attack Unit
+        this.shootOffPosition=Point2D.create(55, 359);
         this.spawnAttackUnits();
 
         // Spawn the Attack unit Legs
@@ -206,7 +209,7 @@ Engine.initObject("LastPlant", "Game", function(){
             this.AttackUnitLifes--;
             this.AttackUnitsArray.shift();
             this.CurrentAttackUnit=this.AttackUnitsArray[0];
-            this.CurrentAttackUnit.setPosition(Point2D.create(45, 360));
+            this.CurrentAttackUnit.setPosition(this.shootOffPosition);
         }
         else if(this.AttackUnitLifes==0){
             this.gameOver(false);
@@ -255,16 +258,16 @@ Engine.initObject("LastPlant", "Game", function(){
             this.writeText(1.6, Point2D.create(200, 80), "You receive " + MapBaseScore + "points (MapScore/10) for your effort.");
             OverallPoints=MapBaseScore;
         }
-        this.writeText(1.6, Point2D.create(200, 200), "Please wait 3 seconds for your score to be saved");
-        
         var map_id = document.getElementById("map_id");
         map_id = map_id.innerHTML;
         map_id = parseInt(map_id);
-        Timeout.create("SaveDataTimer", 3000, function() {
-			LastPlant.saveDataAJAX(OverallPoints, map_id, GameWon);
-        });
+        //Timeout.create("SaveDataTimer", 500, function() {
+			//LastPlant.saveDataAJAX(OverallPoints, map_id, GameWon);
+        //});
 
-        //this.saveDataAJAX(OverallPoints, map_id, GameWon);
+        this.saveDataAJAX(OverallPoints, map_id, GameWon);
+        
+        this.writeText(1.6, Point2D.create(200, 200), "Your Score was saved");
       },
       
       writeAJAX: function(url, score){
@@ -282,7 +285,6 @@ Engine.initObject("LastPlant", "Game", function(){
       },
 
       saveDataAJAX: function(score, mapid, destroyerWon){
-        
         var builderScore;
         var destroyerScore = score;
         if(destroyerWon){
@@ -291,12 +293,10 @@ Engine.initObject("LastPlant", "Game", function(){
         }else{
             builderScore = score/2;
         }
-        //console.log("mapid: " + mapid);
  
         this.writeAJAX("/gamehandler", "builderscore=" + builderScore + "&destroyerscore=" + destroyerScore + "&mapid=" + mapid);
-        var target = "/protect";
-        window.location.href = target;
-
+        //var target = "/protect";
+        //window.location.href = target;
       },
        
       /**
@@ -310,7 +310,7 @@ Engine.initObject("LastPlant", "Game", function(){
         this.renderContext.remove(TextToWrite);
         var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
         TextToWrite.setPosition(Position);
-        TextToWrite.setTextFont("Verdana")
+        TextToWrite.setTextFont("Helvetica, Arial")
         TextToWrite.setColor("#ccff33");
         this.renderContext.add(TextToWrite);
       },
@@ -322,20 +322,20 @@ Engine.initObject("LastPlant", "Game", function(){
       spawnAttackUnits: function(){
         this.AttackUnitsArray = [];
         
-        this.writeText(1.2, Point2D.create(30, 20), "Remaining Monsters");
+        this.writeText(0.8, Point2D.create(15, 20), "Shots left");
         
         this.AttackUnit=AttkUnit.create();
-        LastPlant.createLPObject(this.AttackUnit, Point2D.create(45, 360), 0);
+        LastPlant.createLPObject(this.AttackUnit, this.shootOffPosition, 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
         
         this.AttackUnit=AttkUnit.create();
-        LastPlant.createLPObject(this.AttackUnit, Point2D.create(100, 50), 0);
+        LastPlant.createLPObject(this.AttackUnit, Point2D.create(130, 45), 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
 
         this.AttackUnit=AttkUnit.create();
-        LastPlant.createLPObject(this.AttackUnit, Point2D.create(50, 50), 0);
+        LastPlant.createLPObject(this.AttackUnit, Point2D.create(80, 45), 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
         

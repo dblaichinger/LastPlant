@@ -139,6 +139,7 @@ Engine.initObject("Simulation", "BaseObject", function() {
        * @private
        */
       removeBody: function(b2jsBody) {
+         if(this.world)
          this.world.DestroyBody(b2jsBody);
       },
       

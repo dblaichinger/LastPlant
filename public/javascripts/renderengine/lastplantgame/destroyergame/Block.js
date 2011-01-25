@@ -49,10 +49,18 @@ Engine.initObject("Block", "LPObject", function() {
 		 */
 		constructor: function(BlockType) {
             this.LPOType=BlockType;
-            if(BlockType=="Block-long")
+            if(BlockType=="Block-long"){
                 this.base("Block-long", "Block-long", "Block-longOver");
-            else if(BlockType=="Block-square")
+                this.sprites.push(LastPlant.spriteLoader.getSprite("Block-long", "Block-long-cracked"));
+                this.sprites.push(LastPlant.spriteLoader.getSprite("Block-long", "Block-long-lightbroken"));
+                this.sprites.push(LastPlant.spriteLoader.getSprite("Block-long", "Block-long-heavybroken"));
+            }
+            else if(BlockType=="Block-square"){
                 this.base("Block-square", "Block-square", "Block-squareOver");
+                this.sprites.push(LastPlant.spriteLoader.getSprite("Block-square", "Block-square-cracked"));
+                this.sprites.push(LastPlant.spriteLoader.getSprite("Block-square", "Block-square-lightbroken"));
+                this.sprites.push(LastPlant.spriteLoader.getSprite("Block-square", "Block-square-heavybroken"));
+            }
 		},
 
 		/**
@@ -63,18 +71,24 @@ Engine.initObject("Block", "LPObject", function() {
 		 * @param scale {Number} A scalar scaling value for the LPObject
 		 */
 		createPhysicalBody: function(componentName, scale) {
-            if(this.LPOType=="Block-long")
+            if(this.LPOType=="Block-long"){
                 this.boxSize = Point2D.create(34, 160);
+                this.health = 120;
+            }
 			else if(this.LPOType=="Block-square")
                 this.boxSize = Point2D.create(63, 63);
-                
+
 			this.boxSize.mul(scale);
 			this.add(BoxBodyComponent.create(componentName, this.boxSize));
 			
-			// Set the friction and bounciness of the Block
-			this.getComponent(componentName).setFriction(1);
-			this.getComponent(componentName).setRestitution(-1);
-			this.getComponent(componentName).setDensity(10);
+            // Set the friction and bounciness of the Block
+			this.getComponent(componentName).setFriction(0.7);
+			this.getComponent(componentName).setRestitution(0);
+			
+            if(this.LPOType=="Block-long")
+                this.getComponent(componentName).setDensity(20);
+            else if(this.LPOType=="Block-square")
+                this.getComponent(componentName).setDensity(10);
 		},
         
 		/**
@@ -119,7 +133,13 @@ Engine.initObject("Block", "LPObject", function() {
             if(this.health<=0){
                 LastPlant.destroyedBlocks++;
                 this.destroy();
-            }
+            }else if(this.health<=40)
+                this.setSprite(4);
+            else if(this.health<=80)
+                this.setSprite(3);
+            else if(this.health<=100)
+                this.setSprite(2);
+
         },
 		clicked: function(p) {
             //[ABSTRACT]        

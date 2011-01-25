@@ -9,7 +9,6 @@ class MapsController < ApplicationController
   end
 
   def create
-
     #this method is only called per AJAX request
     mapname = Map.set_name(params[:mapname])
     

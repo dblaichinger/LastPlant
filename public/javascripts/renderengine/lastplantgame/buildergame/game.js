@@ -73,6 +73,7 @@ Engine.initObject("LastPlant", "Game", function(){
       currentNumberOfBlocks: 0,
       BlocksArray: null,
       BlocksArrayIndex: 0,
+      currentBlock: null,
       
       //Counter Text Object
       NumberBlocksLeftText: null,
@@ -87,6 +88,8 @@ Engine.initObject("LastPlant", "Game", function(){
       // The collision model
       cModel: null,
       
+      // The collision model
+      player: null,
       
       // The physical world simulation
       simulation: null,
@@ -165,13 +168,13 @@ Engine.initObject("LastPlant", "Game", function(){
         LastPlant.createLPObject();
          
         // Add the player object
-        var player = Player.create();
-        this.getRenderContext().add(player);
+        this.player = Player.create();
+        this.getRenderContext().add(this.player);
           
         // Write the "Blocks Left" Text
         var BlocksLeftText = TextRenderer.create(ContextText.create(), "Blocks left", 1.8);
         BlocksLeftText.setPosition(Point2D.create(20, 50));
-        BlocksLeftText.setTextFont("Verdana")
+        BlocksLeftText.setTextFont("Helvetica, Arial")
         BlocksLeftText.setColor("#ccff33");
         this.renderContext.add(BlocksLeftText);
       },
@@ -188,7 +191,7 @@ Engine.initObject("LastPlant", "Game", function(){
           	pos.set(0, this.fieldHeight+50);
           	ext.set(2000, 50);
           	this.simulation.addSimpleBoxBody(pos, ext, {
-          		restitution: 0.2,
+          		restitution: 0.0,
           		friction: 3.0
           	});
 			
@@ -243,11 +246,12 @@ Engine.initObject("LastPlant", "Game", function(){
         
         gameOver: function(){
             this.renderContext.remove(this.PlantWasSetText);
+			this.player.removeInputHandler();
 			
 			this.TotalScore=0;
-			
+            
             this.writeText(1.8, Point2D.create(190, 50), "You did your best to save the LastPlant!");
-            this.writeText(1.4, Point2D.create(190, 83), 'Press "Save Construct" now to receive following points on your Builder-Profile');
+            this.writeText(1.4, Point2D.create(190, 83), 'Enter a mapname and "Save Construct" now to receive following Builder points');
             
             var BlocksInLvl = "Blocks in level: " + this.OverallNumberOfBlocks + " x 30 points";
 			this.TotalScore=this.OverallNumberOfBlocks*30;
@@ -263,16 +267,16 @@ Engine.initObject("LastPlant", "Game", function(){
             this.renderContext.remove(TextToWrite);
             var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
             TextToWrite.setPosition(Position);
-            TextToWrite.setTextFont("Verdana")
+            TextToWrite.setTextFont("Helvetica, Arial")
             TextToWrite.setColor("#655655");
             this.renderContext.add(TextToWrite);
         },
         showPlantWasSetText: function(){
-            var PlantWasSetTextString="Please wait for the Plant to settle down";
+            var PlantWasSetTextString="The Plant must settle down. Please wait or retry.";
             
-            this.PlantWasSetText = TextRenderer.create(ContextText.create(), PlantWasSetTextString, 1.8);
-            this.PlantWasSetText.setPosition(Point2D.create(190, 50));
-            this.PlantWasSetText.setTextFont("Verdana")
+            this.PlantWasSetText = TextRenderer.create(ContextText.create(), PlantWasSetTextString, 1.7);
+            this.PlantWasSetText.setPosition(Point2D.create(190, 55));
+            this.PlantWasSetText.setTextFont("Helvetica, Arial")
             this.PlantWasSetText.setColor("#655655");
             this.renderContext.add(this.PlantWasSetText);
         },
@@ -289,6 +293,7 @@ Engine.initObject("LastPlant", "Game", function(){
             else if(blocksleft==0){  //Spawn Plant
                 this.writeBlocksCounter("0");
                 
+                this.currentBlock=null;
 
                 NewLPObject=Plant.create();
                 
@@ -337,6 +342,7 @@ Engine.initObject("LastPlant", "Game", function(){
 
                 this.BlocksArray[this.BlocksArrayIndex]=NewLPObject;
                 this.BlocksArrayIndex++;
+                this.currentBlock = NewLPObject;
 
                 startPos.destroy();
             }
@@ -349,7 +355,7 @@ Engine.initObject("LastPlant", "Game", function(){
             this.renderContext.remove(this.NumberBlocksLeftText);
             this.NumberBlocksLeftText = TextRenderer.create(ContextText.create(), counter, 1.8);
             this.NumberBlocksLeftText.setPosition(Point2D.create(60, 80));
-            this.NumberBlocksLeftText.setTextFont("Verdana")
+            this.NumberBlocksLeftText.setTextFont("Helvetica, Arial")
             this.NumberBlocksLeftText.setColor("#ccff33");
             this.renderContext.add(this.NumberBlocksLeftText);
       },
@@ -377,7 +383,13 @@ Engine.initObject("LastPlant", "Game", function(){
       getCModel: function() {
          return this.cModel;
       },
-      
+      getCurrentBlock: function() {
+         return this.currentBlock;
+      },
+      getPlayer: function() {
+         return this.player;
+      },      
+       
    });
    
    return LastPlant;

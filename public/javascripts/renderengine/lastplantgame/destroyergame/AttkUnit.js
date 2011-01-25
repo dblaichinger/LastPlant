@@ -64,7 +64,7 @@ Engine.initObject("AttkUnit", "LPObject", function() {
 			// Set the friction and bounciness and density of the AttkUnit
 			this.getComponent(componentName).setFriction(8);
 			this.getComponent(componentName).setRestitution(2); //bounciness
-			this.getComponent(componentName).setDensity(20);
+			this.getComponent(componentName).setDensity(25);
 		},
         SetWasShot: function(thisWasShot) {
             this.wasShot=thisWasShot;

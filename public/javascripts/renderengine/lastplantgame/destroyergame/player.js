@@ -136,6 +136,10 @@ Engine.initObject("Player", "Object2D", function() {
        */
       onMouseMove: function(mouseInfo) {
         this.setPosition(this.convertToWorldCoord(mouseInfo.position));
+        if(this.mouseDown==true){
+            var ForceSetter = LastPlant.getForceSetter();
+            ForceSetter.continuePosAndRotSetting(this.convertToWorldCoord(mouseInfo.position));
+        }
       },
 
       onMouseDown: function(mouseInfo) {

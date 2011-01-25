@@ -39,6 +39,9 @@ Engine.initObject("Block", "LPObject", function() {
    var Block = LPObject.extend(/** @scope Block.prototype */{
 
 		boxSize: null,
+        isClicked: null,
+        wasOverLeftBorder: null,
+        rotateDirection: null,
 
 		/**
 		 * @private
@@ -51,6 +54,9 @@ Engine.initObject("Block", "LPObject", function() {
                 this.base("Block-square", "Block-square", "Block-squareOver");
             
             this.isPlaced=false;
+            this.isClicked=false;
+            this.wasOverLeftBorder=false;
+            this.rotateDirection=0;
 		},
 
 		/**
@@ -71,15 +77,74 @@ Engine.initObject("Block", "LPObject", function() {
 			
 			// Set the friction, bounciness and density of the Block
             // Mass depends on objects size
-			this.getComponent(componentName).setFriction(1);
-			this.getComponent(componentName).setRestitution(-1);
-			this.getComponent(componentName).setDensity(10);
+			this.getComponent(componentName).setFriction(0.7);
+			this.getComponent(componentName).setRestitution(0);
+			
+            if(this.LPOType=="Block-long")
+                this.getComponent(componentName).setDensity(20);
+            else if(this.LPOType=="Block-square")
+                this.getComponent(componentName).setDensity(10);
 		},
-		
-		clicked: function(p) {
+        //called every frame
+        update: function(renderContext, time){
+            renderContext.pushTransform();
+            this.base(renderContext, time);
+            renderContext.popTransform()
+            
+            if(this.wasOverLeftBorder==false)
+                if(this.getPosition().get().x > 162)
+                    this.wasOverLeftBorder=true;
+
+            if(this.isClicked==true){
+                var cursorPosition = LastPlant.getPlayer().getPosition();
+                var newBlockPos= cursorPosition;
+                if(cursorPosition.get().x > LastPlant.fieldWidth-72)
+                    newBlockPos.setX(LastPlant.fieldWidth-72);
+                if(this.wasOverLeftBorder==true){
+                    if(cursorPosition.get().x < 162)
+                        newBlockPos.setX(162);
+                }else{
+                    if(cursorPosition.get().x < 5){
+                        newBlockPos.setX(5);
+                    }
+                }
+                    
+                if(cursorPosition.get().y < 5)
+                    newBlockPos.setY(5);
+                if(cursorPosition.get().y > LastPlant.fieldHeight-5)
+                    newBlockPos.setY(LastPlant.fieldHeight);
+                
+                //this.startsim();
+                this.setPosition(newBlockPos); 
+                //this.stopsim();
+            }
+            if(this.rotateDirection==1)
+                this.rotateCW();
+            else if(this.rotateDirection==2)
+                this.rotateCCW();
+            
+        },
+        setRotateDirection: function(direction) {
+            this.rotateDirection=direction;
+        },
+        
+        rotateCW: function(p) {
+            this.getComponent("physics").setRotation( this.getRot()*0.017453292519943+0.034906585039887 );
+            this.startsim();
+            this.stopsim();
+        },
+        rotateCCW: function(p) {
+            this.getComponent("physics").setRotation( this.getRot()*0.017453292519943-0.034906585039887 );
+            this.startsim();
+            this.stopsim();
+        },
+        
+		clicked: function(cursorPosition) {
             if(this.isPlaced==false){
-                this.stopsim();
-                this.setPosition(p);
+                this.isClicked=true;
+                // this.startsim();
+                // this.setPosition(cursorPosition);                                     
+                // this.stopsim();
             }
             
         },
@@ -90,6 +155,7 @@ Engine.initObject("Block", "LPObject", function() {
         released: function(p) {
             if(this.isPlaced==false){
                 this.isPlaced=true;
+                this.isClicked=false;
                 this.remove(this.Collider);
                 this.setSprite(0);
                 LastPlant.createLPObject(this);
@@ -112,6 +178,7 @@ Engine.initObject("Block", "LPObject", function() {
                 return ColliderComponent.CONTINUE;
             }
         },
+
 
     }, /** @scope Block.prototype */{ // Static
     
