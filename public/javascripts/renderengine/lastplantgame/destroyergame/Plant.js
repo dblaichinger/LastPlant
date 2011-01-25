@@ -42,7 +42,7 @@ Engine.initObject("Plant", "LPObject", function() {
         destroyable: false,
         timeOfCreation: null,
         timeOfCreationSet: false,
-        health: 60,
+        health: 120,
 
 		/**
 		 * @private

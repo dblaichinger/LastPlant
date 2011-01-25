@@ -89,7 +89,10 @@ Engine.initObject("LastPlant", "Game", function(){
       AttackUnitLegs: null,
       AttackUnitLifes: 3,
       FirstAttackUnitwasCreated: false,
+      shootOffPosition: null,
       
+	  GameBackground: null,
+	  
       // the Plant unit
       Plant: null,      
       
@@ -169,7 +172,8 @@ Engine.initObject("LastPlant", "Game", function(){
 
         
         // Add the Background
-        this.getRenderContext().add(Background.create());
+        this.GameBackground=Background.create();
+        this.getRenderContext().add(this.GameBackground);
         
         // Load the Blocks and the Plant
         this.loadBlocks();
@@ -187,8 +191,10 @@ Engine.initObject("LastPlant", "Game", function(){
         // Add the player object
         var player = Player.create();
         this.getRenderContext().add(player);
-
+        
+        
         // Spawn the first Attack Unit
+        this.shootOffPosition=Point2D.create(55, 359);
         this.spawnAttackUnits();
 
         // Spawn the Attack unit Legs
@@ -206,7 +212,7 @@ Engine.initObject("LastPlant", "Game", function(){
             this.AttackUnitLifes--;
             this.AttackUnitsArray.shift();
             this.CurrentAttackUnit=this.AttackUnitsArray[0];
-            this.CurrentAttackUnit.setPosition(Point2D.create(45, 360));
+            this.CurrentAttackUnit.setPosition(this.shootOffPosition);
         }
         else if(this.AttackUnitLifes==0){
             this.gameOver(false);
@@ -219,7 +225,11 @@ Engine.initObject("LastPlant", "Game", function(){
        */
       gameOver: function(GameWon){
         this.Forcesetter.destroy();
+		
+		
+		
         this.getRenderContext().remove(this.AttackUnitLegs);
+		this.GameBackground.setBGtoGameOver();
         
         this.getRenderContext().remove(this.AttackUnitLegs);
         var GameOverString;
@@ -231,42 +241,66 @@ Engine.initObject("LastPlant", "Game", function(){
         var croppedBaseScore=parseInt(croppedBaseScore);
 
         if(GameWon){
-            this.CurrentAttackUnit.destroy();
-            this.writeText(1.8, Point2D.create(200, 40), "You destroyed the LastPlant. All Hail the Maschine!");
-            this.writeText(1.4, Point2D.create(200, 80), "You receive following points on your Destroyer-Profile");
+            //this.CurrentAttackUnit.destroy();
+			if(this.AttackUnitLifes>0){
+				for(var i=0; i < this.AttackUnitLifes+1; i++){
+					console.log("i: " + i);
+					this.AttackUnitsArray[i].destroy();
+				}
+			}
+            this.writeText(1.6, Point2D.create(30, 45), "All Hail the Maschine!", "bold");
             
-            var Quar
             var BaseScoreText = "1/4 Basescore of the map: " + croppedBaseScore;
-            this.writeText(1.4, Point2D.create(200, 100), BaseScoreText);
+            this.writeText(1.0, Point2D.create(30, 80), BaseScoreText, "bold");
 			
             var BlocksInLvl = "Blocks destroyed: " + this.destroyedBlocks + " x 10 points";
-            this.writeText(1.4, Point2D.create(200, 120), BlocksInLvl);
+            this.writeText(1.0, Point2D.create(30, 100), BlocksInLvl, "bold");
             
             var MonestersLeft = "Monsters left: " + this.AttackUnitLifes + " x 30 points";
-            this.writeText(1.4, Point2D.create(200, 140), MonestersLeft);
+            this.writeText(1.0, Point2D.create(30, 120), MonestersLeft, "bold");
             
             OverallPoints=croppedBaseScore + this.destroyedBlocks*10 + this.AttackUnitLifes*30;
-            var OverallPointsText = "All in all you get: " + OverallPoints + " points";
-            this.writeText(1.6, Point2D.create(200, 180), OverallPointsText);
+            var OverallPointsText = "Total: " + OverallPoints + " points";
+            this.writeText(1.1, Point2D.create(30, 140), OverallPointsText, "bold");
+			this.writeText(1.5, Point2D.create(30, 180), "Your Score was saved", "bold");
         }else{
-            this.writeText(1.8, Point2D.create(200, 40), "You couldn't destroy the LastPlant.");
+            this.writeText(2.3, Point2D.create(30, 55), "You failed!", "bold");
 			MapBaseScore=MapBaseScore/10;
 			MapBaseScore=parseInt(MapBaseScore);
-            this.writeText(1.6, Point2D.create(200, 80), "You receive " + MapBaseScore + "points (MapScore/10) for your effort.");
+            this.writeText(1.0, Point2D.create(30, 120), "You receive " + MapBaseScore + " points for your effort", "bold");
             OverallPoints=MapBaseScore;
+			this.writeText(1.1, Point2D.create(30, 140), "Your Score was saved", "bold");
         }
-        this.writeText(1.6, Point2D.create(200, 200), "Please wait 3 seconds for your score to be saved");
-        
         var map_id = document.getElementById("map_id");
         map_id = map_id.innerHTML;
         map_id = parseInt(map_id);
-        Timeout.create("SaveDataTimer", 3000, function() {
-			LastPlant.saveDataAJAX(OverallPoints, map_id, GameWon);
-        });
+        //Timeout.create("SaveDataTimer", 500, function() {
+			//LastPlant.saveDataAJAX(OverallPoints, map_id, GameWon);
+        //});
 
-        //this.saveDataAJAX(OverallPoints, map_id, GameWon);
+        this.saveDataAJAX(OverallPoints, map_id, GameWon);
+        
+        
       },
-      
+             
+      /**
+       * Write a Text to a  given Position
+       * @param Position (Point2D): Position the object should be set to
+       * @param Size (float): Size to write the text in
+       * @param Text (string): the string to write
+       * @private
+       */
+      writeText: function(Size, Position, Text, boldness){
+        this.renderContext.remove(TextToWrite);
+        var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
+        TextToWrite.setPosition(Position);
+        TextToWrite.setTextFont("Helvetica, Arial")
+        TextToWrite.setColor("#666666");
+		TextToWrite.setTextWeight(boldness);
+        this.renderContext.add(TextToWrite);
+      },
+	  
+	  
       writeAJAX: function(url, score){
         var xhr = createXHR();
         xhr.onreadystatechange=function() {
@@ -282,7 +316,6 @@ Engine.initObject("LastPlant", "Game", function(){
       },
 
       saveDataAJAX: function(score, mapid, destroyerWon){
-        
         var builderScore;
         var destroyerScore = score;
         if(destroyerWon){
@@ -291,28 +324,10 @@ Engine.initObject("LastPlant", "Game", function(){
         }else{
             builderScore = score/2;
         }
-        //console.log("mapid: " + mapid);
  
         this.writeAJAX("/gamehandler", "builderscore=" + builderScore + "&destroyerscore=" + destroyerScore + "&mapid=" + mapid);
-        var target = "/protect";
-        window.location.href = target;
-
-      },
-       
-      /**
-       * Write a Text to a  given Position
-       * @param Position (Point2D): Position the object should be set to
-       * @param Size (float): Size to write the text in
-       * @param Text (string): the string to write
-       * @private
-       */
-      writeText: function(Size, Position, Text){
-        this.renderContext.remove(TextToWrite);
-        var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
-        TextToWrite.setPosition(Position);
-        TextToWrite.setTextFont("Verdana")
-        TextToWrite.setColor("#ccff33");
-        this.renderContext.add(TextToWrite);
+        //var target = "/protect";
+        //window.location.href = target;
       },
       
       /**
@@ -322,20 +337,18 @@ Engine.initObject("LastPlant", "Game", function(){
       spawnAttackUnits: function(){
         this.AttackUnitsArray = [];
         
-        this.writeText(1.2, Point2D.create(30, 20), "Remaining Monsters");
-        
         this.AttackUnit=AttkUnit.create();
-        LastPlant.createLPObject(this.AttackUnit, Point2D.create(45, 360), 0);
+        LastPlant.createLPObject(this.AttackUnit, this.shootOffPosition, 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
         
         this.AttackUnit=AttkUnit.create();
-        LastPlant.createLPObject(this.AttackUnit, Point2D.create(100, 50), 0);
+        LastPlant.createLPObject(this.AttackUnit, Point2D.create(150, 40), 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
 
         this.AttackUnit=AttkUnit.create();
-        LastPlant.createLPObject(this.AttackUnit, Point2D.create(50, 50), 0);
+        LastPlant.createLPObject(this.AttackUnit, Point2D.create(95, 40), 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
         

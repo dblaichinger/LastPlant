@@ -38,7 +38,9 @@ Engine.initObject("Plant", "LPObject", function() {
     */
    var Plant = LPObject.extend(/** @scope Plant.prototype */{
 
-		boxSize: null,
+		boxSize: null,        
+        isClicked: null,
+        wasOverLeftBorder: null,
         canBeSaved: true,
         
 		/**
@@ -48,6 +50,9 @@ Engine.initObject("Plant", "LPObject", function() {
 			this.base("Plant", "Plant", "PlantOver");
             this.isPlaced=false;
             this.LPOType="Plant";
+            this.canBeSaved=true;
+            this.isClicked=false;
+            this.wasOverLeftBorder=false;
 		},
 
 		/**
@@ -74,7 +79,38 @@ Engine.initObject("Plant", "LPObject", function() {
             renderContext.pushTransform();
             this.base(renderContext, time);
             renderContext.popTransform();
-            
+                        if(this.wasOverLeftBorder==false)
+                if(this.getPosition().get().x > 162)
+                    this.wasOverLeftBorder=true;
+            // Don't let Plant out of the Canvas
+            if(this.isClicked==true){
+                var cursorPosition = LastPlant.getPlayer().getPosition();
+                var newBlockPos= cursorPosition;
+                if(cursorPosition.get().x > LastPlant.fieldWidth-140)
+                    newBlockPos.setX(LastPlant.fieldWidth-140);
+                if(this.wasOverLeftBorder==true){
+                    if(cursorPosition.get().x < 162)
+                        newBlockPos.setX(162);
+                }else{
+                    if(cursorPosition.get().x < 5){
+                        newBlockPos.setX(5);
+                    }
+                }
+                    
+                if(cursorPosition.get().y < 5)
+                    newBlockPos.setY(5);
+                if(cursorPosition.get().y > LastPlant.fieldHeight-5)
+                    newBlockPos.setY(LastPlant.fieldHeight);
+                
+                //this.startsim();
+                this.setPosition(newBlockPos); 
+                //this.stopsim();
+            }
+            if(this.rotateDirection==1)
+                this.rotateCW();
+            else if(this.rotateDirection==2)
+                this.rotateCCW();
+                
             if(this.isPlaced==true && this.getComponent("physics").isSleeping()==true && this.canBeSaved==true){
                 this.canBeSaved=false;
                 Timeout.create("SaveTimer", 1000, function() {
@@ -86,9 +122,15 @@ Engine.initObject("Plant", "LPObject", function() {
         
 		clicked: function(p) {
             if(this.isPlaced==false){
+                this.isClicked=true;
+                // this.startsim();
+                // this.setPosition(cursorPosition);                                     
+                // this.stopsim();
+            }
+            /*if(this.isPlaced==false){
                 this.stopsim();
                 this.setPosition(p);
-            }
+            }*/
         },
             
         /**
@@ -97,17 +139,20 @@ Engine.initObject("Plant", "LPObject", function() {
         released: function(p) {
             if(this.isPlaced==false){
                 this.isPlaced=true;
+                this.isClicked=false;
                 this.remove(this.Collider);
                 this.setSprite(0);
                 this.startsim();
                 LastPlant.showPlantWasSetText();
                 // Backup timer if the safe function isnt called via update
-                Timeout.create("SaveTimer", 10000, function() {
-                    if(this.canBeSaved==true){
+                /*if(this.canBeSaved==true){
+                    this.canBeSaved=false;
+                    Timeout.create("BackupSaveTimer", 10000, function() {
+                        console.log("inside BackupSaveTimer");
                         LastPlant.gameOver();
                         LastPlant.saveConstruct();
-                    }
-                });
+                    });
+                }*/
                 
             }
         },
@@ -128,6 +173,11 @@ Engine.initObject("Plant", "LPObject", function() {
                 return ColliderComponent.CONTINUE;
             }
         },
+        getWorldBox: function() {
+            var pos=this.getComponent("physics").getPosition();
+            var bBox = Rectangle2D.create(pos.x,pos.y,21,66);
+            return bBox.offset(-bBox.getHalfWidth(), -bBox.getHalfHeight());;
+        },        
 
     }, /** @scope Plant.prototype */{ // Static
     

@@ -51,15 +51,18 @@ Engine.initObject("Background", "Object2D", function() {
           this.setPosition(Point2D.create(0, 0));
         },
 
+		setBGtoGameOver: function() {
+		   this.getComponent("draw").setSprite(LastPlant.spriteLoader.getSprite("Background", "BackgroundGameOver"));
+		},
     }, /** @scope Background.prototype */{ // Static
-    
+	
     /**
      * Get the class name of this object
      * @return {String} The string <tt>Background</tt>
      */
     getClassName: function() {
        return "Background";
-      }
+    }
       
     });
 

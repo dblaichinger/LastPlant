@@ -5,6 +5,9 @@
 	"version": 2,
    "sprites": {
       "Block-square": [0, 0, 63, 64],
-      "Block-squareOver": [64, 0, 64, 64]
+      "Block-squareOver": [64, 0, 64, 64],
+      "Block-square-cracked": [0, 64, 64, 64],
+      "Block-square-lightbroken": [0, 128, 64, 64],
+      "Block-square-heavybroken": [0, 192, 64, 64]      
    }
 }
