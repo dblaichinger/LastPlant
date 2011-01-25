@@ -71,6 +71,7 @@ module SessionsHelper
       establish_oauth
     end
     #request and parse token from facebook
+
     $token = Koala::Facebook::OAuth.new("158315630884949", '24649532594ab931351f13465261391e', "http://blaichinger5.heroku.com/").get_access_token(@code)
 	
 	$graph = Koala::Facebook::GraphAPI.new($token)
@@ -96,13 +97,15 @@ module SessionsHelper
 			
       # if user already member, set session
 			if User.find_by_fbid(@me['id'])
-            session[:fb_id] = @me['id']
+	            session[:fb_id] = @me['id']
+
 				#flash.now[:notice] = "user logged in."
                 
-        #else create new user
+        	#else create new user
 			else
+
                @user = User.new(:fbid => @me['id'], :name => @me['name'], :email => @me['email'], :isFacebook => true, :password =>@me['id'], :password_confirmation =>@me['id'], :createScore => 0, :destroyScore => 0)
-                 
+
         #if creating user worked, set session
 				if @user.save
           session[:fb_id] = @user.fbid

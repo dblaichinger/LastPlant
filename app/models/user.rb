@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
 		end
   end
 
-	def self.authenticate_with_salt(id, cookie_salt)
+  def self.authenticate_with_salt(id, cookie_salt)
 	  user = find_by_id(id)
       
     if user.nil?
@@ -74,22 +74,21 @@ class User < ActiveRecord::Base
 		else
 		  return nil
 		end
-	end
-
-	
-	def self.register_new(params, isFacebook = false)
-	
-	  @user = User.new(params[:user])
+  end
+    
+    
+  def self.register_new(params, isFacebook = false)
+	  @user = User.new(params)
       @user.createScore = 0;
       @user.destroyScore = 0;
-	  
 	  if(!isFacebook)
-      	@user.isFacebook = false;
+    	  @user.isFacebook = false;
 	  else
-	  	@user.isFacebook = true;
+	  	  @user.isFacebook = true;
 	  end
-	end
-
+	  return @user
+  end
+	
   private
 	
   def encrypt_password

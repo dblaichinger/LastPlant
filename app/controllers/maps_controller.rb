@@ -24,7 +24,6 @@ class MapsController < ApplicationController
       if @user.save
         flash[:success] = "Your map was created successfully"
       end
-	  
     else
       flash[:error] = "Failed to save map "
     end

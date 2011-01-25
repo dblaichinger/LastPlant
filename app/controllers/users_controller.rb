@@ -28,8 +28,8 @@ class UsersController < ApplicationController
   	if signed_in?
       redirect_to current_user
     else
-	  @user = register_new(params[:user], false)	
-	
+	  @user = User.register_new(params[:user], false)
+
       if @user.save
         sign_in(@user)
         flash[:success] = "Welcome to Last Plant!"
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
 
   def edit
     @title = "Edit user"
