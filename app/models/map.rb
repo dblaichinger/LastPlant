@@ -14,7 +14,7 @@
 
 class Map < ActiveRecord::Base
   attr_accessible :name, :content, :score, :user_id
-    
+
   belongs_to :user
 
   def self.set_name(name)
@@ -29,7 +29,7 @@ def self.generate_name
   username = User.find_by_id(session[:id]).name
   map_count = (Map.find_all_by_user_id(session[:id]).count + 1)
   #map_count = Map.where("user_id =
-    
+
   mapname = username + "'s " + map_count.to_s + " Map"
   return mapname
 end
