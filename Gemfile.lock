@@ -48,6 +48,7 @@ GEM
       rest-client (>= 1.4.0, < 1.7.0)
     i18n (0.5.0)
     json (1.4.6-x86-mingw32)
+    json_pure (1.4.6)
     koala (0.10.0)
       json (>= 1.0)
     launchy (0.3.7)
