@@ -4,19 +4,13 @@
     <img class="logo" src="images/logo_turm_web-gross.png" alt="Last Plant">
   </div>
 
-  <div id="machine"><img src="images/startimage_machine_kleiner.png"></div>
-
-  <div id="descr">
-    <p>Do you like to <span class="highlight">build</span> or do you like to <span class="highlight">destroy</span>?</p><br />
-    <p>Login and find out!</p>
-  </div>
-
-  <h3 class="registrieren">
-    <a href="<%= $oauth.url_for_oauth_code(:permissions => "publish_stream, email") %>"><img src="/images/login-button.png"></a>
-  </h3>
+  <div id="machine"></div>
+    <div id="start_box">
+    <p>
+    Do you like to save the <span class="highlight">last plants</span> to survive or do you want to help the <span class="highlight">machines</span> to rule the world?
+    </p>
 
   <%= form_for(:session, :url => sessions_path, :html => { :class => "loginform"}) do |f| %>
-    <h4>Sign in</h4>
     <div class="field">
       <%= f.label :email %>
       <%= f.text_field :email %>
@@ -27,11 +21,17 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Sign in" %>
+      <%= f.submit "" %>
     </div>
     <p class="signup">New user? <%= link_to "Sign up for free!", signup_path %></p>
   <% end %>
-<% end %>   
+
+  <p class="highlight nosignup">Don't want to signup?</p>
+  <h3 class="registrieren">
+    <a href="<%= $oauth.url_for_oauth_code(:permissions => "publish_stream, email") %>"><img src="/images/login-button.png"></a>
+  </h3></div>
+  
+<% end %>        
 
 
 

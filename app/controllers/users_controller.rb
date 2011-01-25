@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 
   def index
     @title = "All users"
-
-    @users = User.paginate(:all, :per_page => 7, :page => params[:page], :order => 'created_at DESC')
+    @top_builder = User.paginate(:all, :per_page => 8, :page => params[:builder], :order => 'createScore DESC')
+    @top_destroyer = User.paginate(:all, :per_page => 8, :page => params[:destroyer], :order => 'destroyScore DESC')
   end
   
   def show  

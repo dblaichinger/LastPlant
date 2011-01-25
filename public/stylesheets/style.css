@@ -1,47 +1,43 @@
-@font-face {
-	font-family: 'BebasNeueRegular';
-	src: url('BebasNeue-webfont.eot');
-	src: local(''), url('BebasNeue-webfont.woff') format('woff'), url('BebasNeue-webfont.ttf') format('truetype'), url('BebasNeue-webfont.svg#webfontkl9Cw39n') format('svg');
-	font-weight: normal;
-	font-style: normal;
+
+
+*{
+	margin: 0;
+	padding: 0;
 }
-
-@font-face {
-	font-family: 'DroidSansRegular';
-	src: url('DroidSans-webfont.eot');
-	src: local(''), url('DroidSans-webfont.woff') format('woff'), url('DroidSans-webfont.ttf') format('truetype'), url('DroidSans-webfont.svg#webfontUQHwT7La') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'DroidSansBold';
-	src: url('DroidSans-Bold-webfont.eot');
-	src: local(''), url('DroidSans-Bold-webfont.woff') format('woff'), url('DroidSans-Bold-webfont.ttf') format('truetype'), url('DroidSans-Bold-webfont.svg#webfontLfmbhKy2') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-
 
 body {
-    color: #f1f1f1;
+    color: #9d9a98;
     text-transform: none;
-	
+	font-family:Helvetica, Arial, sans-serif;
+	font-size: 11px;
+	background: url('../images/lastplant_hg3.png') center top;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	background-color: rgb(36,30,30);
+
+}
+span.highlight{
+	font-size: 11px;
+}
+
+span.highlight_big {
+    font-size: 14px;
 }
     
-a, .highlight {
-    color: rgb(152, 191,75);
+a, .highlight, .highlight_big {
+    color: #fff;
     text-decoration: none;
+    font-size: 11px;
+    line-h
+    eight: 1.5;
 }    
 
 a:hover {
-    color: rgb(144,141,137)
+    color: #9d9a98;
 }
     
 p.signup {
-    width: 220px;
-    margin: 10px 0 10px 60px;
+margin-top: 5px;
 }
 
 .left {
@@ -58,30 +54,71 @@ p.signup {
     padding: 10px;
     width: 150px;
     margin-left: 50px;
-    border: solid rgb(152, 191,75) 3px;
+    border: none;
     text-align: center;
+}
+
+#protect_block .map img {
+    margin-bottom: 5px;
 }
 
 
 .pagination {
-    margin-top: 5px;
+    margin-top: 15px;
     font-family: Arial;
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 11px;
 }
 
+.user_list .pagination {
+    width: auto;
+    text-align: left;
+}
+
+.user_list {
+    width: 300px;
+    margin-left: 180px;
+    margin-right: 0px;
+    float: left;
+}
+
+.user_list h1 {
+    text-align: left;
+    margin-bottom: 30px;
+    margin-left: 0px;
+}
+
+.allusers {
+    height: 60px;
+}
+
+.allusers span {
+    margin-left: 10px;
+    margin-top: 10px;
+    float: left;
+    line-height: 1.5em;
+}
+
+.allusers img {
+    float: left;
+}
 
 .destroy_block {
-	
+	float: left;
+    margin-right: 20px;
     padding: 10px;
-    width: 280px;
-    border: solid rgb(152, 191,75) 3px;
+    width: 240px;
     text-align: center;
 }
 
-#randommaps, #mymaps, #latestmaps {
-    float: left;
-    margin: 20px 30px 20px 35px;
-    min-height: 110px;
-    min-width: 355px;
+#mymaps.destroy_block {
+    margin-right: 100px;
+}
+
+.destroy_block p {
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 /*
@@ -96,21 +133,27 @@ p.signup {
 }
 */
 
-h1, h2{
-    font-size: 18px;
+h1, h2, h2 a, h2 a:hover{
+    font-size: 14px;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 8px;
 }
 
-nav {
-	width: 900px;
+#savemap {
+    background-image: url(../images/saveconstruct_button.jpg);
+    width: 156px;
+    height: 25px;
 }
+
+#savemap:hover {
+    background-image: url(../images/saveconstruct_button2.jpg);
+}
+
 
 ul#navi li{     
 	list-style-type: none;
     /*border: 1px solid red;*/
-	overflow:hidden;
     margin: 0; 
 	padding: 0;
 	float: left;
@@ -125,19 +168,29 @@ ul#navi li.left{
 	*/
 ul#navi{ list-style:none;
     text-align: left;
-	width: 900px;
+	width: 960px;
 	overflow:hidden;
 	margin-bottom:5px;
 	margin-top:10px;
+	border-bottom: 1px #9D9A98 solid;
+	padding-bottom: 3px;
 }	
+
+a{
+	font-size: 11px;
+	
+}
+
+
 ul#navi a {
 	   
 	color: rgb(144, 141, 137);
 	text-align:left;
-	font-family:'BebasNeueRegular', Geneva, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	letter-spacing:1.3;
 	text-transform:uppercase;
 	text-decoration:none;
+	font-size: 11px;
 	}
 ul#navi a:link{ color:rgb(144,141,137);}
 
@@ -156,33 +209,41 @@ ul#navi li.rechts{
 	width:5em;}	
 	
 ul#navi li.abstand{
-	padding-left: 250px;}	
+	padding-left: 460px;}	
 	
 ul#navi li.slash{
 		color:rgb(144, 141, 137);
 	text-align:left;
-	font-family:'BebasNeueRegular', Geneva, sans-serif;
+	font-family:Helvetica, Arial, sans-serif;
+	font-size: 14px;
 	text-transform:uppercase;
 	text-decoration:none;
 	padding: 0;
 	margin: 0;
 	width: 10px;
-	}
+	display: none;}
 	
 	
 .content	{
-	width: 900px;
-	font-family:'BebasNeueRegular', Geneva, sans-serif;
+	width: 960px;
+	font-family:Helvetica, Arial, sans-serif;
 	height:500px;
 	margin: 0 auto;
-	border: solid rgb(152, 191,75) 3px;
+
+	opacity: ;
 }
 
-.overview_box {
-    width: 450px;
-    float: left;
+#start_box {
+    margin-top: 60px;
+    widtH: 250px;
     text-align: center;
+    overflow: hidden;
+}   
+
+#start_box p {
+    line-height: 1.3em;
 }
+
 
 .center_me {
     text-align: center;
@@ -190,7 +251,8 @@ ul#navi li.slash{
     
 h3{color:rgb(152, 191,75);
 padding-top: 20px;
-text-align: center}	
+text-align: center;
+border:none!important}	
 	
  ul#navi div {
      clear: both;
@@ -200,13 +262,13 @@ text-align: center}
 	 list-style:none;}
 	 
 #footer{
-	width:900px;
+	width:960px;
+	display: none;
 }
 	 
 #footer p {
-    width: 120px;
 	text-align:center;
-	font-family:'DroidSansRegular', Geneva, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	font-size: 9px;
 	color: rgb(152, 191,75);
     margin: 10px auto;
@@ -214,23 +276,17 @@ text-align: center}
 	
 #footer p a{
 	color: rgb(152, 191,75);
-	font-family:'DroidSansRegular', Geneva, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	text-decoration: none;
 	padding: 5px;
 	}	
-
-body{
-	width: 800px;
-	margin: auto;
-	background-color: rgb(36,30,30);
-
-		}	 
-div#machine{
-	position:relative;
-	left:-350px;
-	top: -250px;
-	
-	}	
+	 
+div#machine {
+    background-image: url(../images/startimage_machine_kleiner.png);
+    width: 551px;
+    height: 417px;
+    float: left;
+}	
 	
 	
 .login img{
@@ -241,45 +297,91 @@ div#machine{
 	margin-top: 50px;
 }
 	
-form.loginform{
-	top: -558px;
+
+
+#new_map_btn {
+    background-image: url(../images/newconstruct_button.jpg);
+    width: 156px;
+    height: 25px;
+    display: block;
+    margin: 20px auto;
 }
-	
-form {
-	position:relative;
-	left: 250px;
-	width: 300px;
-	border: solid rgb(152, 191,75) 1px;
+
+#new_map_btn:hover {
+    margin: 20px auto;
+    background-image: url(../images/newconstruct_button2.jpg);
+    width: 156px;
+    height: 25px;
+    display: block;
+}
+
+#update_btn {
+    width: 90px;
+    height: 25px;
+    background-image: url(../images/update_button.jpg);
+    display: block;
+    margin: 20px auto;
+    margin-bottom: 40px;
+}
+#update_btn:hover {
+    width: 90px;
+    height: 25px;
+    background-image: url(../images/update_button2.jpg);
+    display: block;
+}
+
+#mapname {
+    margin-top: 20px;
 }
 
 #protectform {
     border: none;
+    relative;
+    top: 500px;
+    padding-bottom: 50px;
     width: 200px;
+    margin-left: 80px;
+    margin-bottom: 50px;
 }
 	
-h4{font-family:'BebasNeueRegular', Geneva, sans-serif;
-
+h4{font-family: Helvetica, Arial, sans-serif;
 text-align:center;
-background-color: rgb(36,30,30);
+
 color: white;
-font-size:25px;
+font-size:16px;
 padding:10px
-	}	
+}
+
+.overview_box {
+    width: 450px;
+    float: left;
+    text-align: center;
+}
+
 h3.registrieren{
-	font-family:'BebasNeueRegular', Geneva, sans-serif;
-	font-size:27px;
-	position:relative;
-	top: -560px;
-	left: 250px;
-	width:300px;
-	border: rgb(152, 191,75) solid 1px;
-	text-align:center;
+	margin-top: 20px;
 	padding-bottom:13px;
+    text-align: inherit;
 }	
+
+.loginform h4 {
+    text-align: inherit;
+}
+
+.loginform {
+    margin-top: 30px;
+}
+
+.nosignup {
+    margin-top: 40px;
+    margin-bottom: -35px;
+}
+
 	
 form .field {
-    width: 300px;
-    background-color: rgb(95,94,80);
+    width: 230px;
+    height: 25px;
+    
 }
 
 form .field input {
@@ -288,15 +390,14 @@ form .field input {
 }
 
 form .field label {
-	font-family:'BebasNeueRegular', Geneva, sans-serif;
-	font-size:15px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size:12px;
 	display:inline;
     text-align: right;
-    width: 120px;
-    margin-left: 50px;
-    margin-bottom: 5px;
-    color: #000;
+    color: #FFF;
+    vertical-align: middle;
     text-align: right;
+    
 }	
 
 form label input {
@@ -304,25 +405,18 @@ form label input {
 	}
 	
 .field {
-	width: 294px;
-	padding-bottom: 10px;
+	width:290px;
+
 }
 
 canvas {
-	position: relative;
-	top: -500px;
-	left: 50px;
+	display: block;
+    margin: -200px auto;
 	background-color: #241E1E;
 }
 
 .loadbox {
 
-}
-
-#protectform {
-    position: relative;
-    top: 450px;
-    padding-left: 130px;
 }
 
 table {
@@ -334,17 +428,19 @@ table {
 	margin-top: 25px;
 }
 
-.allusers{
-	padding-left: 50px;
-	padding-bottom: 5px;
-}
-
-#user_submit, #session_submit {
+#user_submit {
 	margin-left: 115px;
 }
 
 #session_submit {
-	margin-top: 5px;
+	background-image:url(../images/signin_button.jpg);
+	height:27px;
+	width:90px;
+	margin-top:10px;
+}
+
+#session_submit:hover {
+    background-image:url(../images/signin_button2.jpg);
 }
 
 
@@ -353,7 +449,7 @@ table {
 	margin-top: 15px;
 }
 
-#storage, #score, #map_score, #map_id , #map_img , #mapname {
+#storage, #score, #map_score, #map_id , #map_img {
 	display: none;
 }
 
@@ -371,15 +467,26 @@ ul#navi a.highlight_link {
 }
 
 #descr {
-    border: 2px solid #98BF4B;
-    left: 242px;
-    padding: 10px;
-    position: relative;
+	border:none;
+    float: left;
     text-align: center;
-    top: -571px;
-    width: 296px;
+    width: 310px;
+	line-height:1.4;
+	margin-top:70px;
+	font-size:13px;
 }
 
+#session_email{
+	height: 12px;
+	font-size:12px;
+	background-color:#9d9a98;
+}
+
+#session_password{
+	height: 12px;
+		background-color:#9d9a98;
+
+}
 
 /* Success, info, notice and error/alert boxes
 -------------------------------------------------------------- */
@@ -430,6 +537,10 @@ ul#navi a.highlight_link {
   list-style: square;
   color: #000;
   margin-left: 10px;
+}
+
+header img {
+	padding-top: 30px;
 }
 
 
