@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   	if signed_in?
       redirect_to current_user
     else
-	  @user = User.register_new(params[:user], false)
+	  @user = User.register_new(params, false)
 
       if @user.save
         sign_in(@user)

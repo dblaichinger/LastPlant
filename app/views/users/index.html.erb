@@ -6,7 +6,7 @@
     <li class="allusers"><% if user.isFacebook %>
         <img src="http://graph.facebook.com/<%= user.fbid.to_s %>/picture">
       <% else %>
-        <%= gravatar_for user, :size => 50 %>
+        <%= gravatar_for user, :size => 50, :default => 'identicon' %>
       <% end %>
       <%= user.name %>
 

@@ -13,7 +13,7 @@
       load = false
 
     elsif(params[:id])
-      if((request.fullpath == '/maps/' + params[:id]) || (request.fullpath == '/maps/' + params[:id] + '/'))
+      if((request.fullpath == '/maps/' + params[:id].to_s) || (request.fullpath == '/maps/' + params[:id].to_s + '/'))
         load = false
       end
     end
