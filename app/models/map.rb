@@ -16,16 +16,13 @@ class Map < ActiveRecord::Base
   attr_accessible :name, :content, :score, :user_id
     
   belongs_to :user
-end
 
-private
-def self.set_name(name)
-  if(!name || name == "")
-    return self.generate_name
-  else
-    mapname = params[:mapname]
+  def self.set_name(name)
+    if(!name || name == "")
+      return self.generate_name
+    else
+      mapname = params[:mapname]
   end
-
 end
 
 def self.generate_name

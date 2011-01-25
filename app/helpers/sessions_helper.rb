@@ -67,8 +67,9 @@ module SessionsHelper
 
   # Methods for Facebook - Login
 	def establish_graph
-    if(!$oauth)
-      establish_oauth
+      if(!$oauth)
+        establish_oauth
+      end
     end
     #request and parse token from facebook
 	def facebook_login
