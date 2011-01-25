@@ -76,19 +76,21 @@ class User < ActiveRecord::Base
 		end
 	end
 	
-	
 	def self.register_new(params, isFacebook = false)
-	  @user = User.new(params)
-      @user.createScore = 0;
-      @user.destroyScore = 0;
-	  if(!isFacebook)
-    	  @user.isFacebook = false;
-	  else
-	  	  @user.isFacebook = true;
-	  end
-	  return @user
-	end
 	
+	  user = User.new(params[:user])
+      user.createScore = 0;
+      user.destroyScore = 0;
+	  
+	  if(!isFacebook)
+      	user.isFacebook = false;
+	  else
+	  	user.isFacebook = true;
+	  end
+      
+      return user
+	end
+
   private
 	
   def encrypt_password
@@ -99,7 +101,7 @@ class User < ActiveRecord::Base
   def encrypt(string)
     Digest::SHA2.hexdigest("#{salt}--#{string}")
   end
-	
+
   def make_salt
     Digest::SHA2.hexdigest("#{Time.now.utc}--#{password}")
   end

@@ -101,7 +101,6 @@ module SessionsHelper
                 
         #else create new user
 			else
-
                 params[:user][:fbid] = @me['id']
                 params[:user][:name] = @me['name']
                 params[:user][:email] = @me['email']

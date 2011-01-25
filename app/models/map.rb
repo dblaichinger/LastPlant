@@ -14,33 +14,22 @@
 
 class Map < ActiveRecord::Base
   attr_accessible :name, :content, :score, :user_id
-    
+
   belongs_to :user
-end
 
-private
-def self.set_name(name)
-<<<<<<< HEAD
-  if(!name || name == "")
-    return self.generate_name
-  else
-    mapname = params[:mapname]
-  end
-=======
+
+  def self.set_name(name, user_id)
     if(!name || name == "")
-      return self.generate_name     
-    else
-      return name
+      name = generate_name(user_id)
     end
->>>>>>> 2ec9da5ae3a2eae60be5c6f3234f551b635604a3
+    return name
+  end
 
-end
 
-def self.generate_name
-  username = User.find_by_id(session[:id]).name
-  map_count = (Map.find_all_by_user_id(session[:id]).count + 1)
-  #map_count = Map.where("user_id =
-    
-  mapname = username + "'s " + map_count.to_s + " Map"
-  return mapname
+  def self.generate_name(user_id)
+    username = User.find_by_id(user_id).name
+    map_count = (Map.find_all_by_user_id(user_id, :select => "id").count + 1)
+    mapname = username + "'s " + map_count.to_s + " Map"
+    return mapname
+  end
 end
