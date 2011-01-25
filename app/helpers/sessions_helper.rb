@@ -69,7 +69,6 @@ module SessionsHelper
 	def establish_graph
       if(!$oauth)
         establish_oauth
-      end
     end
     #request and parse token from facebook
 	def facebook_login
