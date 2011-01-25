@@ -1,14 +1,16 @@
-<h1>All users</h1>
+
+<div class="user_list">
+<h1>Top Builder</h1>
 
 <ul class="users">
-  <% @users.each do |user| %>
-
+  <% @top_builder.each do |user| %>
     <li class="allusers"><% if user.isFacebook %>
         <img src="http://graph.facebook.com/<%= user.fbid.to_s %>/picture">
       <% else %>
-        <%= gravatar_for user, :size => 50 %>
+        <%= gravatar_for user, :size => 50, :default => 'identicon' %>
       <% end %>
-      <%= user.name %>
+      <span class="10pxup"><%= user.name %><br>
+      Score: <%= user.createScore %></span>
 
       <% if current_user.admin? %>
         <% if (user.admin == true) %>
@@ -20,8 +22,36 @@
     </li>
   <% end %>
   <div id="will_paginate_links">
-    <%= will_paginate @users %>
+    <%= will_paginate @top_builder, :param_name => :builder, :previous_label => "Previous", :next_label => "Next" %>
   </div>
 </ul>
+</div>
+<div class="user_list">
+<h1>Top Destroyer</h1>
 
+<ul class="users">
+  <% @top_destroyer.each do |user| %>
+
+    <li class="allusers"><% if user.isFacebook %>
+        <img src="http://graph.facebook.com/<%= user.fbid.to_s %>/picture">
+      <% else %>
+        <%= gravatar_for user, :size => 50, :default => 'identicon' %>
+      <% end %>
+      <span class="10pxup"><%= user.name %><br>
+      Score: <%= user.destroyScore %></span>
+      
+      <% if current_user.admin? %>
+        <% if (user.admin == true) %>
+                              | <%= link_to "delete", user, :method => :delete, :confirm => "Attention:\nAre you sure to delete an ADMIN-USER!", :title => "Delete #{user.name}"%>
+        <% else %>
+                                | <%= link_to "delete", user, :method => :delete, :confirm => "Are you sure to delete #{user.name}?", :title => "Delete #{user.name}"%>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+  <div id="will_paginate_links">
+    <%= will_paginate @top_destroyer, :param_name => :destroyer, :previous_label => "Previous", :next_label => "Next" %>
+  </div>
+</ul>
+</div>
 

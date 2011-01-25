@@ -40,8 +40,14 @@
         <% else %>
           <li><%= link_to "Settings", edit_user_path(current_user) %></li>
         <% end %>
-
+                      
         <li class="abstand"><%= link_to "Logout", signout_path, :method => :delete %></li>
+        <% if(request.fullpath =='/imprint') %>
+            <li><%= link_to "Imprint", imprint_path, :class => 'highlight_link'%></li>
+        <%else %>
+             <li><%= link_to "Imprint", imprint_path %></li>
+        <% end %>
+        
       </ul>
     </nav>
   <% end %>
