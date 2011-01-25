@@ -27,7 +27,7 @@ class Map < ActiveRecord::Base
 
   def self.generate_name(user_id)
     username = User.find_by_id(user_id).name
-    map_count = (Map.find_all_by_user_id(user_id, :select => "id").count + 1)g
+    map_count = (Map.find_all_by_user_id(user_id, :select => "id").count + 1)
     #map_count = Map.where("user_id =
 
     mapname = username + "'s " + map_count.to_s + " Map"
