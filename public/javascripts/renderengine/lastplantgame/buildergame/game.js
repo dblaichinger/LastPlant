@@ -37,7 +37,7 @@ Engine.include("/textrender/text.renderer.js");
 Engine.include("/physics/collision/shapes/b2BoxDef.js");
 
 //load game objects
-Game.load("../../javascripts/renderengine/lastplantgame/buildergame/player.js");
+Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Player.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/LPObject.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Block.js");
 Game.load("../../javascripts/renderengine/lastplantgame/buildergame/Plant.js");

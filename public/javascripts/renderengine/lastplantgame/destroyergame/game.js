@@ -35,13 +35,13 @@ Engine.include("/textrender/text.renderer.js");
 Engine.include("/physics/collision/shapes/b2BoxDef.js");
 
 // Load game objects
-Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/player.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Player.js");
 Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/LPObject.js");
 Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/AttkUnit.js");
 Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/AttkUnitLegs.js");
 Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Block.js");
 Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Plant.js");
-Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/forcesetter.js");
+Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Forcesetter.js");
 Game.load("../../javascripts/renderengine/lastplantgame/destroyergame/Background.js");
 
 
