@@ -2,24 +2,13 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 
-<<<<<<< HEAD
-gem 'koala'
 gem 'json'
-=======
-
->>>>>>> 0ab0f293f765271c4358c05d525b8f541b29373b
+gem 'koala'
 
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate', '3.0.pre2'
 gem 'heroku'
 
-<<<<<<< HEAD
-=======
-gem 'json'
-gem 'koala'
-
-
->>>>>>> 0ab0f293f765271c4358c05d525b8f541b29373b
 group :development do
   gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
   gem 'rspec-rails'
