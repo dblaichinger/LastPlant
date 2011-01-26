@@ -1,0 +1,10 @@
+{
+   // bg sprite
+   "bitmapImage": "Background.png",
+   "bitmapSize": [800,400],
+	"version": 2,
+   "sprites": {
+      "BackgroundIMG": [0, 0, 800, 400],
+      "BackgroundGameover": [0, 400, 800, 400]
+   }
+}

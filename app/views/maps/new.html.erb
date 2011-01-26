@@ -1,0 +1,72 @@
+<% content_for :scripts do %>
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/base.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/jquery.ext.engine.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/libs/sylvester.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/engine/runtime/engine.js"></script>
+  <script type="text/javascript" src="../../javascripts/renderengine/lastplantgame/buildergame/createXHR.js"></script>
+
+<% end %>
+
+<script type="application/javascript"> 
+  var wasSent = false;
+
+  function Write(url, content){
+    var xhr = createXHR();
+    xhr.onreadystatechange=function() {
+      if(xhr.readyState == 4) {
+        // nothing for now
+        // alert("sent " + url + " " + content);
+      }
+    };
+                
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(content);
+                
+    //var ajax = new XMLHttpRequest();
+    //var img = document.getElementById("map_img").innerHTML;
+    //xhr.open("POST",'/images/new',false);
+    //xhr.setRequestHeader('Content-Type', 'application/upload');
+    //xhr.send(img);
+
+  }
+
+  function saveData(){
+    var content = document.getElementById("storage").innerHTML;
+    var score = document.getElementById("score").innerHTML;
+                
+    if(content!="NULL" && !wasSent){
+      this.wasSent = true;
+      var mapname = document.getElementById("mapname").value;
+
+      Write("/maps/create", "map=" + content + "&score=" + score + "&mapname=" + mapname);
+      var storing = document.getElementById("storage");
+                    
+      //document.ajax.dyn.value="Saved:" + content;
+      //storing.innerHTML = "<p>XML File wurde gespeichert! <b><a href='ajax-post-text.txt' target='_parent'>Look at the file</a></b>. ";
+      var target = "/protect";
+      window.location.href = target;
+    }
+  }
+ 
+
+</script> 
+
+<script type="text/javascript"> 
+  $(document).ready(function() {
+    // Load the game script
+    Engine.loadGame('/../../javascripts/renderengine/lastplantgame/buildergame/game.js','LastPlant','LastPlant Game');
+  });
+</script>
+<div id="buttons"> 
+  <form name="ajax" method="POST" id="protectform" action="">
+    <input type="text" id="mapname" name="mapname" placeholder="<%= @mapname %>">
+    <input type="button" id="savemap" value=""  ONCLICK="saveData()">
+  </form>
+  <div id="storage">NULL</div>
+  <div id="score">SCORENULL</div>
+  <div id="map_img"></div>
+</div> 
+
+
