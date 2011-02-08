@@ -22,7 +22,6 @@
     *
 */
 
-
 // Load engine objects
 Engine.include("/components/component.collider.js");
 Engine.include("/components/component.mouseinput.js");
@@ -169,12 +168,15 @@ Engine.initObject("Player", "Object2D", function() {
       },
       
       onMouseUp: function(mouseInfo) {
-        this.mouseDown = false;
+		var currentBlock = LastPlant.getCurrentBlock();
+		if(currentBlock != null){
+			currentBlock.setRotateDirection(0);
+		}
+	    this.mouseDown = false;
         if(this.clickLPObject != null){
             this.clickLPObject.released(this.convertToWorldCoord(mouseInfo.position));
         }
         this.clickLPObject = null;
-
       },      
         
       /**
@@ -197,7 +199,7 @@ Engine.initObject("Player", "Object2D", function() {
         return false;
       },
       onKeyUp: function(charCode, keyCode) {
-      var currentBlock = LastPlant.getCurrentBlock();
+        var currentBlock = LastPlant.getCurrentBlock();
         if(currentBlock != null){
             switch (charCode) {
                 case EventEngine.KEYCODE_LEFT_ARROW:

@@ -215,6 +215,7 @@ Engine.initObject("LastPlant", "Game", function(){
             this.CurrentAttackUnit.setPosition(this.shootOffPosition);
         }
         else if(this.AttackUnitLifes==0){
+            //this.CurrentAttackUnit.destroy();
             this.gameOver(false);
         }
       },
@@ -226,6 +227,7 @@ Engine.initObject("LastPlant", "Game", function(){
       gameOver: function(GameWon){
         this.Forcesetter.destroy();
         this.Forcesetter=null;
+
 		this.GameBackground.setBGtoGameOver();
         
         this.getRenderContext().remove(this.AttackUnitLegs);
@@ -238,12 +240,16 @@ Engine.initObject("LastPlant", "Game", function(){
         var croppedBaseScore=parseInt(croppedBaseScore);
 
         if(GameWon){
+            //this.CurrentAttackUnit.destroy();
+            //this.AttackUnitLifes--;
 			if(this.AttackUnitLifes>0){
 				for(var i=0; i < this.AttackUnitLifes+1; i++){
+					//console.log("i: " + i);
 					this.AttackUnitsArray[i].destroy();
 				}
 			}
-            this.writeText(1.6, Point2D.create(30, 45), "All Hail the Machine!", "bold");
+            this.writeText(1.6, Point2D.create(30, 45), "All Hail the Maschine!", "bold");
+            
             var BaseScoreText = "1/4 Basescore of the map: " + croppedBaseScore;
             this.writeText(1.0, Point2D.create(30, 80), BaseScoreText, "bold");
 			
@@ -268,8 +274,13 @@ Engine.initObject("LastPlant", "Game", function(){
         var map_id = document.getElementById("map_id");
         map_id = map_id.innerHTML;
         map_id = parseInt(map_id);
+        //Timeout.create("SaveDataTimer", 500, function() {
+			//LastPlant.saveDataAJAX(OverallPoints, map_id, GameWon);
+        //});
 
         this.saveDataAJAX(OverallPoints, map_id, GameWon);
+        
+        
       },
              
       /**
@@ -317,7 +328,6 @@ Engine.initObject("LastPlant", "Game", function(){
         this.writeAJAX("/gamehandler", "builderscore=" + builderScore + "&destroyerscore=" + destroyerScore + "&mapid=" + mapid);
         //var target = "/protect";
         //window.location.href = target;
-
       },
       
       /**
@@ -327,22 +337,18 @@ Engine.initObject("LastPlant", "Game", function(){
       spawnAttackUnits: function(){
         this.AttackUnitsArray = [];
         
-
         this.AttackUnit=AttkUnit.create();
         LastPlant.createLPObject(this.AttackUnit, this.shootOffPosition, 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
         
         this.AttackUnit=AttkUnit.create();
-
         LastPlant.createLPObject(this.AttackUnit, Point2D.create(150, 40), 0);
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
 
         this.AttackUnit=AttkUnit.create();
-		
         LastPlant.createLPObject(this.AttackUnit, Point2D.create(95, 40), 0);
-
         this.AttackUnit.stopsim();
         this.AttackUnitsArray.push(this.AttackUnit);
         

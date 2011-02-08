@@ -98,10 +98,8 @@ Engine.initObject("Block", "LPObject", function() {
             if(this.isClicked==true){
                 var cursorPosition = LastPlant.getPlayer().getPosition();
                 var newBlockPos= cursorPosition;
-
                 if(cursorPosition.get().x > LastPlant.fieldWidth-140)
                     newBlockPos.setX(LastPlant.fieldWidth-140);
-
                 if(this.wasOverLeftBorder==true){
                     if(cursorPosition.get().x < 162)
                         newBlockPos.setX(162);

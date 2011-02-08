@@ -89,7 +89,6 @@ Engine.initObject("AttkUnit", "LPObject", function() {
             this.base(renderContext, time);
             renderContext.popTransform();
             if(this.wasShot && this.getComponent("physics").isSleeping()){
-
                 var FSetter=LastPlant.getForceSetter();
                     if(FSetter!=null){
                         FSetter.resetPosRot();
@@ -100,7 +99,6 @@ Engine.initObject("AttkUnit", "LPObject", function() {
             if(this.wasShot){
                 var TimeAlive=time-this.TimeWhenShot;
                 if(TimeAlive>6000){
-
                     var FSetter=LastPlant.getForceSetter();
                     if(FSetter!=null){
                         FSetter.resetPosRot();

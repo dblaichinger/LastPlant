@@ -180,7 +180,6 @@ Engine.initObject("LastPlant", "Game", function(){
         BlocksLeftText.setTextFont("Helvetica, Arial")
         BlocksLeftText.setColor("#ccff99");
         this.renderContext.add(BlocksLeftText);*/
-
       },
         
       /**
@@ -276,7 +275,6 @@ Engine.initObject("LastPlant", "Game", function(){
             var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
             TextToWrite.setPosition(Position);
             TextToWrite.setTextFont("Helvetica, Arial")
-
             TextToWrite.setColor("#666666");
             TextToWrite.setTextWeight(bold);
             this.renderContext.add(TextToWrite);
@@ -289,7 +287,6 @@ Engine.initObject("LastPlant", "Game", function(){
             this.PlantWasSetText.setPosition(Point2D.create(210, 49));
             this.PlantWasSetText.setTextFont("Helvetica, Arial")
             this.PlantWasSetText.setColor("#666666");
-
             this.renderContext.add(this.PlantWasSetText);
         },
         
