@@ -9,12 +9,12 @@
       <div class="map">
         <img src="images/map_dummy.jpg">
         <%= map.name %><br />
-                            Score: <%= map.score %> <br />
+        Score: <%= map.score %> <br />
         <%= link_to "delete", map, :method => :delete, :confirm => "Are you sure to delete #{map.name}?", :title => "Delete #{map.name}"%>
       </div>
     <% end %>
   <% else %>
-                  You haven't build a map yet.
+    You haven't build a map yet.
   <% end %>
 </p>
 </div>

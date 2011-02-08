@@ -89,15 +89,23 @@ Engine.initObject("AttkUnit", "LPObject", function() {
             this.base(renderContext, time);
             renderContext.popTransform();
             if(this.wasShot && this.getComponent("physics").isSleeping()){
-                LastPlant.getForceSetter().resetPosRot();
-                LastPlant.setNewAttackUnit();
+
+                var FSetter=LastPlant.getForceSetter();
+                    if(FSetter!=null){
+                        FSetter.resetPosRot();
+                        LastPlant.setNewAttackUnit();
+                    }
                 this.destroy();
             }
             if(this.wasShot){
                 var TimeAlive=time-this.TimeWhenShot;
                 if(TimeAlive>6000){
-                    LastPlant.getForceSetter().resetPosRot();
-                    LastPlant.setNewAttackUnit();
+
+                    var FSetter=LastPlant.getForceSetter();
+                    if(FSetter!=null){
+                        FSetter.resetPosRot();
+                        LastPlant.setNewAttackUnit();
+                    }
                     this.destroy();
                 }
             }

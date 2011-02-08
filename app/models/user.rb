@@ -87,7 +87,6 @@ class User < ActiveRecord::Base
 	  else
 	  	user.isFacebook = true;
 	  end
-      
       return user
 	end
 

@@ -308,6 +308,22 @@ div#machine {
     margin: 20px auto;
 }
 
+
+#user_submit {
+    background-image: url(../images/signup_button.jpg);
+    width: 90px;
+    height: 25px;
+    display: block;
+}
+
+#user_submit:hover {
+    background-image: url(../images/signup_button2.jpg);
+    width: 90px;
+    height: 25px;
+    display: block;
+}
+
+
 #new_map_btn:hover {
     margin: 20px auto;
     background-image: url(../images/newconstruct_button2.jpg);
@@ -390,7 +406,8 @@ form .field input {
     float: right;
 }
 
-form .field label {
+
+form .field label, form .field_with_errors label {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size:12px;
 	display:inline;
@@ -408,6 +425,11 @@ form label input {
 .field {
 	width:290px;
 
+}
+
+
+form .field_with_errors {
+    margin-bottom: -17px;
 }
 
 canvas {
@@ -460,6 +482,12 @@ ul#navi a.highlight_link {
 	color: #98BF4B;
 }
 
+
+#new_user {
+    width: 300px;
+    float: left;
+}
+
 #about {
     border: 3px solid #98BF4B;
     margin: 20px 50px;
@@ -478,7 +506,8 @@ ul#navi a.highlight_link {
 	font-size:13px;
 }
 
-#session_email{
+
+#session_email, #user_name, #user_email, #user_password, #user_password_confirmation {
 	height: 12px;
 	font-size:12px;
 	background-color:#9d9a98;

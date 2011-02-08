@@ -225,10 +225,7 @@ Engine.initObject("LastPlant", "Game", function(){
        */
       gameOver: function(GameWon){
         this.Forcesetter.destroy();
-		
-		
-		
-        this.getRenderContext().remove(this.AttackUnitLegs);
+        this.Forcesetter=null;
 		this.GameBackground.setBGtoGameOver();
         
         this.getRenderContext().remove(this.AttackUnitLegs);
@@ -241,15 +238,12 @@ Engine.initObject("LastPlant", "Game", function(){
         var croppedBaseScore=parseInt(croppedBaseScore);
 
         if(GameWon){
-            //this.CurrentAttackUnit.destroy();
 			if(this.AttackUnitLifes>0){
 				for(var i=0; i < this.AttackUnitLifes+1; i++){
-					console.log("i: " + i);
 					this.AttackUnitsArray[i].destroy();
 				}
 			}
-            this.writeText(1.6, Point2D.create(30, 45), "All Hail the Maschine!", "bold");
-            
+            this.writeText(1.6, Point2D.create(30, 45), "All Hail the Machine!", "bold");
             var BaseScoreText = "1/4 Basescore of the map: " + croppedBaseScore;
             this.writeText(1.0, Point2D.create(30, 80), BaseScoreText, "bold");
 			
@@ -274,13 +268,8 @@ Engine.initObject("LastPlant", "Game", function(){
         var map_id = document.getElementById("map_id");
         map_id = map_id.innerHTML;
         map_id = parseInt(map_id);
-        //Timeout.create("SaveDataTimer", 500, function() {
-			//LastPlant.saveDataAJAX(OverallPoints, map_id, GameWon);
-        //});
 
         this.saveDataAJAX(OverallPoints, map_id, GameWon);
-        
-        
       },
              
       /**

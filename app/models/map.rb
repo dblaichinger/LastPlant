@@ -17,7 +17,6 @@ class Map < ActiveRecord::Base
 
   belongs_to :user
 
-
   def self.set_name(name, user_id)
     if(!name || name == "")
       name = generate_name(user_id)
