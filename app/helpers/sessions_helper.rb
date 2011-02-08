@@ -66,6 +66,7 @@ module SessionsHelper
   end
 
 
+
   ## Methods for Facebook - Login
 	def establish_graph
 	
