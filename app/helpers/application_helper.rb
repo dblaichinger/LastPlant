@@ -22,5 +22,9 @@ module ApplicationHelper
   def destroy_img
     destroy_img = image_tag("destroy_small.png", :alt => "Last Plant Monster");
   end
+  
+  def new_map_img
+    new_map_img = image_tag("newconstruct_button.jpg", :alt => "Create a new map");
+  end
 
 end

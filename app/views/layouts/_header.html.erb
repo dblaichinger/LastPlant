@@ -12,20 +12,17 @@
           <li class="left"><%= link_to "Home", current_user %></li>
         <% end %>
 
-        <li class="slash">/</li>
         <% if(request.fullpath == '/protect') %>
           <li><%= link_to "Protect", protect_path, :class => 'highlight_link' %></li>
         <% else %>
           <li><%= link_to "Protect", protect_path %></li>
         <% end %>
 
-        <li class="slash">/</li>
         <% if(request.fullpath == '/destroy') %>
           <li><%= link_to "Destroy", destroy_path,:class => 'highlight_link' %></li>
         <% else %>
           <li><%= link_to "Destroy", destroy_path %></li>
         <% end %>
-        <li class="slash">/</li>
 
 
         <% if(request.fullpath == '/users') %>
@@ -33,15 +30,20 @@
         <% else %>
           <li><%= link_to "Users", users_path %></li>
         <% end %>
-        <li class="slash">/</li>
 
         <% if(request.fullpath == '/users/'+ current_user[:id].to_s + '/edit') %>
           <li><%= link_to "Settings", edit_user_path(current_user), :class => 'highlight_link' %></li>
         <% else %>
           <li><%= link_to "Settings", edit_user_path(current_user) %></li>
         <% end %>
-
-        <li class="abstand"><%= link_to "Logout", signout_path, :method => :delete %></li>
+        
+        <li class="right"><%= link_to "Logout", signout_path, :method => :delete %></li>
+        <% if(request.fullpath =='/imprint') %>
+            <li><%= link_to "Imprint", imprint_path, :class => 'highlight_link'%></li>
+        <%else %>
+             <li class="right"><%= link_to "Imprint", imprint_path %></li>
+        <% end %>
+        
       </ul>
     </nav>
   <% end %>

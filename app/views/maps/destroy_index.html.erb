@@ -1,37 +1,38 @@
 <h1>Destroy</h1>
 
+
+<div class="destroy_block" id="mymaps">
+  <h2 class="highlight">My constructs</h2>
+  <% if @my_maps != [] %>
+    <% @my_maps.each do |map| %>
+      <img src="images/map_dummy.jpg"><p>
+      <%= map.name %> | <%= link_to 'Test', map_path(map.id)%></p>
+    <% end %>
+  <%else%>
+    <p>You have not build any constructs yet</p>
+  <% end %>
+    <%= will_paginate @my_maps, :param_name => :my_page  %>
+</div>
+
 <div class="destroy_block" id="randommaps">
-  <p>Random maps</p>
+  <h2 class="highlight">Random constructs</h2>
   <% if @rand_maps != [] %>
     <% @rand_maps.each do |map| %>
 
-      <p><%= map.name %> | <%= link_to 'Play this map', map_path(map.id)%></p>
+      <img src="images/map_dummy.jpg"><p><%= map.name %> | <%= link_to 'Play', map_path(map.id)%></p>
     <% end %>
   <% else %>
-    <p>Could not find any maps</p>
+    <p>Could not find any constructs</p>
   <% end %>
 </div>
-
-<div class="destroy_block" id="mymaps">
-  <p>My maps</p>
-  <% if @my_maps != [] %>
-    <% @my_maps.each do |map| %>
-
-      <p><%= map.name %> | <%= link_to 'Play this map', map_path(map.id)%></p>
-    <% end %>
-  <%else%>
-    <p>You have not build any maps yet</p>
-  <% end %>
-
-</div>
-
 
 <div class="destroy_block" id="latestmaps">
-  <p>Latest maps</p>
+  <h2 class="highlight">Latest constructs</h2>
   <% if @latest_maps != [] %>
     <% @latest_maps.each do |map| %>
 
-      <p><%= map.name %> | <%= link_to 'Play this map', map_path(map.id)%></p>
+      <img src="images/map_dummy.jpg">
+      <p><%= map.name %> | <%= link_to 'Play', map_path(map.id)%></p>
     <% end %>
   <% else %>
     <p>Could not find any maps</p>

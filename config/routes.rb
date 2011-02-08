@@ -6,8 +6,6 @@ SampleApp::Application.routes.draw do
   resources :maps, :only => [:new, :show, :create, :destroy, :protect_index, :destroy_index]
 
   match '/about',   :to => 'pages#about'
-  match '/help',    :to => 'pages#help'
-  match '/home',	:to => 'pages#home'
   match '/imprint', :to => 'pages#imprint'
   
   match '/signup',    :to => 'users#new'
@@ -29,6 +27,7 @@ SampleApp::Application.routes.draw do
   # root :to => "welcome#index"
   
   	root :to => "sessions#new"
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

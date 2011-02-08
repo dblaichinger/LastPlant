@@ -75,6 +75,8 @@ Engine.initObject("LastPlant", "Game", function(){
       BlocksArrayIndex: 0,
       currentBlock: null,
       
+	  
+      GameBackground: null,
       //Counter Text Object
       NumberBlocksLeftText: null,
       PlantWasSetText: null,
@@ -162,7 +164,8 @@ Engine.initObject("LastPlant", "Game", function(){
         this.cModel = SpatialGrid.create(this.fieldWidth, this.fieldHeight, 8);
 
         // Add the Background to the context
-        this.getRenderContext().add(Background.create());
+		this.GameBackground=Background.create();
+        this.getRenderContext().add(this.GameBackground);
 
         this.BlocksArray = [];
         LastPlant.createLPObject();
@@ -172,11 +175,12 @@ Engine.initObject("LastPlant", "Game", function(){
         this.getRenderContext().add(this.player);
           
         // Write the "Blocks Left" Text
-        var BlocksLeftText = TextRenderer.create(ContextText.create(), "Blocks left", 1.8);
-        BlocksLeftText.setPosition(Point2D.create(20, 50));
+        /*var BlocksLeftText = TextRenderer.create(ContextText.create(), "Blocks left", 1.8);
+        BlocksLeftText.setPosition(Point2D.create(20, 39));
         BlocksLeftText.setTextFont("Helvetica, Arial")
-        BlocksLeftText.setColor("#ccff33");
-        this.renderContext.add(BlocksLeftText);
+        BlocksLeftText.setColor("#ccff99");
+        this.renderContext.add(BlocksLeftText);*/
+
       },
         
       /**
@@ -237,11 +241,15 @@ Engine.initObject("LastPlant", "Game", function(){
         getHeightOfConstruct: function(){
             var maxPosY=this.fieldHeight;
             for (var i = 0; i < this.OverallNumberOfBlocks+1; i++){
-                if(this.BlocksArray[i].getPos().y<maxPosY)
-                    maxPosY=this.BlocksArray[i].getPos().y
+                if(this.BlocksArray[i].getPos().y < maxPosY)
+                    maxPosY=this.BlocksArray[i].getPos().y;
+				/*if(this.BlocksArray[i].getBoundingBox().getBottomRight().get().y < maxPosY)
+                    maxPosY=this.BlocksArray[i].getPos().y;
+				if(this.BlocksArray[i].getBoundingBox().getTopLeft().get().y < maxPosY)
+                    maxPosY=this.BlocksArray[i].getPos().y;*/
             }
-            maxPosY=this.fieldHeight-maxPosY;
-            return parseInt(maxPosY);
+            var height=this.fieldHeight-maxPosY;
+            return parseInt(height);
         },
         
         gameOver: function(){
@@ -250,34 +258,38 @@ Engine.initObject("LastPlant", "Game", function(){
 			
 			this.TotalScore=0;
             
-            this.writeText(1.8, Point2D.create(190, 50), "You did your best to save the LastPlant!");
-            this.writeText(1.4, Point2D.create(190, 83), 'Enter a mapname and "Save Construct" now to receive following Builder points');
+            this.writeText(1.8, Point2D.create(210, 49), "You did your best to save the LastPlant!", "normal");
             
-            var BlocksInLvl = "Blocks in level: " + this.OverallNumberOfBlocks + " x 30 points";
+            var BlocksInLvl = "Blocks: " + this.OverallNumberOfBlocks + " x 30 points";
 			this.TotalScore=this.OverallNumberOfBlocks*30;
-            this.writeText(1.4, Point2D.create(210, 105), BlocksInLvl);
+            this.writeText(1.0, Point2D.create(677, 105), BlocksInLvl, "bold");
             var height=this.getHeightOfConstruct();
-            var BlocksInLvl = "Height of the defense: " + height + " points";
+            var BlocksInLvl = "Height: " + height + " points";
 			this.TotalScore=this.TotalScore+height;
-            this.writeText(1.4, Point2D.create(210, 125), BlocksInLvl);
-            var TotalScoreText = "All in all this makes: " + this.TotalScore + " points";
-            this.writeText(1.4, Point2D.create(210, 145), TotalScoreText);
+            this.writeText(1.0, Point2D.create(677, 120), BlocksInLvl, "bold");
+            var TotalScoreText = "Total: " + this.TotalScore + " points";
+            this.writeText(1.0, Point2D.create(677, 145), TotalScoreText, "bold");
+			this.writeText(1.0, Point2D.create(677, 180), 'Please save now', "bold");
         },
-        writeText: function(Size, Position, Text){
+        writeText: function(Size, Position, Text, bold){
             this.renderContext.remove(TextToWrite);
             var TextToWrite = TextRenderer.create(ContextText.create(), Text, Size);
             TextToWrite.setPosition(Position);
             TextToWrite.setTextFont("Helvetica, Arial")
-            TextToWrite.setColor("#655655");
+
+            TextToWrite.setColor("#666666");
+            TextToWrite.setTextWeight(bold);
             this.renderContext.add(TextToWrite);
         },
         showPlantWasSetText: function(){
+			this.GameBackground.setBGtoGameOver();
             var PlantWasSetTextString="The Plant must settle down. Please wait or retry.";
             
-            this.PlantWasSetText = TextRenderer.create(ContextText.create(), PlantWasSetTextString, 1.7);
-            this.PlantWasSetText.setPosition(Point2D.create(190, 55));
+            this.PlantWasSetText = TextRenderer.create(ContextText.create(), PlantWasSetTextString, 1.6);
+            this.PlantWasSetText.setPosition(Point2D.create(210, 49));
             this.PlantWasSetText.setTextFont("Helvetica, Arial")
-            this.PlantWasSetText.setColor("#655655");
+            this.PlantWasSetText.setColor("#666666");
+
             this.renderContext.add(this.PlantWasSetText);
         },
         
@@ -297,7 +309,7 @@ Engine.initObject("LastPlant", "Game", function(){
 
                 NewLPObject=Plant.create();
                 
-                var p = Point2D.create(50, 200);
+                var p = Point2D.create(80, 190);
                 NewLPObject.setPosition(p);
                 p.destroy();
                 
@@ -321,7 +333,7 @@ Engine.initObject("LastPlant", "Game", function(){
                 this.writeBlocksCounter(blocksleft)
                 this.currentNumberOfBlocks=this.currentNumberOfBlocks+1;
 
-                var startPos = Point2D.create(60, 200);
+                var startPos = Point2D.create(80, 190);
                 
                 NewLPObject.setPosition(startPos);
                 var rot=Math2.randomRange(0,180,true);
@@ -354,9 +366,9 @@ Engine.initObject("LastPlant", "Game", function(){
       writeBlocksCounter: function(counter){
             this.renderContext.remove(this.NumberBlocksLeftText);
             this.NumberBlocksLeftText = TextRenderer.create(ContextText.create(), counter, 1.8);
-            this.NumberBlocksLeftText.setPosition(Point2D.create(60, 80));
+            this.NumberBlocksLeftText.setPosition(Point2D.create(70, 78));
             this.NumberBlocksLeftText.setTextFont("Helvetica, Arial")
-            this.NumberBlocksLeftText.setColor("#ccff33");
+            this.NumberBlocksLeftText.setColor("#cccccc");
             this.renderContext.add(this.NumberBlocksLeftText);
       },
       

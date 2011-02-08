@@ -6,6 +6,8 @@ class MapsController < ApplicationController
 
   def new
   	@title = "Protect"
+    
+    @mapname = Map.generate_name(session[:id])
   end
 
   def create
@@ -76,8 +78,7 @@ class MapsController < ApplicationController
     @latest_maps = Map.paginate(:all, :per_page => 5, :order => 'created_at DESC', :page => params[:latest_page])
     
     @user_id = current_user.id
-    @my_maps = Map.find_all_by_user_id(@user_id)
-    #@my_maps.paginate(:limit => 3, :order => 'created_at DESC', :page => params[:my_page]);
+    @my_maps = Map.find_all_by_user_id(@user_id).paginate(:per_page => 5, :order => 'created_at DESC', :page => params[:my_page]);
   end
 end
 

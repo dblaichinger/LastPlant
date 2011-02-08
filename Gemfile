@@ -2,14 +2,13 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 
+gem 'json'
+gem 'koala'
 
 
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate', '3.0.pre2'
 gem 'heroku'
-
-gem 'json'
-gem 'koala'
 
 
 group :development do
@@ -23,7 +22,6 @@ group :test do
   gem 'webrat', '0.7.1'
   gem 'factory_girl_rails', '1.0'
   gem 'faker'
-
 end
 
 

@@ -51,9 +51,9 @@ module SessionsHelper
 	
 	def admin_user
 		if (current_user)
-      redirect_to(home_path) unless current_user.admin?
+      redirect_to(current_user) unless current_user.admin?
 		else
-      redirect_to(home_path)
+      redirect_to(root_path)
 		end
   end
 
@@ -65,21 +65,23 @@ module SessionsHelper
     cookies.signed[:remember_token] || [nil, nil]
   end
 
-  # Methods for Facebook - Login
+
+  ## Methods for Facebook - Login
 	def establish_graph
-      if(!$oauth)
-        establish_oauth
-      end
-    #request and parse token from facebook
-    $token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/").get_access_token(@code)
-	  $graph = Koala::Facebook::GraphAPI.new($token)
+	
+		if(!$oauth)
+		  establish_oauth
+		end
+		#request and parse token from facebook
+		$token = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/").get_access_token(@code)
+		$graph = Koala::Facebook::GraphAPI.new($token)
 	end
 	
 	def establish_oauth
-	  $oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/")
+	  $oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplantbeta.heroku.com/")
 	end
 	
-    #request and parse token from facebook
+	
 	def facebook_login
     	# create oauth helper
     	establish_oauth
@@ -110,9 +112,10 @@ module SessionsHelper
                 
         #if creating user worked, set session
 				if @user.save
-          session[:fb_id] = @user.fbid
-          flash[:success] = "Welcome to Last Plant!"
-          #unexpected error occured, save faile
+          			session[:fb_id] = @user.fbid
+          			flash[:success] = "Welcome to Last Plant!"
+					
+          #unexpected error occured, save failed
 				else
 					flash[:error] = "Login failed."
 				end

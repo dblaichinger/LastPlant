@@ -25,6 +25,7 @@
 // Load engine objects
 Engine.include("/components/component.collider.js");
 Engine.include("/components/component.mouseinput.js");
+Engine.include("/components/component.keyboardinput.js");
 Engine.include("/components/component.transform2d.js");
 Engine.include("/engine/engine.object2d.js");
 
@@ -53,7 +54,9 @@ Engine.initObject("Player", "Object2D", function() {
          this.base("Player");
 
          // Add components to move and collide the player.  
-         this.add(MouseInputComponent.create("input"));
+         this.add(MouseInputComponent.create("MouseInput"));
+         // Add the component which handles keyboard input
+         this.add(KeyboardInputComponent.create("KeyboardInput"));
          this.add(Transform2DComponent.create("move"));
          this.add(ColliderComponent.create("collide", LastPlant.cModel));
          
@@ -112,7 +115,7 @@ Engine.initObject("Player", "Object2D", function() {
        * @param point {Point2D} The position where the cursor is
        */
       setPosition: function(point,mouseInfo) {
-        if(point.get().x < 0){
+        /*if(point.get().x < 0){
             point.setX(0);
             this.onMouseUp(mouseInfo);
         }
@@ -127,7 +130,7 @@ Engine.initObject("Player", "Object2D", function() {
         if(point.get().y > LastPlant.fieldHeight){
             point.setY(LastPlant.fieldHeight);
             this.onMouseUp(mouseInfo);
-        }
+        }*/
 
         this.base(point);
         this.getComponent("move").setPosition(point);
@@ -172,7 +175,41 @@ Engine.initObject("Player", "Object2D", function() {
         this.clickLPObject = null;
 
       },      
-
+        
+      /**
+      * Handle a "keydown" event from the <tt>KeyboardInputComponent</tt>.
+      * @param charCode {Number} Unused
+      * @param keyCode {Number} The key which was pressed down.
+      */
+      onKeyDown: function(charCode, keyCode) {
+        var currentBlock = LastPlant.getCurrentBlock();
+        if(currentBlock != null){
+            switch (charCode) {
+                case EventEngine.KEYCODE_LEFT_ARROW:
+                  currentBlock.setRotateDirection(2);
+                  break;
+                case EventEngine.KEYCODE_RIGHT_ARROW:
+                  currentBlock.setRotateDirection(1);
+                  break;
+            }
+        }
+        return false;
+      },
+      onKeyUp: function(charCode, keyCode) {
+      var currentBlock = LastPlant.getCurrentBlock();
+        if(currentBlock != null){
+            switch (charCode) {
+                case EventEngine.KEYCODE_LEFT_ARROW:
+                  currentBlock.setRotateDirection(0);
+                  break;
+                case EventEngine.KEYCODE_RIGHT_ARROW:
+                  currentBlock.setRotateDirection(0);
+                  break;
+            }
+        }
+        return false;
+      },
+        
       /**
        * Check for collision between a LPObject object and the player.
        *
@@ -191,6 +228,12 @@ Engine.initObject("Player", "Object2D", function() {
 
          this.overLPObject = null;
          return ColliderComponent.CONTINUE;
+      },
+      removeInputHandler: function() {
+        this.remove(this.getComponent("KeyboardInput"));
+        this.remove(this.getComponent("MouseInput"));
+        this.getComponent("KeyboardInput").destroy();
+        this.getComponent("MouseInput").destroy();
       }
 
    }, /** @scope Player.prototype */{ // Static
