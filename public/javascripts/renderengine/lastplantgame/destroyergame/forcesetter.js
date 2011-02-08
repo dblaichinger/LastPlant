@@ -42,7 +42,6 @@ Engine.initObject("ForceSetter", "LPObject", function() {
         height: 17,
         startPosition: null,
         startRotation: null,
-        isClicked: null,
 
         /**
          * @private
@@ -79,59 +78,34 @@ Engine.initObject("ForceSetter", "LPObject", function() {
             this.startPosition=StartPos;
             this.startRotation=StartRot;
         },
-        
-        continuePosAndRotSetting: function(currentCursorPos) {
-            if(this.isClicked){
-                this.setSprite(1);
-                var AttackUnit=LastPlant.getAttackUnit();
-                var CursorPos=Point2D.create(currentCursorPos);
 
-                var distanceToUnit=CursorPos.dist(AttackUnit.getPosition());
-                
-                this.ShootDirection=CursorPos.sub(AttackUnit.getPosition());
-                var ShootDirectionVec = Vector2D.create(this.ShootDirection.get().x, this.ShootDirection.get().y);
-                var AngleToSet = ShootDirectionVec.angleBetween(Vector2D.create(-1, 0));
-                var AngleToYAxis = ShootDirectionVec.angleBetween(Vector2D.create(0, 1));
-                
-                //clamp forcesetter to a max of 150 length
-                var AttkUnitToForceSetterVec = Vector2D.create(currentCursorPos.get().x - AttackUnit.getPosition().get().x ,
-                                                               currentCursorPos.get().y - AttackUnit.getPosition().get().y);
-                var length = AttkUnitToForceSetterVec.len();
-                if(length > 150)
-                    length=150;
-                else if(length < 35)
-                    length=35;
-
-                AttkUnitToForceSetterVec = AttkUnitToForceSetterVec.normalize();
-                var clampedForceVec = AttackUnit.getPosition();
-                clampedForceVec = clampedForceVec.add(AttkUnitToForceSetterVec.mul(length));
-                
-                //if(distanceToUnit<150 && distanceToUnit>35){
-                    if(AngleToSet>90 && AngleToYAxis>90 ){
-                        this.setPosition(Point2D.create(clampedForceVec.get().x, clampedForceVec.get().y));
-                        this.getComponent("physics").setRotation( (AngleToSet+180)*0.017453292519943 );
-                        //need to start/stop simulation for rotation to be updated
-                        this.startsim();
-                        this.stopsim();
-                    }
-                //}
-            }
-            
-        },
         
         clicked: function(currentCursorPos) {
-            this.isClicked = true;
-            this.setSprite(1);
+            var AttackUnit=LastPlant.getAttackUnit();
+            var CursorPos=Point2D.create(currentCursorPos);
+
+            var distanceToUnit=CursorPos.dist(AttackUnit.getPosition());
+            
+            this.ShootDirection=CursorPos.sub(AttackUnit.getPosition());
+            var ShootDirectionVec = Vector2D.create(this.ShootDirection.get().x, this.ShootDirection.get().y);
+            var AngleToSet = ShootDirectionVec.angleBetween(Vector2D.create(-1, 0));
+            var AngleToYAxis = ShootDirectionVec.angleBetween(Vector2D.create(0, 1));
+                
+            if(distanceToUnit<150 && distanceToUnit>35){
+                if(AngleToSet>90 && AngleToYAxis>90 ){
+                    this.setPosition(currentCursorPos);
+                    this.getComponent("physics").setRotation( (AngleToSet+180)*0.017453292519943 );
+                    //need to start/stop simulation for rotation to be updated
+                    this.startsim();
+                    this.stopsim();
+                }
+            }
         },
-        
-        
-        
+            
         /**
          * called when button released
          */
         released: function(p) {
-            this.isClicked = false;
-            this.setSprite(0);
             var AttackUnit=LastPlant.getAttackUnit();
             var AttackUnitLegs=LastPlant.getAttackUnitLegs();
             var thisPos = this.getPosition();
@@ -143,9 +117,9 @@ Engine.initObject("ForceSetter", "LPObject", function() {
             if(!AttackUnit.getWasShot()){
                 // Start simulation of unit
                 AttackUnit.startsim();
-                
+
                 //calulate force to shoot unit with
-                var Shootforce = Vector2D.create (this.ShootDirection.x*12000000, this.ShootDirection.y*12000000);
+                var Shootforce = Vector2D.create (this.ShootDirection.x*10000000, this.ShootDirection.y*10000000);
 
                 //shoot AttackUnit = apply force to unit
                 AttackUnit.applyForce(Shootforce,AttackUnit.getPosition());
