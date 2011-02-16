@@ -79,7 +79,7 @@ module SessionsHelper
 	end
 	
 	def establish_oauth
-	  $oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplantbeta.heroku.com/")
+	  $oauth = Koala::Facebook::OAuth.new("115861615151381", '35aba13c7b790d4e41f38feccacbe04a', "http://lastplant.heroku.com/")
 	end
 	
 	

@@ -99,7 +99,6 @@ class User < ActiveRecord::Base
 	elsif (update && password !=nil && password != "")
 		self.encrypted_password = encrypt(password)
 	end
-	
   end
 	
   def encrypt(string)
