@@ -62,6 +62,7 @@ class MapsController < ApplicationController
       flash[:success] = "Destroyer points added"
     end
     
+    render :nothing => true, :status => 200;
   end
 
   def protect_index
