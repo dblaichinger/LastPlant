@@ -52,14 +52,14 @@ class MapsController < ApplicationController
   def gamehandler
   	@map = Map.find(params[:mapid].to_i)
     @destroyer = User.find(session[:id])
-    @builder = User.find(@map.user_id)
+    @builder = @map.user
     
     if(@destroyer.id != @builder.id)
       @destroyer.destroyScore += params[:destroyerscore].to_i    
       @builder.createScore += params[:builderscore].to_i
     end
     if (@builder.save && @destroyer.save)
-      flash[:success] = "Destroyer points added"
+      #flash[:success] = "Destroyer points added"
     end
     
     render :nothing => true, :status => 200;
