@@ -58,9 +58,9 @@ class MapsController < ApplicationController
       @destroyer.destroyScore += params[:destroyerscore].to_i    
       @builder.createScore += params[:builderscore].to_i
     end
-    if (@builder.save && @destroyer.save)
-      #flash[:success] = "Destroyer points added"
-    end
+    
+    @builder.save
+    @destroyer.save
     
     render :nothing => true, :status => 200;
   end
